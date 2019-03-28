@@ -149,10 +149,10 @@ MonoBehaviour:
     y: 46
     width: 20
     height: 36
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 8
+    borderRight: 10
+    borderTop: 12
+    borderBottom: 8
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
@@ -188,10 +188,10 @@ MonoBehaviour:
     y: 182
     width: 22
     height: 74
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 7
+    borderRight: 8
+    borderTop: 12
+    borderBottom: 8
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
