@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4427405164033686}
   - component: {fileID: 114068333025949544}
+  - component: {fileID: 114716680816372832}
   m_Layer: 8
   m_Name: ShopItem
   m_TagString: Untagged
@@ -329,6 +330,17 @@ MonoBehaviour:
   mAtlas: {fileID: 114565852838139476, guid: 0d38d3c6636665f4d9b2f0014cdcd017, type: 2}
   mSpriteName: common_button_green_stroke_bg
   mFillCenter: 1
+--- !u!114 &114716680816372832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243247098730550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec70d78da9d3d54cb291546cd8df8e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114936272458915488
 MonoBehaviour:
   m_ObjectHideFlags: 1

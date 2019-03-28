@@ -18,7 +18,7 @@
       "price": 1
     }
   ],
-  "items": {
+  "farmItems": {
     "wheat": {
       "producePeriod": 20,
       "product": "seed"

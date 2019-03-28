@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4924332825170986}
   - component: {fileID: 114689556890042326}
+  - component: {fileID: 114858244654242332}
   m_Layer: 8
   m_Name: ShopContainer
   m_TagString: Untagged
@@ -337,3 +338,14 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &114858244654242332
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1459137658986720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58534f28bfe93bc4ba07c040c550468c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4394825367302364}
   - component: {fileID: 114960453023612874}
+  - component: {fileID: 114991352315865370}
   m_Layer: 8
   m_Name: ProductItem
   m_TagString: Untagged
@@ -446,3 +447,14 @@ MonoBehaviour:
   mAtlas: {fileID: 114565852838139476, guid: 0d38d3c6636665f4d9b2f0014cdcd017, type: 2}
   mSpriteName: common_check_bg
   mFillCenter: 1
+--- !u!114 &114991352315865370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1352240032830472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a03630c93c70641bc4f423456335da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
