@@ -4,5 +4,6 @@ namespace Data
     {
         public string name;
         public int sellPrice;
+
     }
 }

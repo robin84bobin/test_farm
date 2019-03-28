@@ -1,24 +1,51 @@
+using InternalNewtonsoft.Json;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace Data.UserData
+namespace Data.User
 {
-    public class GameStateData
+    public class GameState
     {
-        public int money;
-        
-        public Dictionary<string, UserProductData> Products = new Dictionary<string, UserProductData>();
-        public Dictionary<string, UserFarmItemData> FarmItems = new Dictionary<string, UserFarmItemData>();
-        public Dictionary<string, UserShopItemData> ShopItems = new Dictionary<string, UserShopItemData>();
-        
-        
+        const string PREF_KEY = "GameState";
+
+        public int Money;
+
+        public List<FarmCell> Cells = new List<FarmCell>();
+        public Dictionary<string, Data.User.ShopInventoryItem> ShopItems = new Dictionary<string, ShopInventoryItem>();
+        public Dictionary<string, Data.User.ProductInventoryItem> Products = new Dictionary<string, ProductInventoryItem>();
+
+
         public void Save()
         {
-            
+            PlayerPrefs.SetString(PREF_KEY, JsonConvert.SerializeObject(this));
         }
 
         public void Load()
         {
-            
+            GameState gs = JsonConvert.DeserializeObject<GameState>(PlayerPrefs.GetString(PREF_KEY));
+            Money = gs.Money;
+            Cells = gs.Cells;
+            ShopItems = gs.ShopItems;
+            Products = gs.Products;
         }
+    }
+
+
+    public class FarmCell
+    {
+        public string ItemId;
+        public int Progress;
+    }
+
+    public class ShopInventoryItem
+    {
+        public string ItemId;
+        public int Amount;
+    }
+
+    public class ProductInventoryItem
+    {
+        public string ItemId;
+        public int Amount;
     }
 }
