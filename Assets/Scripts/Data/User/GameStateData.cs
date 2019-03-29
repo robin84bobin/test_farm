@@ -29,23 +29,4 @@ namespace Data.User
             Products = gs.Products;
         }
     }
-
-
-    public class FarmCell
-    {
-        public string ItemId;
-        public int Progress;
-    }
-
-    public class ShopInventoryItem
-    {
-        public string ItemId;
-        public int Amount;
-    }
-
-    public class ProductInventoryItem
-    {
-        public string ItemId;
-        public int Amount;
-    }
 }

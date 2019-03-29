@@ -3,16 +3,32 @@ using TMPro;
 
 namespace Model
 {
-    public class FarmItem : IProducer, IEater
+
+    public class FarmItem : TickableItem, IProducer, IEater
     {
         public event ProduceProductDelegate OnProduceComplete;
+
+        public enum State
+        {
+            IDLE,
+            PRODUCE,
+        }
+
         private Data.FarmItem _data;
+        private FSM<State, FarmItemState> _fsm;
+
 
         public FarmItem(Data.FarmItem data)
         {
             _data = data;
+
+            _fsm = new FSM<State, FarmItemState>();
+                _fsm.Add(new IdleState());
+            var produceState = new ProduceState(_data);
+            produceState.OnProduceComplete += OnProduceComplete;
+                _fsm.Add(produceState);
         }
-        
+
 
         public bool Eat(IEatible food)
         {
@@ -25,21 +41,23 @@ namespace Model
 
         private void StartProduce()
         {
-            //TODO wait period
-            
-            
-            
-            if (OnProduceComplete != null)
-                OnProduceComplete.Invoke(_data.product,1);
+            _fsm.SetState(State.PRODUCE);
         }
 
-        public void Release()
+        public override void Release()
         {
+            base.Release();
+            _fsm.Release();
             OnProduceComplete = null;
+        }
+
+        protected override void OnTick()
+        {
+            _fsm.CurrentState.Tick();
         }
     }
 
-    public delegate void ProduceProductDelegate(string name, int amount);
+
     
     public interface IProducer
     {

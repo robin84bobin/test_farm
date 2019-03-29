@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI
@@ -7,12 +8,14 @@ namespace UI
         [SerializeField] private UITable _table;
 
         private int _cellAmount;
+        private List<FarmCellView> _cells;
         
-        public void Init(int width, int height)
+        public void InitView(int width, int height)
         {
             _cellAmount = width * height;
             _table.columns = width;
 
+            _cells = new List<FarmCellView>();
             for (int i = 0; i < _cellAmount; i++)
             {
                 GameObject source = (GameObject)Resources.Load("UI/FarmCell", typeof(GameObject));
@@ -21,7 +24,10 @@ namespace UI
                 go.transform.localEulerAngles = Vector3.zero;
                 go.transform.localScale = Vector3.one;
                 FarmCellView cell = go.GetComponent<FarmCellView>();
+                _cells.Add(cell);
             }
         }
+
+
     }
 }

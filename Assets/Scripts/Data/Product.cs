@@ -1,6 +1,6 @@
 namespace Data
 {
-    public class Product
+    public class Product : DataItem
     {
         public string name;
         public int sellPrice;

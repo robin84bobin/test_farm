@@ -1,6 +1,6 @@
 namespace Data
 {
-    public class FarmItem
+    public class FarmItem : DataItem
     {
         public int producePeriod;
         public string product;
