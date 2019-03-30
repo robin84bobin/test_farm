@@ -1,6 +1,6 @@
 ﻿namespace Data.User
 {
-    public class ShopInventoryItem
+    public class UserShopItem : DataItem
     {
         public string ItemId;
         public int Amount;

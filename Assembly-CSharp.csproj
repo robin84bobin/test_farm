@@ -168,15 +168,34 @@
     <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
     <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
     <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
-    <Compile Include="Assets\Scripts\Data\FarmItem.cs" />
-    <Compile Include="Assets\Scripts\Data\Product.cs" />
-    <Compile Include="Assets\Scripts\Data\Repository.cs" />
-    <Compile Include="Assets\Scripts\Data\ShopItem.cs" />
-    <Compile Include="Assets\Scripts\Data\User\GameStateData.cs" />
-    <Compile Include="Assets\Scripts\Data\User\UserFarmItemData.cs" />
-    <Compile Include="Assets\Scripts\Data\User\UserProductData.cs" />
-    <Compile Include="Assets\Scripts\Data\User\UserShopItemData.cs" />
-    <Compile Include="Assets\Scripts\Model\FarmItem.cs" />
+    <Compile Include="Assets\Scripts\App.cs" />
+    <Compile Include="Assets\Scripts\Commands\Command.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandManager.cs" />
+    <Compile Include="Assets\Scripts\Commands\CommandSequence.cs" />
+    <Compile Include="Assets\Scripts\Commands\Data\InitStorageCommand.cs" />
+    <Compile Include="Assets\Scripts\Commands\Startup\InitDataCommand.cs" />
+    <Compile Include="Assets\Scripts\Data\Catalog\Catalog.cs" />
+    <Compile Include="Assets\Scripts\Data\Catalog\FarmItem.cs" />
+    <Compile Include="Assets\Scripts\Data\Catalog\Product.cs" />
+    <Compile Include="Assets\Scripts\Data\Catalog\ShopItem.cs" />
+    <Compile Include="Assets\Scripts\Data\Repository\DataItem.cs" />
+    <Compile Include="Assets\Scripts\Data\Repository\DataStorage.cs" />
+    <Compile Include="Assets\Scripts\Data\Repository\IDataBaseProxy.cs" />
+    <Compile Include="Assets\Scripts\Data\Repository\JsonDbProxy.cs" />
+    <Compile Include="Assets\Scripts\Data\Repository\Repository.cs" />
+    <Compile Include="Assets\Scripts\Data\User\UserFarmCell.cs" />
+    <Compile Include="Assets\Scripts\Data\User\UserFarmItem.cs" />
+    <Compile Include="Assets\Scripts\Data\User\UserProduct.cs" />
+    <Compile Include="Assets\Scripts\Data\User\UserRepository.cs" />
+    <Compile Include="Assets\Scripts\Data\User\UserShopItem.cs" />
+    <Compile Include="Assets\Scripts\Model\Farm.cs" />
+    <Compile Include="Assets\Scripts\Model\FarmItem\FarmItem.cs" />
+    <Compile Include="Assets\Scripts\Model\FarmItem\FarmItemState.cs" />
+    <Compile Include="Assets\Scripts\Model\FarmItem\IdleState.cs" />
+    <Compile Include="Assets\Scripts\Model\FarmItem\ProduceState.cs" />
+    <Compile Include="Assets\Scripts\Model\FSM\BaseState.cs" />
+    <Compile Include="Assets\Scripts\Model\FSM\FSM.cs" />
+    <Compile Include="Assets\Scripts\Model\TickableItem.cs" />
     <Compile Include="Assets\Scripts\UI\FarmCellView.cs" />
     <Compile Include="Assets\Scripts\UI\FarmItemView.cs" />
     <Compile Include="Assets\Scripts\UI\FarmTableView.cs" />
@@ -418,6 +437,9 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity2018/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="NewtonJsonLib">
+      <HintPath>E:/STUFF ETC/TEST/Test_farm/Assets/Plugins/Newtonsoft.Json/NewtonJsonLib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Ю/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

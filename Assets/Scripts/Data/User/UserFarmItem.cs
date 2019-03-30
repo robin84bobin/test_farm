@@ -1,6 +1,6 @@
 ﻿namespace Data.User
 {
-    public class FarmItem
+    public class UserFarmItem: DataItem
     {
         public string ItemId;
         public int Progress;

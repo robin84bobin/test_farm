@@ -45,7 +45,7 @@ namespace Data
         /// <param name="id"></param>
         /// <param name="callback"></param>
         /// <typeparam name="T"></typeparam>
-        void Remove<T>(string collection, string id = "", Action<string> callback = null);
+        //void Remove<T>(string collection, string id = "", Action<string> callback = null);
 
         event Action OnInitialized;
 

@@ -49,7 +49,7 @@ namespace Data
                 _items.Remove(id);
                 if (now)
                 {
-                    _dbProxy.Remove<T>(CollectionName, id, callback);
+                    _dbProxy.SaveCollection(CollectionName, _items);
                 }
             }
             else
@@ -84,7 +84,8 @@ namespace Data
 
             //onSuccessCallback += delegate { GlobalEvents.OnStorageUpdated.Publish(typeof(T)); };
             if (saveNow)
-                _dbProxy.Save(CollectionName, item, item.Id, onSuccessCallback);
+                //_dbProxy.Save(CollectionName, item, item.Id, onSuccessCallback);
+                SaveData();
         }
 
 
@@ -164,7 +165,7 @@ namespace Data
 
 
 
-        #region foreach methods realization 
+        #region foreach methods impmementation 
 
         public BaseStorageEnumerator GetEnumerator()
         {

@@ -4,9 +4,9 @@ namespace Model
 {
     public class FarmCell 
     {
-        Data.User.FarmCell _data;
+        Data.User.UserFarmCell _data;
 
-        public void Init(Data.User.FarmCell userData)
+        public void Init(Data.User.UserFarmCell userData)
         {
             _data = userData;
         }
@@ -14,19 +14,13 @@ namespace Model
 
     public class Farm 
     {
-        private List<Model.FarmCell> _cells;
+        private Dictionary<int,Model.FarmCell> _cells;
 
         public void Init()
         {
-            _cells = new List<FarmCell>();
-            var cellDatas = App.Instance.Repository.Cells;
-            for (int i = 0; i < cellDatas.Count; i++)
-            {
-                FarmCell cell = new FarmCell();
-                cell.Init(cellDatas[i]);
-
-                _cells.Add(cell);
-            }
+            _cells = new Dictionary<int, Model.FarmCell>();
+            var cellDatas = App.Instance.userRepository.Cells;
+            
         }
 
 
