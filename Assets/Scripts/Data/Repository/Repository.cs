@@ -38,7 +38,10 @@ namespace Data.Repository
         {
             _dbProxy.OnInitialized -= OnDbInitComplete;
             CommandSequence sequence = new CommandSequence(_initStoragesCommands.ToArray());
-            sequence.OnComplete += () => OnInitComplete.Invoke();
+            sequence.OnComplete += () =>
+            {
+                OnInitComplete.Invoke();
+            };
             CommandManager.Execute(sequence);
         }
 

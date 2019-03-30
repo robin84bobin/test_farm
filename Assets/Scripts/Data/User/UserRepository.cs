@@ -22,6 +22,9 @@ namespace Data.User
             Products = CreateStorage<UserProduct>("products");
             FarmItems = CreateStorage<UserFarmItem>("farmItems");
             Cells = CreateStorage<UserFarmCell>("cells");
+
+            _dbProxy.OnInitialized += OnDbInitComplete;
+            _dbProxy.Init();
         }
     }
 }

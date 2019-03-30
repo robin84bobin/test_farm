@@ -34,35 +34,35 @@ namespace Data
         public void Get<T>(string collection, Action<Dictionary<string, T>> callback, bool createIfNotExist = true) where T : DataItem, new()
         {
             TryRefreshData();
-            
-            //try
-            //{
+
+            if (string.IsNullOrEmpty(_dataJson) && createIfNotExist)
+            {
+                callback.Invoke(new Dictionary<string, T>());
+                return;
+            }
+
                 JObject j = JObject.Parse(_dataJson);
                 JToken jToken = j[_rootNode];
-                GetData<T>(jToken, collection, callback);
-            //}
-            //catch (Exception e)s
-            //{
-                //Debug.LogError(this + ": OnGetData ("+collection+") error: " + e.Message);
-            //}
-        }
+       //         GetData<T>(jToken, collection, callback);
+       // }
         
-        private void GetData<T>(JToken j, string collection, Action<Dictionary<string, T>> callback) where T : DataItem, new()
-        {
+        //private void GetData<T>(JToken jToken, string collection, Action<Dictionary<string, T>> callback) where T : DataItem, new()
+        //{
             if (string.IsNullOrEmpty(collection))
             {
                 Debug.LogError(ToString() + " : no sourceName in storage had been set: " + collection);
                 return ;
             }
 
-            JToken jToken = j.SelectToken(collection);
-            if (jToken == null)
+            JToken jCollection = jToken.SelectToken(collection);
+            if (jCollection == null && createIfNotExist)
             {
+                callback.Invoke(new Dictionary<string, T>());
                 Debug.LogError(ToString() + " : no source data was found by: " + collection);
                 return ;
             }
 
-            Dictionary<string, T> items = jToken.ToObject<Dictionary<string, T>>();
+            Dictionary<string, T> items = jCollection.ToObject<Dictionary<string, T>>();
             /*T[] dataArray = jToken.ToObject<T[]>();
             
             var items = new Dictionary<string, T>();

@@ -2,14 +2,14 @@ using Data.Repository;
 
 namespace Data.Catalog
 {
-    public class Catalog : Repository.Repository
+    public class CatalogRepository : Repository.Repository
     {
         public  DataStorage<Currency> Currency;
         public  DataStorage<ShopItem> ShopItems;
         public  DataStorage<Product> Products;
         public  DataStorage<FarmItem> FarmItems;
         
-        public Catalog(IDataBaseProxy dbProxy) : base(dbProxy)
+        public CatalogRepository(IDataBaseProxy dbProxy) : base(dbProxy)
         {
         }
         

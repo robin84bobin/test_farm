@@ -16,7 +16,7 @@ public class App : MonoBehaviour
     public static App Instance { get; private set; }
     public event Action OnTick = delegate { };
 
-    public Catalog catalog { get; private set; }
+    public CatalogRepository catalog { get; private set; }
     public UserRepository userRepository { get; private set; }
 
     private Model.Farm _farmModel;
@@ -33,7 +33,7 @@ public class App : MonoBehaviour
     private void Init()
     {
         DontDestroyOnLoad(gameObject);
-        catalog = new Catalog(new JsonDbProxy(Application.streamingAssetsPath + "/catalog.json", "catalog"));
+        catalog = new CatalogRepository(new JsonDbProxy(Application.streamingAssetsPath + "/catalog.json", "catalog"));
         userRepository = new UserRepository(new JsonDbProxy(Application.streamingAssetsPath + "/user.json", "catalog"));
 
         CommandSequence sequence = new CommandSequence(
