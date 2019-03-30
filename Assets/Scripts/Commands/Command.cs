@@ -12,7 +12,7 @@ namespace Commands
             OnComplete = null;
         }
 
-        protected void Complete()
+        protected virtual void Complete()
         {
             OnComplete.Invoke();
             Release();

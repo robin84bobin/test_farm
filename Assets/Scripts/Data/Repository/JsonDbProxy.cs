@@ -14,14 +14,14 @@ namespace Data
         private string _dataJson;
         private string _rootNode;
 
-        public JsonDbProxy(string streamingAssetPath, string rootNode)
+        public JsonDbProxy(string path, string rootNode)
         {
             _rootNode = rootNode;
-            _path = Application.streamingAssetsPath + "/" + streamingAssetPath;
-            if (IsFileExist(_path))
+            _path =  path;
+            /*if (IsFileExist(_path))
             {
                 _lastReadTime = File.GetLastWriteTime(_path);
-            }
+            }*/
         }
 
         public void Save<T>(string collection, T item, string id = "", Action<T> callback = null) where T : DataItem, new()
@@ -35,16 +35,16 @@ namespace Data
         {
             TryRefreshData();
             
-            try
-            {
+            //try
+            //{
                 JObject j = JObject.Parse(_dataJson);
                 JToken jToken = j[_rootNode];
                 GetData<T>(jToken, collection, callback);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("OnGetData error: " + e.Message);
-            }
+            //}
+            //catch (Exception e)s
+            //{
+                //Debug.LogError(this + ": OnGetData ("+collection+") error: " + e.Message);
+            //}
         }
         
         private void GetData<T>(JToken j, string collection, Action<Dictionary<string, T>> callback) where T : DataItem, new()
@@ -61,7 +61,9 @@ namespace Data
                 Debug.LogError(ToString() + " : no source data was found by: " + collection);
                 return ;
             }
-            T[] dataArray = jToken.ToObject<T[]>();
+
+            Dictionary<string, T> items = jToken.ToObject<Dictionary<string, T>>();
+            /*T[] dataArray = jToken.ToObject<T[]>();
             
             var items = new Dictionary<string, T>();
             foreach (T newItem in dataArray)
@@ -73,13 +75,15 @@ namespace Data
                     continue;
                 }
                 items.Add(newItem.Id, newItem);
-            }
+            }*/
             callback.Invoke(items);
         }
 
         public void Init()
         {
             TryRefreshData();
+            if (OnInitialized != null)
+                OnInitialized.Invoke();
         }
 
         private void TryRefreshData()
@@ -87,7 +91,7 @@ namespace Data
             if (!IsFileExist(_path))
                 File.CreateText(_path).Close();
 
-            if (File.GetLastWriteTime(_path) > _lastReadTime)
+            if (string.IsNullOrEmpty(_dataJson) || File.GetLastWriteTime(_path) > _lastReadTime)
             {
                 _dataJson = File.ReadAllText(_path);
                 _lastReadTime = DateTime.Now;
@@ -116,6 +120,13 @@ namespace Data
             }
 
             return exists;
+        }
+
+        public T GetConfigObject<T>(string name)
+        {
+            JObject j = JObject.Parse(_dataJson);
+            JToken jToken = j[_rootNode];
+            return jToken.ToObject<T>();
         }
     }
 }

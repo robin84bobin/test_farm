@@ -47,6 +47,8 @@ namespace Data
         /// <typeparam name="T"></typeparam>
         //void Remove<T>(string collection, string id = "", Action<string> callback = null);
 
+        T GetConfigObject<T>(string name);
+
         event Action OnInitialized;
 
     }

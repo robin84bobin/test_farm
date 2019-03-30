@@ -5,7 +5,6 @@ namespace Commands
 {
     public class CommandSequence : Command
     {
-        public event Action<float> OnProgress = delegate { };
         private readonly Command[] _commands;
 
         /// <summary>
@@ -29,14 +28,12 @@ namespace Commands
                     _commands[i].OnComplete += () =>
                     {
                         CommandManager.Execute(nextCommand);
-                        OnProgress.Invoke((float)(currentCommand+1)/_commands.Length);
                     };
                 }
                 else if (i == _commands.Length - 1)
                     _commands[i].OnComplete += () =>
                     {
                         Complete();
-                        OnProgress.Invoke(1f);
                     };
                     
             }
@@ -44,10 +41,10 @@ namespace Commands
             CommandManager.Execute(_commands.First());
         }
 
-        protected override void Release()
+        protected override void Complete()
         {
-            base.Release();
-            OnProgress = null;
+            base.Complete();
         }
+
     }
 }

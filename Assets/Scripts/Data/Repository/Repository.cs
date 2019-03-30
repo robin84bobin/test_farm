@@ -41,6 +41,11 @@ namespace Data.Repository
             sequence.OnComplete += () => OnInitComplete.Invoke();
             CommandManager.Execute(sequence);
         }
+
+        public T GetSetting<T>(string name)
+        {
+            return _dbProxy.GetConfigObject<T>(name);
+        }
     }
 
 

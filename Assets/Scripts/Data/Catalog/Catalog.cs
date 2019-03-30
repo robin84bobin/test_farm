@@ -4,8 +4,10 @@ namespace Data.Catalog
 {
     public class Catalog : Repository.Repository
     {
+        public  DataStorage<Currency> Currency;
         public  DataStorage<ShopItem> ShopItems;
         public  DataStorage<Product> Products;
+        public  DataStorage<FarmItem> FarmItems;
         
         public Catalog(IDataBaseProxy dbProxy) : base(dbProxy)
         {
@@ -13,19 +15,19 @@ namespace Data.Catalog
         
         public override void Init()
         {
-            ShopItems = CreateStorage<ShopItem>(Collections.SHOP);
-            Products = CreateStorage<Product>(Collections.PRODUCTS);
+            Currency = CreateStorage<Currency>("currency");
+            ShopItems = CreateStorage<ShopItem>("shop");
+            Products = CreateStorage<Product>("products");
+            FarmItems = CreateStorage<FarmItem>("farmItems");
 
             _dbProxy.OnInitialized += OnDbInitComplete;
             _dbProxy.Init();
         }
     }
-    
-    
 
-    public class Collections
+    public class Currency:DataItem
     {
-        public const string SHOP = "shop";
-        public const string PRODUCTS = "products";
+        public string name;
+        public string value;
     }
 }

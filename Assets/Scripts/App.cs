@@ -11,16 +11,19 @@ using UnityEngine.SceneManagement;
 
 public class App : MonoBehaviour
 {
+    const float TiCK_DELTA_TIME = 1f;
+
     public static App Instance { get; private set; }
     public event Action OnTick = delegate { };
 
-    const float TiCK_DELTA_TIME = 1f;
     public Catalog catalog { get; private set; }
     public UserRepository userRepository { get; private set; }
-    
-    void Start()
+
+    private Model.Farm _farmModel;
+
+    void Awake()
     {
-        if (Instance!=null)
+        if (Instance==null)
         {
             Instance = this;
             Init();
@@ -30,8 +33,8 @@ public class App : MonoBehaviour
     private void Init()
     {
         DontDestroyOnLoad(gameObject);
-        catalog = new Catalog(new JsonDbProxy("catalog.json", "catalog"));
-        userRepository = new UserRepository(new JsonDbProxy("user.json", "catalog"));
+        catalog = new Catalog(new JsonDbProxy(Application.streamingAssetsPath + "/catalog.json", "catalog"));
+        userRepository = new UserRepository(new JsonDbProxy(Application.streamingAssetsPath + "/user.json", "catalog"));
 
         CommandSequence sequence = new CommandSequence(
             new InitDataCommand(catalog),
@@ -43,6 +46,9 @@ public class App : MonoBehaviour
 
     private void OnInitComplete()
     {
+        _farmModel = new Model.Farm();
+        _farmModel.Init();
+
         SceneManager.LoadSceneAsync("Level");
     }
 
