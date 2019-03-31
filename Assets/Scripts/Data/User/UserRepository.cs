@@ -50,9 +50,23 @@ namespace Data.User
             }
         }
 
-        protected override void SaveAll()
+        private static bool _needSave;
+        public static void Save()
         {
-            base.SaveAll();
+            _needSave = true;
+        }
+        protected override void OnTick()
+        {
+            base.OnTick();
+            if (_needSave)
+            {
+                _needSave = false;
+                SaveAll();
+            }
+        }
+        
+        protected void SaveAll()
+        {
             Currency.SaveData();
             ShopItems.SaveData();
             FarmItems.SaveData();

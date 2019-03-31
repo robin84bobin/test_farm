@@ -2,43 +2,52 @@
   "catalog": {
     "currency": [
       {
-        "Value": 100,
-        "Id": "coins"
+        "Value": 61,
+        "Id": "coins",
+        "Type": "currency"
       }
     ],
     "shop": [
       {
         "ItemId": "0",
-        "Amount": 0,
-        "Id": "0"
+        "Amount": 4,
+        "Id": "0",
+        "Type": "shop"
       },
       {
         "ItemId": "1",
-        "Amount": 0,
-        "Id": "1"
+        "Amount": 3,
+        "Id": "1",
+        "Type": "shop"
       },
       {
         "ItemId": "2",
-        "Amount": 0,
-        "Id": "2"
+        "Amount": 3,
+        "Id": "2",
+        "Type": "shop"
       }
     ],
     "products": [
       {
         "ItemId": "seed",
         "Amount": 0,
-        "Id": "seed"
+        "Id": "seed",
+        "Type": "products"
       },
       {
         "ItemId": "milk",
         "Amount": 0,
-        "Id": "milk"
+        "Id": "milk",
+        "Type": "products"
       },
       {
         "ItemId": "egg",
         "Amount": 0,
-        "Id": "egg"
+        "Id": "egg",
+        "Type": "products"
       }
-    ]
+    ],
+    "farmItems": [],
+    "cells": []
   }
 }

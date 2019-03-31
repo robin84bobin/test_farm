@@ -51,22 +51,9 @@ namespace Data.Repository
             return _dbProxy.GetConfigObject<T>(name);
         }
 
-        private static bool _needSave;
-        public static void Save()
-        {
-            _needSave = true;
-        }
-        protected override void OnTick()
-        {
-            base.OnTick();
-            if (_needSave)
-            {
-                _needSave = false;
-                SaveAll();
-            }
-        }
         
-        protected virtual void SaveAll(){}
+        
+
     }
 
 

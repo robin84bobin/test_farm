@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data.User;
 using Logic.Parameters;
 
 namespace Model
@@ -27,8 +28,16 @@ namespace Model
             if (Coins.Value < coins)
                 return false;
             
-            Coins.Value -= coins;
+            SetCoinsValue(Coins.Value - coins);
             return true;
         }
+
+        void SetCoinsValue(int value)
+        {
+            Coins.Value = value;
+            App.Instance.userRepository.Currency["coins"].Value = Coins.Value;
+            UserRepository.Save();
+        }
+        
     }
 }
