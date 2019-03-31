@@ -82,9 +82,7 @@ namespace Data
                 Debug.Log(string.Format("Add data in '{0}' storage. Id:{1}", CollectionName, id));
             }
 
-            //onSuccessCallback += delegate { GlobalEvents.OnStorageUpdated.Publish(typeof(T)); };
             if (saveNow)
-                //_dbProxy.Save(CollectionName, item, item.Id, onSuccessCallback);
                 SaveData();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using Data;
+using Model;
 using UnityEngine;
+using Product = Data.Product;
 
 namespace UI
 {
@@ -11,7 +12,19 @@ namespace UI
 
 		private Dictionary<string, ProductItemView> dictionary;
 
-		public void Add(Product product)
+		private ProductInventory _model;
+
+		public void Init(ProductInventory model)
+		{
+			_model = model;
+
+			foreach (var product in _model.Items.Values)
+			{
+				Add(product);
+			}
+		}
+
+		public void Add(Model.Product product)
 		{
 			ProductItemView productView = CreateProductView(product);
 			productView.transform.parent = _grid.transform;
@@ -20,7 +33,7 @@ namespace UI
 			_grid.Reposition();
 		}
 
-		private ProductItemView CreateProductView(Product product)
+		private ProductItemView CreateProductView(Model.Product product)
 		{
 			GameObject source = (GameObject)Resources.Load("UI/ProductItemView", typeof(GameObject));
 			GameObject go = Instantiate(source);
@@ -28,7 +41,7 @@ namespace UI
 			go.transform.localEulerAngles = Vector3.zero;
 			go.transform.localScale = Vector3.one;
 			ProductItemView productView = go.GetComponent<ProductItemView>();
-			//nameIndicator.Init(info);
+			productView.Init(product);
 			return productView;
 		}
 	}
