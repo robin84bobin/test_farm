@@ -61,6 +61,7 @@ namespace Data
             Dictionary<string, T> itemsDict = new Dictionary<string, T>();
             foreach (var item in items)
             {
+                item.Type = collection;
                 itemsDict.Add(item.Id, item);
             }
             callback.Invoke(itemsDict);

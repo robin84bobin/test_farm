@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UI.NGUIExtensions;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using ShopItem = Model.ShopItem;
 
@@ -12,20 +13,29 @@ public class ShopItemView : MonoBehaviour
 	[SerializeField] private UILabel _amountLabel;
 	private ShopItem _model;
 
-
+	private FarmDragDropItem _dragDropItem;
+	
 	public void Init(Model.ShopItem shopItem)
 	{
 		_model = shopItem;
 		InitView();
-		
+		_dragDropItem = _item.GetComponent<FarmDragDropItem>();
+		_dragDropItem.Data = _model.data;
 		_model.Amount.OnValueChange += OnAmountChange;
+
+		CheckDragAvaLiable();
+	}
+
+
+	private void CheckDragAvaLiable()
+	{
+		_dragDropItem.interactable = _model.Amount.Value > 0;
 	}
 
 	private void OnAmountChange(int oldvalue, int newvalue)
 	{
 		_amountLabel.text = newvalue.ToString();
-
-		_item.GetComponent<UIDragDropItem>().enabled = _model.Amount.Value > 0;
+		CheckDragAvaLiable();
 	}
 
 	private void InitView()

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4226897341730660}
   - component: {fileID: 114109000863556678}
   - component: {fileID: 65113158789752270}
-  - component: {fileID: 114031633997111990}
+  - component: {fileID: 114324059232742658}
   m_Layer: 8
   m_Name: hen
   m_TagString: Untagged
@@ -84,22 +84,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 70, y: 70, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114031633997111990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689970626323904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9ee9adcf574fc42857acfaad9fb89e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  restriction: 0
-  cloneOnDrag: 1
-  dropClone: 1
-  pressAndHoldDelay: 1
-  interactable: 1
 --- !u!114 &114109000863556678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +134,24 @@ MonoBehaviour:
   mAtlas: {fileID: 114565852838139476, guid: 0d38d3c6636665f4d9b2f0014cdcd017, type: 2}
   mSpriteName: common_button_orange_stroke_bg
   mFillCenter: 1
+--- !u!114 &114324059232742658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1689970626323904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6828f49cbac843b58c38c06d1d3acda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restriction: 0
+  cloneOnDrag: 1
+  pressAndHoldDelay: 1
+  interactable: 1
+  dropClone: 1
+  cloneOnce: 1
+  removeCloneIfNotDropped: 1
 --- !u!114 &114764208965630054
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4305632406735006}
   - component: {fileID: 114625300147005978}
   - component: {fileID: 65954607679497812}
-  - component: {fileID: 114370716596810992}
+  - component: {fileID: 114197552754447510}
   m_Layer: 8
   m_Name: cow
   m_TagString: Untagged
@@ -151,7 +151,7 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &114370716596810992
+--- !u!114 &114197552754447510
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,14 +159,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1481217161578382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9ee9adcf574fc42857acfaad9fb89e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6828f49cbac843b58c38c06d1d3acda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   restriction: 0
   cloneOnDrag: 1
-  dropClone: 1
   pressAndHoldDelay: 1
   interactable: 1
+  dropClone: 1
+  cloneOnce: 1
+  removeCloneIfNotDropped: 1
 --- !u!114 &114625300147005978
 MonoBehaviour:
   m_ObjectHideFlags: 1

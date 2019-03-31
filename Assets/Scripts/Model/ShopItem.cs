@@ -1,3 +1,4 @@
+using Data.Repository;
 using Data.User;
 using Logic.Parameters;
 
@@ -16,6 +17,13 @@ namespace Model
             data = App.Instance.catalog.ShopItems[_userShopItem.ItemId];
             
             Amount = new ReactiveParameter<int>(_userShopItem.Amount);
+        }
+
+        public void Spend(int amount = 1)
+        {
+            _userShopItem.Amount -= amount;
+            Amount.Value = _userShopItem.Amount;
+            UserRepository.Save();
         }
 
         internal void Buy()

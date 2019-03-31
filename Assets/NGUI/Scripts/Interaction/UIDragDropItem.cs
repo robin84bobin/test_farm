@@ -34,10 +34,6 @@ public class UIDragDropItem : MonoBehaviour
 
 	public bool cloneOnDrag = false;
 
-	public bool dropClone = true;
-
-	public bool cloneOnce = true;
-
 	/// <summary>
 	/// How long the user has to press on an item before the drag action activates.
 	/// </summary>
@@ -210,6 +206,7 @@ public class UIDragDropItem : MonoBehaviour
 
 				UICamera.Notify(gameObject, "OnPress", false);
 				UICamera.Notify(gameObject, "OnHover", false);
+				
 			}
 			else
 			{
@@ -320,7 +317,7 @@ public class UIDragDropItem : MonoBehaviour
 
 	protected virtual void OnDragDropRelease (GameObject surface)
 	{
-		if (!cloneOnDrag || (cloneOnDrag && dropClone))
+		if (!cloneOnDrag)
 		{
 			// Re-enable the collider
 			if (mButton != null) mButton.isEnabled = true;
@@ -359,13 +356,6 @@ public class UIDragDropItem : MonoBehaviour
 
 			if (mTable != null) mTable.repositionNow = true;
 			if (mGrid != null) mGrid.repositionNow = true;
-
-			if (cloneOnce && cloneOnDrag)
-			{
-				if (container!=null) 
-					NGUITools.Destroy(container);
-				NGUITools.Destroy(this);
-			}
 		}
 		else NGUITools.Destroy(gameObject);
 

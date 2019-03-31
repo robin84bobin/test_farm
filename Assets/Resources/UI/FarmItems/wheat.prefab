@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4480628093080510}
   - component: {fileID: 114492106452537414}
   - component: {fileID: 65147387803331928}
-  - component: {fileID: 114714632608847756}
+  - component: {fileID: 114389267611915572}
   m_Layer: 8
   m_Name: wheat
   m_TagString: Untagged
@@ -151,6 +151,24 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &114389267611915572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1335030322055066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6828f49cbac843b58c38c06d1d3acda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restriction: 0
+  cloneOnDrag: 1
+  pressAndHoldDelay: 1
+  interactable: 1
+  dropClone: 1
+  cloneOnce: 1
+  removeCloneIfNotDropped: 1
 --- !u!114 &114492106452537414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,19 +219,3 @@ MonoBehaviour:
   mAtlas: {fileID: 114565852838139476, guid: 0d38d3c6636665f4d9b2f0014cdcd017, type: 2}
   mSpriteName: common_button_green_stroke_bg
   mFillCenter: 1
---- !u!114 &114714632608847756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1335030322055066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d9ee9adcf574fc42857acfaad9fb89e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  restriction: 0
-  cloneOnDrag: 1
-  dropClone: 1
-  pressAndHoldDelay: 1
-  interactable: 1
