@@ -15,6 +15,9 @@ namespace UI
 		{
 			ProductItemView productView = CreateProductView(product);
 			productView.transform.parent = _grid.transform;
+			
+			_grid.repositionNow = true;
+			_grid.Reposition();
 		}
 
 		private ProductItemView CreateProductView(Product product)

@@ -29,7 +29,8 @@ namespace UI
                 _cells.Add(cell);
             }
             
-            
+            _table.repositionNow = true;
+            _table.Reposition();
         }
 
 

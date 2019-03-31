@@ -1,13 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Model;
 using UnityEngine;
 
 public class ShopInventoryView : MonoBehaviour
 {
 	[SerializeField] private UIGrid _grid;
 	[SerializeField] private UILabel _currency;
+
+	private ShopInventory _shopModel;
+
+	public void Init(ShopInventory model)
+	{
+		_shopModel = model;
+		InitItems(_shopModel.Items);
+	}
 	
-	public void Init(Dictionary<string, Model.ShopItem> modelShopItems)
+	void InitItems(Dictionary<string, Model.ShopItem> modelShopItems)
 	{
 		foreach (Model.ShopItem shopItem in modelShopItems.Values)
 		{
@@ -20,6 +29,9 @@ public class ShopInventoryView : MonoBehaviour
 			ShopItemView item = go.GetComponent<ShopItemView>();
 			item.Init(shopItem);
 		}
+
+		_grid.repositionNow = true;
+		_grid.Reposition();
 	}
 	
 

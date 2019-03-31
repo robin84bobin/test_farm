@@ -14,6 +14,8 @@ namespace Model
         {
             _userShopItem = userShopItem;
             data = App.Instance.catalog.ShopItems[_userShopItem.ItemId];
+            
+            Amount = new ReactiveParameter<int>(_userShopItem.Amount);
         }
     }
 }

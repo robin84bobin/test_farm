@@ -113,7 +113,7 @@ namespace Data
         {
             JObject j = JObject.Parse(_dataJson);
             JToken jToken = j[_rootNode];
-            return jToken.ToObject<T>();
+            return jToken[name].ToObject<T>();
         }
     }
 }

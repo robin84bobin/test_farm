@@ -41,18 +41,12 @@ namespace Data.User
 
             foreach (ShopItem shopItem in catalog.ShopItems.GetAll())
             {
-                this.ShopItems.Set(new UserShopItem()
-                {
-                    ItemId = shopItem.Id
-                });
+                this.ShopItems.Set(new UserShopItem(){ItemId = shopItem.Id}, shopItem.Id);
             }
 
             foreach (Product product in catalog.Products.GetAll())
             {
-                this.Products.Set(new UserProduct()
-                {
-                    ItemId = product.Id
-                });
+                this.Products.Set(new UserProduct(){ItemId = product.Id}, product.Id);
             }
         }
     }

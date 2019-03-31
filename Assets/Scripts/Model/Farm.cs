@@ -11,10 +11,10 @@ namespace Model
             public int width;
         }
 
-        public ReactiveParameter<int> Coins;
-
         public FarmSize size { get; private set; }
 
+        public ShopInventory ShopInventory { get; private set; }
+        
         public Dictionary<string,Model.FarmCell> Cells{ get; private set; }
         public Dictionary<string,Model.ShopItem> ShopItems{ get; private set; }
         public Dictionary<string,Model.Product> Products{ get; private set; }
@@ -23,11 +23,10 @@ namespace Model
         {
             size = App.Instance.catalog.GetSetting<FarmSize>("grid");
             
-            int coinsValue = App.Instance.catalog.Currency["coins"].Value;
-            Coins = new ReactiveParameter<int>(coinsValue);
+            ShopInventory = new ShopInventory();
+            ShopInventory.Init();
             
             InitCells();
-            InitShop();
             InitProducts();
         }
 
@@ -41,10 +40,6 @@ namespace Model
             }
         }
 
-        private void InitShop()
-        {
-            ShopItems = new Dictionary<string, ShopItem>();
-        }
 
         private void InitCells()
         {
