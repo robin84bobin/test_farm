@@ -32,4 +32,8 @@ public class ShopItemView : MonoBehaviour {
 		go.transform.localScale = Vector3.one;
 	}
 
+	public void OnBuyClick()
+	{
+		
+	}
 }

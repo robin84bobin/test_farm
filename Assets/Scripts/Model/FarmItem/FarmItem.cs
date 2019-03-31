@@ -30,7 +30,7 @@ namespace Model
 
         public bool Eat(IEatible food)
         {
-            if (_data.resource != food.Name)
+            if (_data.ResourceProductId != food.Name)
                 return false;
 
             StartProduce();
