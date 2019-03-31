@@ -48,6 +48,8 @@ namespace Data.User
             {
                 this.Products.Set(new UserProduct(){ItemId = product.Id}, product.Id, true);
             }
+            
+            
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Data
             if (jCollection == null && createIfNotExist)
             {
                 callback.Invoke(new Dictionary<string, T>());
-                Debug.LogError(ToString() + " : no source data was found by: " + collection);
+                Debug.LogWarning(ToString() + " : no source data was found by: " + collection);
                 return ;
             }
 
@@ -96,8 +96,9 @@ namespace Data
             
             if (j[_rootNode] == null)
                 j[_rootNode] = new JObject();
-            
-            j[_rootNode][collection] = JToken.FromObject(items);
+
+            var jItems = JToken.FromObject(new List<T>(items.Values));
+            j[_rootNode][collection] = jItems;
 
             StreamWriter writer = File.CreateText(_path);
             var sourceString = j.ToString();
