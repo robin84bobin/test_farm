@@ -1,0 +1,44 @@
+{
+  "catalog": {
+    "currency": {
+      "coins": {
+        "Value": 100,
+        "Id": "coins"
+      }
+    },
+    "shop": {
+      "0": {
+        "ItemId": "0",
+        "Amount": 0,
+        "Id": "0"
+      },
+      "1": {
+        "ItemId": "1",
+        "Amount": 0,
+        "Id": "1"
+      },
+      "2": {
+        "ItemId": "2",
+        "Amount": 0,
+        "Id": "2"
+      }
+    },
+    "products": {
+      "seed": {
+        "ItemId": "seed",
+        "Amount": 0,
+        "Id": "seed"
+      },
+      "milk": {
+        "ItemId": "milk",
+        "Amount": 0,
+        "Id": "milk"
+      },
+      "egg": {
+        "ItemId": "egg",
+        "Amount": 0,
+        "Id": "egg"
+      }
+    }
+  }
+}

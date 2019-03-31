@@ -36,17 +36,17 @@ namespace Data.User
                 {
                     Id = currency.Id,
                     Value = currency.Value
-                });
+                }, currency.Id, true);
             }
 
             foreach (ShopItem shopItem in catalog.ShopItems.GetAll())
             {
-                this.ShopItems.Set(new UserShopItem(){ItemId = shopItem.Id}, shopItem.Id);
+                this.ShopItems.Set(new UserShopItem(){ItemId = shopItem.Id}, shopItem.Id, true);
             }
 
             foreach (Product product in catalog.Products.GetAll())
             {
-                this.Products.Set(new UserProduct(){ItemId = product.Id}, product.Id);
+                this.Products.Set(new UserProduct(){ItemId = product.Id}, product.Id, true);
             }
         }
     }

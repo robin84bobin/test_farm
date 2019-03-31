@@ -90,7 +90,13 @@ namespace Data
         {
             TryRefreshData();
 
-            JObject j = JObject.Parse(_dataJson);
+            JObject j = string.IsNullOrEmpty(_dataJson)?
+                new JObject(): 
+                JObject.Parse(_dataJson);
+            
+            if (j[_rootNode] == null)
+                j[_rootNode] = new JObject();
+            
             j[_rootNode][collection] = JToken.FromObject(items);
 
             StreamWriter writer = File.CreateText(_path);
