@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using ShopItem = Model.ShopItem;
 
-public class ShopItemView : MonoBehaviour {
+public class ShopItemView : MonoBehaviour 
+{
 
 	[SerializeField] private UIWidget _itemPlaceHolder;
+	[SerializeField] private GameObject _item;
 	[SerializeField] private UIButton _buyButton;
 	[SerializeField] private UILabel _priceLabel;
 	[SerializeField] private UILabel _amountLabel;
@@ -21,6 +24,8 @@ public class ShopItemView : MonoBehaviour {
 	private void OnAmountChange(int oldvalue, int newvalue)
 	{
 		_amountLabel.text = newvalue.ToString();
+
+		_item.GetComponent<UIDragDropItem>().enabled = _model.Amount.Value > 0;
 	}
 
 	private void InitView()
@@ -29,14 +34,15 @@ public class ShopItemView : MonoBehaviour {
 		_priceLabel.text = "Price: " + _model.data.BuyPrice;
 		
 		GameObject source = (GameObject)Resources.Load("UI/FarmItems/"+_model.data.FarmItemId, typeof(GameObject));
-		GameObject go = Instantiate(source, _itemPlaceHolder.transform);
-		go.transform.localPosition = Vector3.zero;
-		go.transform.localEulerAngles = Vector3.zero;
-		go.transform.localScale = Vector3.one;
+		_item = Instantiate(source, _itemPlaceHolder.transform);
+		_item.transform.localPosition = Vector3.zero;
+		_item.transform.localEulerAngles = Vector3.zero;
+		_item.transform.localScale = Vector3.one;
 	}
 
 	public void OnBuyClick()
 	{
         _model.Buy();
 	}
+
 }
