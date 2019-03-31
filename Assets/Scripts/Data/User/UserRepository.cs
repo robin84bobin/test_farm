@@ -47,6 +47,14 @@ namespace Data.User
                     ItemId = shopItem.Id
                 });
             }
+
+            foreach (Product product in catalog.Products.GetAll())
+            {
+                this.Products.Set(new UserProduct()
+                {
+                    ItemId = product.Id
+                });
+            }
         }
     }
 }

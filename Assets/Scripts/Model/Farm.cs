@@ -15,19 +15,41 @@ namespace Model
 
         public FarmSize size { get; private set; }
 
-        private Dictionary<int,Model.FarmCell> _cells;
-        private Dictionary<int,Model.ShopItem> _shopItems;
+        public Dictionary<string,Model.FarmCell> Cells{ get; private set; }
+        public Dictionary<string,Model.ShopItem> ShopItems{ get; private set; }
+        public Dictionary<string,Model.Product> Products{ get; private set; }
 
         public void Init()
         {
             size = App.Instance.catalog.GetSetting<FarmSize>("grid");
+            
             int coinsValue = App.Instance.catalog.Currency["coins"].value;
             Coins = new ReactiveParameter<int>(coinsValue);
-            _cells = new Dictionary<int, Model.FarmCell>();
+            
+            InitCells();
+            InitShop();
+            InitProducts();
         }
 
+        private void InitProducts()
+        {
+            Products = new Dictionary<string, Product>();
+            foreach (var product in App.Instance.userRepository.Products)
+            {
+                Products.Add(product.ItemId, new Product(product));
+                
+            }
+        }
 
+        private void InitShop()
+        {
+            ShopItems = new Dictionary<string, ShopItem>();
+        }
 
+        private void InitCells()
+        {
+            Cells = new Dictionary<string, Model.FarmCell>();
+        }
     }
 
 }

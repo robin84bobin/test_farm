@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Data;
-using Data.User;
 using UnityEngine;
 
 public class ShopInventoryView : MonoBehaviour
@@ -9,9 +7,9 @@ public class ShopInventoryView : MonoBehaviour
 	[SerializeField] private UIGrid _grid;
 	[SerializeField] private UILabel _currency;
 	
-	public void Init()
+	public void Init(Dictionary<string, Model.ShopItem> modelShopItems)
 	{
-		foreach (UserShopItem shopItem in App.Instance.userRepository.ShopItems.GetAll())
+		foreach (Model.ShopItem shopItem in modelShopItems.Values)
 		{
 			GameObject source = (GameObject)Resources.Load("UI/ShopItem", typeof(GameObject));
 			GameObject go = Instantiate(source, _grid.transform);
@@ -20,8 +18,7 @@ public class ShopInventoryView : MonoBehaviour
 			go.transform.localScale = Vector3.one;
 			
 			ShopItemView item = go.GetComponent<ShopItemView>();
-			item.Init(App.Instance.catalog.ShopItems[shopItem.ItemId]);
-			item.SetUserData(shopItem);
+			item.Init(shopItem);
 		}
 	}
 	

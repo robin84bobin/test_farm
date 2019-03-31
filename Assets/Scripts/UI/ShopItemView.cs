@@ -23,6 +23,8 @@ public class ShopItemView : MonoBehaviour {
 
 	private void InitView()
 	{
+		_amountLabel.text = _model.Amount.Value.ToString();
+		
 		GameObject source = (GameObject)Resources.Load("UI/FarmItems/"+_model.data.name, typeof(GameObject));
 		GameObject go = Instantiate(source, _itemPlaceHolder.transform);
 		go.transform.localPosition = Vector3.zero;
@@ -30,9 +32,4 @@ public class ShopItemView : MonoBehaviour {
 		go.transform.localScale = Vector3.one;
 	}
 
-	public void SetUserData(Data.User.UserShopItem userShopItem)
-	{
-		_userShopItem = userShopItem;
-		_amountLabel.text = userShopItem.Amount.ToString();
-	}
 }
