@@ -48,8 +48,16 @@ namespace Data.User
             {
                 this.Products.Set(new UserProduct(){ItemId = product.Id}, product.Id, true);
             }
-            
-            
+        }
+
+        protected override void SaveAll()
+        {
+            base.SaveAll();
+            Currency.SaveData();
+            ShopItems.SaveData();
+            FarmItems.SaveData();
+            Products.SaveData();
+            Cells.SaveData();
         }
     }
 }

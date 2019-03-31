@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Data;
-using Data.User;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using ShopItem = Model.ShopItem;
 
 public class ShopItemView : MonoBehaviour {
@@ -31,6 +26,7 @@ public class ShopItemView : MonoBehaviour {
 	private void InitView()
 	{
 		_amountLabel.text = _model.Amount.Value.ToString();
+		_priceLabel.text = "Price: " + _model.data.BuyPrice;
 		
 		GameObject source = (GameObject)Resources.Load("UI/FarmItems/"+_model.data.FarmItemId, typeof(GameObject));
 		GameObject go = Instantiate(source, _itemPlaceHolder.transform);
@@ -41,6 +37,6 @@ public class ShopItemView : MonoBehaviour {
 
 	public void OnBuyClick()
 	{
-		
+        _model.Buy();
 	}
 }

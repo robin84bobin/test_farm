@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using Commands;
 using Commands.Data;
+using Model;
 
 namespace Data.Repository
 {
-    public abstract class Repository
+    public abstract class Repository : TickableItem
     {
         public abstract void Init();
 
@@ -49,6 +50,23 @@ namespace Data.Repository
         {
             return _dbProxy.GetConfigObject<T>(name);
         }
+
+        private static bool _needSave;
+        public static void Save()
+        {
+            _needSave = true;
+        }
+        protected override void OnTick()
+        {
+            base.OnTick();
+            if (_needSave)
+            {
+                _needSave = false;
+                SaveAll();
+            }
+        }
+        
+        protected virtual void SaveAll(){}
     }
 
 

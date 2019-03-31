@@ -10,7 +10,7 @@ namespace Model
 
         public void Init()
         {
-            int coinsValue = App.Instance.catalog.Currency["coins"].Value;
+            int coinsValue = App.Instance.userRepository.Currency["coins"].Value;
             Coins = new ReactiveParameter<int>(coinsValue);
             
             Items = new Dictionary<string, Model.ShopItem>();
@@ -20,10 +20,14 @@ namespace Model
             }
         }
         
-        public bool Buy(Data.ShopItem shopItemData)
+        public bool Buy(Data.ShopItem shopItemData, int amount = 1)
         {
-            //shopItemData.BuyPrice
-            Coins.Value -= shopItemData.BuyPrice;
+            int coins = shopItemData.BuyPrice * amount;
+            
+            if (Coins.Value < coins)
+                return false;
+            
+            Coins.Value -= coins;
             return true;
         }
     }

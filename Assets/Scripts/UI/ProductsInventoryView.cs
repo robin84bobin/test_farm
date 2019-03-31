@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using Model;
 using UnityEngine;
-using Product = Data.Product;
 
 namespace UI
 {
-	public class ProductsInventoryView : MonoBehaviour {
-
-	
+	public class ProductsInventoryView : MonoBehaviour 
+	{
 		[SerializeField] private UIGrid _grid;
 
 		private Dictionary<string, ProductItemView> dictionary;

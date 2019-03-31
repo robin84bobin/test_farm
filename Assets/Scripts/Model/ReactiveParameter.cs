@@ -16,6 +16,7 @@ namespace Logic.Parameters
         public virtual void SetDefaultValue(T defaultValue)
         {
             _defaultValue = defaultValue;
+            _value = _defaultValue;
         }
 
         protected T _defaultValue = default(T);

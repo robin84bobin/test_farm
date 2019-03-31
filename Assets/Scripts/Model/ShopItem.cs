@@ -17,5 +17,16 @@ namespace Model
             
             Amount = new ReactiveParameter<int>(_userShopItem.Amount);
         }
+
+        internal void Buy()
+        {
+            int amount = 1;
+            if (App.Instance.FarmModel.ShopInventory.Buy(data, amount))
+            {
+                _userShopItem.Amount += amount;
+                Amount.Value = _userShopItem.Amount;
+                UserRepository.Save();
+            }
+        }
     }
 }
