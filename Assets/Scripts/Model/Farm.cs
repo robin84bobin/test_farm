@@ -1,18 +1,8 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
+using Logic.Parameters;
 
 namespace Model
 {
-    public class FarmCell 
-    {
-        Data.User.UserFarmCell _data;
-
-        public void Init(Data.User.UserFarmCell userData)
-        {
-            _data = userData;
-        }
-    }
-
     public class Farm 
     {
         public class FarmSize
@@ -21,6 +11,8 @@ namespace Model
             public int width;
         }
 
+        public ReactiveParameter<int> Coins;
+
         public FarmSize size { get; private set; }
 
         private Dictionary<int,Model.FarmCell> _cells;
@@ -28,9 +20,9 @@ namespace Model
         public void Init()
         {
             size = App.Instance.catalog.GetSetting<FarmSize>("grid");
+            int coinsValue = App.Instance.catalog.Currency["coins"].value;
+            Coins = new ReactiveParameter<int>(coinsValue);
             _cells = new Dictionary<int, Model.FarmCell>();
-            var cellDatas = App.Instance.userRepository.Cells;
-            
         }
 
 

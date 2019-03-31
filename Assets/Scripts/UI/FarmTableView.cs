@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Data;
+using Data.User;
 using UnityEngine;
 
 namespace UI
@@ -29,5 +31,13 @@ namespace UI
         }
 
 
+        public void SetData(List<UserFarmCell> userRepositoryCells)
+        {
+            //
+            foreach (var cell in userRepositoryCells)
+            {
+                _cells[cell.index].SetData(cell);
+            }
+        }
     }
 }

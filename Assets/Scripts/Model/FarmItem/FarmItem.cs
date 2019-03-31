@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 
 namespace Model
 {
@@ -23,10 +21,10 @@ namespace Model
             _data = data;
 
             _fsm = new FSM<State, FarmItemState>();
-                _fsm.Add(new IdleState());
+            _fsm.Add(new IdleState());
             var produceState = new ProduceState(_data);
             produceState.OnProduceComplete += OnProduceComplete;
-                _fsm.Add(produceState);
+            _fsm.Add(produceState);
         }
 
 

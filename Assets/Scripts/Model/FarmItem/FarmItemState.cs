@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Model
 {
     internal abstract class FarmItemState : BaseState<FarmItem.State>

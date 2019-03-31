@@ -24,10 +24,4 @@ namespace Data.Catalog
             _dbProxy.Init();
         }
     }
-
-    public class Currency:DataItem
-    {
-        public string name;
-        public string value;
-    }
 }
