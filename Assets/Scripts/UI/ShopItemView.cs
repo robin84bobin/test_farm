@@ -19,6 +19,13 @@ public class ShopItemView : MonoBehaviour {
 	{
 		_model = shopItem;
 		InitView();
+		
+		_model.Amount.OnValueChange += OnAmountChange;
+	}
+
+	private void OnAmountChange(int oldvalue, int newvalue)
+	{
+		_amountLabel.text = newvalue.ToString();
 	}
 
 	private void InitView()

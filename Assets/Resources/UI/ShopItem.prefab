@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4915779230726788}
   - component: {fileID: 114887828945082370}
   m_Layer: 8
-  m_Name: Label
+  m_Name: AmountLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 80
   mHeight: 82
-  mDepth: 5
+  mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   mFont: {fileID: 0}
   mText: 'PRICE:
 
-    2$'
+    2'
   mFontSize: 10
   mFontStyle: 0
   mAlignment: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 3459068928204737762, guid: 0000000000000000d000000000000000,
     type: 0}
   mFont: {fileID: 0}
-  mText: x999
+  mText: 99
   mFontSize: 18
   mFontStyle: 0
   mAlignment: 0

@@ -5,7 +5,7 @@ namespace Data.User
 {
     public class UserRepository : Repository.Repository
     {
-        public DataStorage<UserCurrency> Currency;
+        public  DataStorage<UserCurrency> Currency;
         public  DataStorage<UserShopItem> ShopItems;
         public  DataStorage<UserFarmItem> FarmItems;
         public  DataStorage<UserProduct> Products;

@@ -13,9 +13,15 @@ public class ShopInventoryView : MonoBehaviour
 	public void Init(ShopInventory model)
 	{
 		_shopModel = model;
+		_shopModel.Coins.OnValueChange += OnCoinsChange;
 		InitItems(_shopModel.Items);
 	}
-	
+
+	private void OnCoinsChange(int oldvalue, int newvalue)
+	{
+		_currency.text = newvalue.ToString();
+	}
+
 	void InitItems(Dictionary<string, Model.ShopItem> modelShopItems)
 	{
 		foreach (Model.ShopItem shopItem in modelShopItems.Values)
