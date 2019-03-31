@@ -41,13 +41,8 @@ namespace Data
                 return;
             }
 
-                JObject j = JObject.Parse(_dataJson);
-                JToken jToken = j[_rootNode];
-       //         GetData<T>(jToken, collection, callback);
-       // }
-        
-        //private void GetData<T>(JToken jToken, string collection, Action<Dictionary<string, T>> callback) where T : DataItem, new()
-        //{
+            JObject j = JObject.Parse(_dataJson);
+            JToken jToken = j[_rootNode];
             if (string.IsNullOrEmpty(collection))
             {
                 Debug.LogError(ToString() + " : no sourceName in storage had been set: " + collection);
@@ -62,21 +57,13 @@ namespace Data
                 return ;
             }
 
-            Dictionary<string, T> items = jCollection.ToObject<Dictionary<string, T>>();
-            /*T[] dataArray = jToken.ToObject<T[]>();
-            
-            var items = new Dictionary<string, T>();
-            foreach (T newItem in dataArray)
+            T[] items = jCollection.ToObject<T[]>();
+            Dictionary<string, T> itemsDict = new Dictionary<string, T>();
+            foreach (var item in items)
             {
-                if (items.ContainsKey(newItem.Id))
-                {
-                    Debug.LogError(string.Format("Map {0} already contains key {1}! Skiping...", typeof(T).Name,
-                        newItem.Id));
-                    continue;
-                }
-                items.Add(newItem.Id, newItem);
-            }*/
-            callback.Invoke(items);
+                itemsDict.Add(item.Id, item);
+            }
+            callback.Invoke(itemsDict);
         }
 
         public void Init()

@@ -35,8 +35,7 @@ namespace Data.User
                 this.Currency.Set(new UserCurrency()
                 {
                     Id = currency.Id,
-                    name = currency.name, 
-                    value = currency.value
+                    Value = currency.Value
                 });
             }
 

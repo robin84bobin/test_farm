@@ -4,57 +4,67 @@
       "width": 8,
       "height": 8
     },
-    "currency": {
-      "coins": {
-        "value": 100
+    "currency": [
+      {
+        "Id": "coins",
+        "Value": 100
       }
-    },
-    "shop": {
-      "0": {
-        "item": "wheat",
-        "price": 1
+    ],
+    "shop": [
+      {
+        "Id": "0",
+        "FarmItemId": "wheat",
+        "BuyPrice": 1,
+        "BuyCurrencyId": "coins"
       },
-      "1": {
-        "item": "hen",
-        "price": 1
+      {
+        "Id": "1",
+        "FarmItemId": "hen",
+        "BuyPrice": 2,
+        "BuyCurrencyId": "coins"
       },
-      "2": {
-        "item": "cow",
-        "price": 1
+      {
+        "Id": "2",
+        "FarmItemId": "cow",
+        "BuyPrice": 3,
+        "BuyCurrencyId": "coins"
       }
-    },
-    "farmItems": {
-      "wheat": {
-        "producePeriod": 20,
-        "product": "seed"
+    ],
+    "farmItems": [
+      {
+        "Id": "wheat",
+        "ProductId": "seed",
+        "ProducePeriod": 20
       },
-      "hen": {
-        "producePeriod": 20,
-        "product": "egg",
-        "resourceProduct": {
-          "product": "seed",
-          "amount": 1,
-          "duration": 20
-        }
+      {
+        "Id": "hen",
+        "ProducePeriod": 20,
+        "ProductId": "egg",
+        "ResourceProductId": "seed",
+        "ProduceAmount": 1,
+        "ProduceDuration": 20
       },
-      "cow": {
-        "producePeriod": 20,
-        "product": "milk",
-        "resourceProduct": {
-          "product": "seed",
-          "amount": 1,
-          "duration": 20
-        }
+      {
+        "Id": "cow",
+        "ProducePeriod": 20,
+        "ProductId": "milk",
+        "ResourceProductId": "seed",
+        "ProduceAmount": 1,
+        "ProduceDuration": 20
       }
-    },
-    "products": {
-      "seed": {},
-      "milk": {
-        "price": 1
+    ],
+    "products": [
+      {
+        "Id": "seed"
       },
-      "egg": {
-        "price": 1
+      {
+        "Id": "milk",
+        "SellPrice": 1
+      },
+      {
+        "Id": "egg",
+        "SellPrice": 1
       }
-    }
+    ]
   }
 }

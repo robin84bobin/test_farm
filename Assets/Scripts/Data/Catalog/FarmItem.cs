@@ -2,10 +2,10 @@ namespace Data
 {
     public class FarmItem : DataItem
     {
-        public int producePeriod;
-        public string product;
-        public string resource;
-        public int amount;
-        public int duration;
+        public string ProductId;
+        public int ProducePeriod;
+        public int ProduceAmount;
+        public int ProduceDuration;
+        public string ResourceProductId;
     }
 }

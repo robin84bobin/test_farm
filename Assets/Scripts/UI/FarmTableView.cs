@@ -38,7 +38,7 @@ namespace UI
             //
             foreach (var cell in userRepositoryCells)
             {
-                _cells[cell.index].SetData(cell);
+                _cells[cell.Index].SetData(cell);
             }
         }
     }

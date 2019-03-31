@@ -2,7 +2,6 @@
 {
     public class UserCurrency  :DataItem
     {
-        public string name;
-        public int value;
+        public int Value;
     }
 }

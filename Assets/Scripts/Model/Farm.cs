@@ -23,7 +23,7 @@ namespace Model
         {
             size = App.Instance.catalog.GetSetting<FarmSize>("grid");
             
-            int coinsValue = App.Instance.catalog.Currency["coins"].value;
+            int coinsValue = App.Instance.catalog.Currency["coins"].Value;
             Coins = new ReactiveParameter<int>(coinsValue);
             
             InitCells();

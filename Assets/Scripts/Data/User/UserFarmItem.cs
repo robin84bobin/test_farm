@@ -4,6 +4,6 @@
     {
         public string ItemId;
         public int Progress;
-        public int resourceAmount;
+        public int ResourceAmount;
     }
 }
