@@ -26,9 +26,14 @@ namespace Model
             InitCells();
         }
 
+        
         private void InitCells()
         {
             Cells = new Dictionary<string, Model.FarmCell>();
+            foreach (var cell in App.Instance.userRepository.Cells)
+            {
+                Cells.Add(cell.Id,  new FarmCell(cell));
+            }
         }
     }
 
