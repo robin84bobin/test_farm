@@ -1,4 +1,6 @@
 
+using Data.Catalog;
+
 namespace Data.User
 {
     public class UserRepository : Repository.Repository
@@ -24,6 +26,27 @@ namespace Data.User
 
             _dbProxy.OnInitialized += OnDbInitComplete;
             _dbProxy.Init();
+        }
+
+        public void InitStartValuesFrom(CatalogRepository catalog)
+        {
+            foreach (Currency currency in catalog.Currency.GetAll())
+            {
+                this.Currency.Set(new UserCurrency()
+                {
+                    Id = currency.Id,
+                    name = currency.name, 
+                    value = currency.value
+                });
+            }
+
+            foreach (ShopItem shopItem in catalog.ShopItems.GetAll())
+            {
+                this.ShopItems.Set(new UserShopItem()
+                {
+                    ItemId = shopItem.Id
+                });
+            }
         }
     }
 }

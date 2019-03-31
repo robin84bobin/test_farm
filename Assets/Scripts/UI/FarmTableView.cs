@@ -12,7 +12,7 @@ namespace UI
         private int _cellAmount;
         private List<FarmCellView> _cells;
         
-        public void InitView(int width, int height)
+        public void Init(int width, int height)
         {
             _cellAmount = width * height;
             _table.columns = width;
@@ -28,6 +28,8 @@ namespace UI
                 FarmCellView cell = go.GetComponent<FarmCellView>();
                 _cells.Add(cell);
             }
+            
+            
         }
 
 

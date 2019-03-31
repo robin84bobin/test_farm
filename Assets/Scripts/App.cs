@@ -58,7 +58,7 @@ public class App : MonoBehaviour
     private void OnInitComplete()
     {
         if (_newGame)
-            InitUserStartValues();
+            userRepository.InitStartValuesFrom(catalog);
         
         FarmModel = new Model.Farm();
         FarmModel.Init();
@@ -66,23 +66,7 @@ public class App : MonoBehaviour
         SceneManager.LoadSceneAsync("Level");
     }
 
-    private void InitUserStartValues()
-    {
-        foreach (Currency currency in catalog.Currency.GetAll())
-        {
-            userRepository.Currency.Set(
-                new UserCurrency()
-                {
-                    Id = currency.Id,
-                    name = currency.name, 
-                    value = currency.value
-                });
-        }
-    }
-
     private float _nextTickTime;
-
-
     void Update()
     {
         if(Time.time >= _nextTickTime)

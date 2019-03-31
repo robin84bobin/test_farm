@@ -16,6 +16,7 @@ namespace Model
         public FarmSize size { get; private set; }
 
         private Dictionary<int,Model.FarmCell> _cells;
+        private Dictionary<int,Model.ShopItem> _shopItems;
 
         public void Init()
         {
