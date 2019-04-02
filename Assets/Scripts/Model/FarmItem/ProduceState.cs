@@ -9,21 +9,13 @@ namespace Model
 
     internal class ProduceState : FarmItemState
     {
-        private Data.FarmItem _data;
-
+        private FarmItem _farmItem;
         public event ProduceProductDelegate OnProduceComplete;
 
-        private ReactiveParameter<float> _progress;
-        private ReactiveParameter<float> _resourceTime;
-
-
-        public ProduceState(Data.FarmItem data, ReactiveParameter<float> progress, ReactiveParameter<float> resourceTime) 
-            :base(State.PRODUCE)
+        public ProduceState(FarmItem farmItem) :base(State.PRODUCE)
         {
-            _data = data;
-            _progress = progress;
-            _resourceTime = resourceTime;
-            _progress.OnValueChange += OnProgress ;
+            _farmItem = farmItem;
+            _farmItem.Progress.OnValueChange += OnProgress ;
         }
 
         private void OnProgress (float oldvalue, float newvalue)
@@ -44,8 +36,14 @@ namespace Model
 
         public override void Tick(float deltaTime)
         {
-            _progress.Value += 1;
-            _resourceTime.Value -= deltaTime;
+            _farmItem.Progress.Value += 1;
+            _farmItem.ResourceTime.Value -= deltaTime;
+        }
+
+        public override void Release()
+        {
+            base.Release();
+            _farmItem.Progress.OnValueChange -= OnProgress ;
         }
     }
 }

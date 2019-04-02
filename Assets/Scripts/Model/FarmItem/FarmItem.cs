@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Logic.Parameters;
 
 namespace Model
@@ -12,8 +13,8 @@ namespace Model
     public class FarmItem : TickableItem, IProducer, IEater
     {
         public event ProduceProductDelegate OnProduceComplete;
-        public ReactiveParameter<float> Progress;
-        public ReactiveParameter<float> ResourceTime;
+        public ReactiveParameter<float> Progress { get; private set; }
+        public ReactiveParameter<float> ResourceTime { get; private set; }
 
         private Data.FarmItem _data;
         public FSM<State, FarmItemState> Fsm { get; private set; }
@@ -29,11 +30,12 @@ namespace Model
             
             ResourceTime = new ReactiveParameter<float>(0f);
 
-            Fsm = new FSM<State, FarmItemState>();
-            Fsm.Add(new IdleState());
-            var produceState = new ProduceState(_data,Progress,ResourceTime);
+            var produceState = new ProduceState(this);
             produceState.OnProduceComplete += OnProduceComplete;
+            
+            Fsm = new FSM<State, FarmItemState>();
             Fsm.Add(produceState);
+            Fsm.Add(new IdleState(this));
         }
 
         private void OnProgress(float oldvalue, float newvalue)
@@ -47,7 +49,8 @@ namespace Model
         public void PickUp(out Data.Product product)
         {
             product = _pendingProducts.Dequeue();
-            StartProduce();
+            if (_pendingProducts.Count <= 0)
+                TryStartProduce();
         }
 
         public bool Eat(IEatible food)
@@ -56,11 +59,11 @@ namespace Model
                 return false;
 
             ResourceTime.Value += _data.ResourceTime;
-            StartProduce();
+            TryStartProduce();
             return true;
         }
 
-        private void StartProduce()
+        public void TryStartProduce()
         {
             if (ResourceTime.Value < _data.ResourceTime)
                 return;

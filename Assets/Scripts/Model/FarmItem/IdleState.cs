@@ -2,23 +2,24 @@
 {
     internal class IdleState : FarmItemState
     {
-        public IdleState() : base(State.IDLE)
+        public IdleState(FarmItem farmItem) : base(State.IDLE)
         {
+            _farmItem = farmItem;
         }
 
         public override void OnEnterState()
         {
-            throw new System.NotImplementedException();
+            _farmItem.TryStartProduce();
         }
 
         public override void OnExitState()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         public override void Tick(float deltaTime)
         {
-            throw new System.NotImplementedException();
+            // new System.NotImplementedException();
         }
     }
 }
