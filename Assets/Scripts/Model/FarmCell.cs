@@ -9,6 +9,7 @@ namespace Model
         public FarmCell(UserFarmCell userData)
         {
             Data = userData;
+            
         }
     }
 }

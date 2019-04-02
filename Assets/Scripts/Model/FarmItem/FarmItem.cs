@@ -7,13 +7,12 @@ namespace Model
     {
         public event ProduceProductDelegate OnProduceComplete;
         public ReactiveParameter<float> Progress;
-        public ReactiveParameter<float> Resource;
+        public ReactiveParameter<float> ResourceTime;
 
         public enum State
         {
             IDLE,
             PRODUCE,
-            
         }
 
         private Data.FarmItem _data;
@@ -25,13 +24,23 @@ namespace Model
             _data = data;
             
             Progress = new ReactiveParameter<float>(0f);
-            Resource = new ReactiveParameter<float>(0f);
+            Progress.OnValueChange += OnProgress;
+            
+            ResourceTime = new ReactiveParameter<float>(0f);
 
             _fsm = new FSM<State, FarmItemState>();
             _fsm.Add(new IdleState());
-            var produceState = new ProduceState(_data,Progress,Resource);
+            var produceState = new ProduceState(_data,Progress,ResourceTime);
             produceState.OnProduceComplete += OnProduceComplete;
             _fsm.Add(produceState);
+        }
+
+        private void OnProgress(float oldvalue, float newvalue)
+        {
+            if (newvalue >= 1)
+                Progress.Value = 0;
+            
+            _fsm.SetState(State.IDLE);
         }
 
 
@@ -56,9 +65,9 @@ namespace Model
             OnProduceComplete = null;
         }
 
-        protected override void OnTick()
+        protected override void OnTick(float deltaTime)
         {
-            _fsm.CurrentState.Tick();
+            _fsm.CurrentState.Tick(deltaTime);
         }
     }
 

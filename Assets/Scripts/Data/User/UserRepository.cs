@@ -65,9 +65,9 @@ namespace Data.User
         {
             _needSave = true;
         }
-        protected override void OnTick()
+        protected override void OnTick(float deltaTime)
         {
-            base.OnTick();
+            base.OnTick(deltaTime);
             if (_needSave)
             {
                 _needSave = false;

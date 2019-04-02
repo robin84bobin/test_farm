@@ -7,6 +7,6 @@ namespace Model
         {
         }
 
-        public abstract void Tick();
+        public abstract void Tick(float deltaTime);
     }
 }

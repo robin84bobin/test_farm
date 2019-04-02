@@ -16,7 +16,7 @@
             throw new System.NotImplementedException();
         }
 
-        public override void Tick()
+        public override void Tick(float deltaTime)
         {
             throw new System.NotImplementedException();
         }

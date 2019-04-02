@@ -34,10 +34,10 @@ namespace UI
         }
 
 
-        public void SetData(Dictionary<string, FarmCell> userRepositoryCells)
+        public void SetData(Dictionary<string, FarmCell> сells)
         {
             //
-            foreach (var cell in userRepositoryCells)
+            foreach (var cell in сells)
             {
                 _cells[cell.Value.Data.Index].Init(cell.Value);
             }

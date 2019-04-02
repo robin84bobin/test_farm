@@ -14,7 +14,7 @@ public class App : MonoBehaviour
 
 
     public static App Instance; 
-    public event Action OnTick = delegate { };
+    public event Action<float> OnTick = delegate { };
 
     public CatalogRepository catalog { get; private set; }
     public UserRepository userRepository { get; private set; }
@@ -72,7 +72,7 @@ public class App : MonoBehaviour
         if(Time.time >= _nextTickTime)
         {
             _nextTickTime = Time.time + TiCK_DELTA_TIME;
-            OnTick.Invoke();
+            OnTick.Invoke(TiCK_DELTA_TIME);
         }
     }
 }

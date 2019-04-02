@@ -12,11 +12,16 @@ namespace Model
 
         public event ProduceProductDelegate OnProduceComplete;
 
+        private ReactiveParameter<float> _progress;
+        private ReactiveParameter<float> _resourceTime;
 
-        public ProduceState(Data.FarmItem data, ReactiveParameter<float> progress, ReactiveParameter<float> resource) 
+
+        public ProduceState(Data.FarmItem data, ReactiveParameter<float> progress, ReactiveParameter<float> resourceTime) 
             :base(FarmItem.State.PRODUCE)
         {
             _data = data;
+            _progress = progress;
+            _resourceTime = resourceTime;
         }
 
         public override void OnEnterState()
@@ -29,9 +34,9 @@ namespace Model
             _owner.SetState(FarmItem.State.IDLE);
         }
 
-        public override void Tick()
+        public override void Tick(float deltaTime)
         {
-            throw new System.NotImplementedException();
+            _progress.Value += 1;
         }
     }
 }
