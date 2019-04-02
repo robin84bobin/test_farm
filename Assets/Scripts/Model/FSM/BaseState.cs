@@ -1,4 +1,4 @@
-namespace Model
+namespace Model.FSM
 {
     public abstract class BaseState<TKey>
     {

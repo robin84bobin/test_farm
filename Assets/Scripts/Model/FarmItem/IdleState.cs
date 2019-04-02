@@ -2,7 +2,7 @@
 {
     internal class IdleState : FarmItemState
     {
-        public IdleState() : base(FarmItem.State.IDLE)
+        public IdleState() : base(State.IDLE)
         {
         }
 

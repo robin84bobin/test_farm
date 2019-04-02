@@ -1,6 +1,7 @@
 ﻿
 using Logic.Parameters;
 
+
 namespace Model
 {
 
@@ -17,7 +18,7 @@ namespace Model
 
 
         public ProduceState(Data.FarmItem data, ReactiveParameter<float> progress, ReactiveParameter<float> resourceTime) 
-            :base(FarmItem.State.PRODUCE)
+            :base(State.PRODUCE)
         {
             _data = data;
             _progress = progress;
@@ -31,7 +32,7 @@ namespace Model
 
         public override void OnExitState()
         {
-            _owner.SetState(FarmItem.State.IDLE);
+            _owner.SetState(State.IDLE);
         }
 
         public override void Tick(float deltaTime)

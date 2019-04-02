@@ -2,6 +2,11 @@ using Logic.Parameters;
 
 namespace Model
 {
+    public enum State
+    {
+        IDLE,
+        PRODUCE,
+    }
 
     public class FarmItem : TickableItem, IProducer, IEater
     {
@@ -9,15 +14,10 @@ namespace Model
         public ReactiveParameter<float> Progress;
         public ReactiveParameter<float> ResourceTime;
 
-        public enum State
-        {
-            IDLE,
-            PRODUCE,
-        }
-
         private Data.FarmItem _data;
-        private FSM<State, FarmItemState> _fsm;
+        public FSM<State, FarmItemState> Fsm { get; private set; }
 
+        public Product PendingProduct { get; private set; }
 
         public FarmItem(Data.FarmItem data)
         {
@@ -28,11 +28,11 @@ namespace Model
             
             ResourceTime = new ReactiveParameter<float>(0f);
 
-            _fsm = new FSM<State, FarmItemState>();
-            _fsm.Add(new IdleState());
+            Fsm = new FSM<State, FarmItemState>();
+            Fsm.Add(new IdleState());
             var produceState = new ProduceState(_data,Progress,ResourceTime);
             produceState.OnProduceComplete += OnProduceComplete;
-            _fsm.Add(produceState);
+            Fsm.Add(produceState);
         }
 
         private void OnProgress(float oldvalue, float newvalue)
@@ -40,7 +40,7 @@ namespace Model
             if (newvalue >= 1)
                 Progress.Value = 0;
             
-            _fsm.SetState(State.IDLE);
+            Fsm.SetState(State.IDLE);
         }
 
 
@@ -55,19 +55,19 @@ namespace Model
 
         private void StartProduce()
         {
-            _fsm.SetState(State.PRODUCE);
+            Fsm.SetState(State.PRODUCE);
         }
 
         public override void Release()
         {
             base.Release();
-            _fsm.Release();
+            Fsm.Release();
             OnProduceComplete = null;
         }
 
         protected override void OnTick(float deltaTime)
         {
-            _fsm.CurrentState.Tick(deltaTime);
+            Fsm.CurrentState.Tick(deltaTime);
         }
     }
 

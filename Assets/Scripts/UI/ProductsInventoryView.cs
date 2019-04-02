@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Model;
+using Model.Product;
 using UnityEngine;
 
 namespace UI
@@ -22,7 +23,7 @@ namespace UI
 			}
 		}
 
-		public void Add(Model.Product product)
+		public void Add(Product product)
 		{
 			ProductItemView productView = CreateProductView(product);
 			productView.transform.parent = _grid.transform;
@@ -31,7 +32,7 @@ namespace UI
 			_grid.Reposition();
 		}
 
-		private ProductItemView CreateProductView(Model.Product product)
+		private ProductItemView CreateProductView(Product product)
 		{
 			GameObject source = (GameObject)Resources.Load("UI/ProductItem", typeof(GameObject));
 			GameObject go = Instantiate(source, _grid.transform);

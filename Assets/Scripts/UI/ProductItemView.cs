@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using Product = Model.Product;
+using Product = Model.Product.Product;
 
 public class ProductItemView : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class ProductItemView : MonoBehaviour
 
 	public event Action<ProductItemView> Remove;
 
-	public void Init(Model.Product product)
+	public void Init(Product product)
 	{
 		_product = product;
 		

@@ -1,9 +1,11 @@
 ﻿
+using Model.FSM;
+
 namespace Model
 {
-    internal abstract class FarmItemState : BaseState<FarmItem.State>
+    public abstract class FarmItemState : BaseState<State>
     {
-        public FarmItemState(FarmItem.State name) : base(name)
+        public FarmItemState(State name) : base(name)
         {
         }
 

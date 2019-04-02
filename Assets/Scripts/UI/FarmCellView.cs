@@ -24,7 +24,7 @@ namespace UI
             _dropContainer.OnFarmItemRecieved += OnFarmItemDrop;
         }
 
-        private void OnFarmItemDrop(FarmItem obj)
+        private void OnFarmItemDrop(FarmItem farmItem)
         {
             
         }
