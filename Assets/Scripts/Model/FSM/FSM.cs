@@ -4,16 +4,16 @@ using Model.FSM;
 
 namespace Model
 {
-    public interface IStateMachine<TKey>
+    public interface IStateMachine<TStateName>
     {
-        void SetState(TKey key);
+        void SetState(TStateName key, bool restartCurrentState = false);
     }
 
-    public class FSM<TKey, TState> : IStateMachine<TKey> where TState : BaseState<TKey>
+    public class FSM<TStateName, TState> : IStateMachine<TStateName> where TState : BaseState<TStateName>
     {
         public event Action<TState> OnStateChanged;
         public TState CurrentState { get; private set; }
-        private Dictionary<TKey, TState> _states = new Dictionary<TKey, TState>();
+        private Dictionary<TStateName, TState> _states = new Dictionary<TStateName, TState>();
 
         public void Add(TState state)
         {
@@ -25,14 +25,17 @@ namespace Model
             _states[state.Name].SetOwner(this);
         }
 
-        public void Remove(TKey key)
+        public void Remove(TStateName key)
         {
             _states[key].Release();
             _states.Remove(key);
         }
 
-        public void SetState(TKey key)
+        public void SetState(TStateName key, bool restartCurrentState = false)
         {
+            if (!restartCurrentState && CurrentState.Name.Equals(key))
+                return;
+            
             if (CurrentState != null)
             {
                 CurrentState.OnExitState();
@@ -47,7 +50,7 @@ namespace Model
 
         public void Release()
         {
-            var keys = new List<TKey>(_states.Keys);
+            var keys = new List<TStateName>(_states.Keys);
             foreach (var key in keys)
             {
                 Remove(key);

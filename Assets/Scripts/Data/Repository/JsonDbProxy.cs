@@ -18,10 +18,6 @@ namespace Data
         {
             _rootNode = rootNode;
             _path =  path;
-            /*if (IsFileExist(_path))
-            {
-                _lastReadTime = File.GetLastWriteTime(_path);
-            }*/
         }
 
         public void Save<T>(string collection, T item, string id = "", Action<T> callback = null) where T : DataItem, new()

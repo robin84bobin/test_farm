@@ -3,15 +3,8 @@ using Logic.Parameters;
 
 namespace Model
 {
-    
-    
     public class Product
     {
-        public enum State
-        {
-            Pending,
-            Picked
-        }
         
         public ReactiveParameter<int> Amount;
         
@@ -19,21 +12,18 @@ namespace Model
 
         public void OnPickUp()
         {
-            Fsm.SetState(State.Picked);
+            Amount.Value ++;
         }
         
         private UserProduct _userProduct;
         
-        public FSM<State, ProductState> Fsm { get; private set; }
 
-        public Product(UserProduct userProduct, State state = State.Pending)
+        public Product(UserProduct userProduct)
         {
             _userProduct = userProduct;
             Amount = new ReactiveParameter<int>(_userProduct.Amount);
             
             data = App.Instance.catalog.Products[_userProduct.ItemId];
-            
-            
         }
     }
 }

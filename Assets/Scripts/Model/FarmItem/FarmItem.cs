@@ -17,7 +17,7 @@ namespace Model
         private Data.FarmItem _data;
         public FSM<State, FarmItemState> Fsm { get; private set; }
 
-        public Product PendingProduct { get; private set; }
+        public bool PendingProduct{ get; private set; }
 
         public FarmItem(Data.FarmItem data)
         {
@@ -43,18 +43,30 @@ namespace Model
             Fsm.SetState(State.IDLE);
         }
 
+        public void PickUp()
+        {
+            PendingProduct = false;
+            StartProduce();
+        }
 
         public bool Eat(IEatible food)
         {
             if (_data.ResourceProductId != food.Name)
                 return false;
 
+            ResourceTime.Value += _data.ResourceTime;
             StartProduce();
             return true;
         }
 
         private void StartProduce()
         {
+            if (ResourceTime.Value < _data.ResourceTime)
+                return;
+
+            if (PendingProduct)
+                return;
+            
             Fsm.SetState(State.PRODUCE);
         }
 

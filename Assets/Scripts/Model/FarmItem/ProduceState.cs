@@ -23,6 +23,13 @@ namespace Model
             _data = data;
             _progress = progress;
             _resourceTime = resourceTime;
+            _progress.OnValueChange += OnProgress ;
+        }
+
+        private void OnProgress (float oldvalue, float newvalue)
+        {
+            if (newvalue >= 1)
+                _owner.SetState(State.IDLE);
         }
 
         public override void OnEnterState()
@@ -32,12 +39,13 @@ namespace Model
 
         public override void OnExitState()
         {
-            _owner.SetState(State.IDLE);
+            
         }
 
         public override void Tick(float deltaTime)
         {
             _progress.Value += 1;
+            _resourceTime.Value -= deltaTime;
         }
     }
 }
