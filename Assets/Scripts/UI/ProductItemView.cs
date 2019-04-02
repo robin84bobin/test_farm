@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Product = Model.Product.Product;
 
 public class ProductItemView : MonoBehaviour
 {
@@ -8,11 +7,11 @@ public class ProductItemView : MonoBehaviour
 	[SerializeField] private UIButton _sellButton;
 	[SerializeField] private UILabel _sellPriceLabel;
 	[SerializeField] private UILabel _amount;
-	private Product _product;
+	private Model.Product _product;
 
 	public event Action<ProductItemView> Remove;
 
-	public void Init(Product product)
+	public void Init(Model.Product product)
 	{
 		_product = product;
 		

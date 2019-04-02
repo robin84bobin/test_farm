@@ -29,8 +29,6 @@ namespace UI
             
         }
 
-
-
         private void OnProductDrop(Product obj)
         {
             //
