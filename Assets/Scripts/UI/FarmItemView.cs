@@ -4,7 +4,14 @@ namespace UI
 {
     public class FarmItemView : MonoBehaviour
     {
+        [SerializeField] private UISprite _progressBar;
+        
+        [SerializeField] private UILabel _resourceLabel;
+        [SerializeField] private UISprite _resourceBar;
+        
+        
         private Model.FarmItem _model;
+        
 
         public void Init(Model.FarmItem model)
         {

@@ -1,4 +1,6 @@
 ﻿
+using Logic.Parameters;
+
 namespace Model
 {
 
@@ -10,19 +12,21 @@ namespace Model
 
         public event ProduceProductDelegate OnProduceComplete;
 
-        public ProduceState(Data.FarmItem data) : base(FarmItem.State.PRODUCE)
+
+        public ProduceState(Data.FarmItem data, ReactiveParameter<float> progress, ReactiveParameter<float> resource) 
+            :base(FarmItem.State.PRODUCE)
         {
             _data = data;
         }
 
         public override void OnEnterState()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         public override void OnExitState()
         {
-            throw new System.NotImplementedException();
+            _owner.SetState(FarmItem.State.IDLE);
         }
 
         public override void Tick()

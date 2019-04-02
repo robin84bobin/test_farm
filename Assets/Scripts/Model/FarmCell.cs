@@ -4,11 +4,11 @@ namespace Model
 {
     public class FarmCell 
     {
-        Data.User.UserFarmCell _data;
+        public readonly Data.User.UserFarmCell Data;
 
         public FarmCell(UserFarmCell userData)
         {
-            _data = userData;
+            Data = userData;
         }
     }
 }

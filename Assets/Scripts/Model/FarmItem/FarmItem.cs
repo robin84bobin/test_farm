@@ -1,3 +1,4 @@
+using Logic.Parameters;
 
 namespace Model
 {
@@ -5,11 +6,14 @@ namespace Model
     public class FarmItem : TickableItem, IProducer, IEater
     {
         public event ProduceProductDelegate OnProduceComplete;
+        public ReactiveParameter<float> Progress;
+        public ReactiveParameter<float> Resource;
 
         public enum State
         {
             IDLE,
             PRODUCE,
+            
         }
 
         private Data.FarmItem _data;
@@ -19,10 +23,13 @@ namespace Model
         public FarmItem(Data.FarmItem data)
         {
             _data = data;
+            
+            Progress = new ReactiveParameter<float>(0f);
+            Resource = new ReactiveParameter<float>(0f);
 
             _fsm = new FSM<State, FarmItemState>();
             _fsm.Add(new IdleState());
-            var produceState = new ProduceState(_data);
+            var produceState = new ProduceState(_data,Progress,Resource);
             produceState.OnProduceComplete += OnProduceComplete;
             _fsm.Add(produceState);
         }

@@ -3,6 +3,7 @@
     public class UserFarmCell : DataItem
     {
         public int Index;
-        public UserFarmItem Item;
+        public string UserFarmItemId;
+
     }
 }

@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemPlaceholder: {fileID: 4631811210537866}
+  _dropContainer: {fileID: 114944403266784424}
 --- !u!114 &114730065372899366
 MonoBehaviour:
   m_ObjectHideFlags: 1

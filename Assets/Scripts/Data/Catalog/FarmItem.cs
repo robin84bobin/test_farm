@@ -7,5 +7,6 @@ namespace Data
         public int ProduceAmount;
         public int ProduceDuration;
         public string ResourceProductId;
+        public int ResourceTime;
     }
 }

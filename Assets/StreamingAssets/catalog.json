@@ -14,19 +14,19 @@
       {
         "Id": "0",
         "FarmItemId": "wheat",
-        "BuyPrice": 1,
+        "BuyPrice": 10,
         "BuyCurrencyId": "coins"
       },
       {
         "Id": "1",
         "FarmItemId": "hen",
-        "BuyPrice": 2,
+        "BuyPrice": 20,
         "BuyCurrencyId": "coins"
       },
       {
         "Id": "2",
         "FarmItemId": "cow",
-        "BuyPrice": 3,
+        "BuyPrice": 30,
         "BuyCurrencyId": "coins"
       }
     ],
@@ -34,7 +34,7 @@
       {
         "Id": "wheat",
         "ProductId": "seed",
-        "ProducePeriod": 20
+        "ProducePeriod": 10
       },
       {
         "Id": "hen",
@@ -42,7 +42,8 @@
         "ProductId": "egg",
         "ResourceProductId": "seed",
         "ProduceAmount": 1,
-        "ProduceDuration": 20
+        "ProduceDuration": 20,
+        "ResourceTime":30
       },
       {
         "Id": "cow",
@@ -50,7 +51,8 @@
         "ProductId": "milk",
         "ResourceProductId": "seed",
         "ProduceAmount": 1,
-        "ProduceDuration": 20
+        "ProduceDuration": 20,
+        "ResourceTime":20
       }
     ],
     "products": [
@@ -59,7 +61,7 @@
       },
       {
         "Id": "milk",
-        "SellPrice": 1
+        "SellPrice": 2
       },
       {
         "Id": "egg",

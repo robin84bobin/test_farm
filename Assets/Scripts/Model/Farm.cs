@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
+using Data.User;
 
 namespace Model
 {
     public class Farm 
     {
-        public class FarmSize
-        {
-            public int height;
-            public int width;
-        }
-
         public FarmSize size { get; private set; }
 
         public ShopInventory ShopInventory { get; private set; }
+        public ProductInventory ProductInventory { get; private set; }
         
         public Dictionary<string,Model.FarmCell> Cells{ get; private set; }
 
@@ -22,6 +18,9 @@ namespace Model
             
             ShopInventory = new ShopInventory();
             ShopInventory.Init();
+            
+            ProductInventory = new ProductInventory();
+            ProductInventory.Init();
             
             InitCells();
         }

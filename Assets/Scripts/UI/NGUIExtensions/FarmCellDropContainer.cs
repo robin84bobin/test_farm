@@ -8,6 +8,7 @@ namespace UI.NGUIExtensions
     public class FarmCellDropContainer : UIDragDropContainer
     {
         public event Action<Product> OnProductRecieved;
+        public event Action<FarmItem> OnFarmItemRecieved;
         private FarmItem _farmItem;
         
         public override void OnDroppedObject(GameObject droppedObject)
@@ -37,6 +38,8 @@ namespace UI.NGUIExtensions
                         StartCoroutine(OnReposition(table));
                     }
 
+                    if (OnFarmItemRecieved != null) 
+                        OnFarmItemRecieved.Invoke(_farmItem);
                     return;
                 }
             }

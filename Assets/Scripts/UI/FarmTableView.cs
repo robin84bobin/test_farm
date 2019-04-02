@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Data.User;
+using Model;
 using UnityEngine;
 
 namespace UI
@@ -33,12 +34,12 @@ namespace UI
         }
 
 
-        public void SetData(List<UserFarmCell> userRepositoryCells)
+        public void SetData(Dictionary<string, FarmCell> userRepositoryCells)
         {
             //
             foreach (var cell in userRepositoryCells)
             {
-                _cells[cell.Index].SetData(cell);
+                _cells[cell.Value.Data.Index].Init(cell.Value);
             }
         }
     }

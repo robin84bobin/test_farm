@@ -1,5 +1,6 @@
 
 using Data.Catalog;
+using Model;
 
 namespace Data.User
 {
@@ -48,6 +49,15 @@ namespace Data.User
             {
                 this.Products.Set(new UserProduct(){ItemId = product.Id}, product.Id, true);
             }
+
+            var size = App.Instance.catalog.GetSetting<FarmSize>("grid");
+            for (int index = 0; index < (size.height*size.width); index++)
+            {
+                var cell = new UserFarmCell() {Index = index, Id = index.ToString()};
+                this.Cells.Set(cell);
+            }
+            
+            SaveAll();
         }
 
         private static bool _needSave;

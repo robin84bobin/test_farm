@@ -19,9 +19,10 @@ namespace UI
 		private void Init()
 		{
 			_table.Init(_model.size.width, _model.size.height);
-			_table.SetData(App.Instance.userRepository.Cells.GetAll());
+			_table.SetData(_model.Cells);
 
 			_shop.Init(_model.ShopInventory);
+			_products.Init(_model.ProductInventory);
 		}
 
 	}

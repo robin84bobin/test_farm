@@ -33,8 +33,8 @@ namespace UI
 
 		private ProductItemView CreateProductView(Model.Product product)
 		{
-			GameObject source = (GameObject)Resources.Load("UI/ProductItemView", typeof(GameObject));
-			GameObject go = Instantiate(source);
+			GameObject source = (GameObject)Resources.Load("UI/ProductItem", typeof(GameObject));
+			GameObject go = Instantiate(source, _grid.transform);
 			go.transform.localPosition = Vector3.zero;
 			go.transform.localEulerAngles = Vector3.zero;
 			go.transform.localScale = Vector3.one;
