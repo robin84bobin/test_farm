@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Logic.Parameters;
 
 namespace Model
@@ -17,7 +18,7 @@ namespace Model
         private Data.FarmItem _data;
         public FSM<State, FarmItemState> Fsm { get; private set; }
 
-        public bool PendingProduct{ get; private set; }
+        private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
 
         public FarmItem(Data.FarmItem data)
         {
@@ -43,9 +44,9 @@ namespace Model
             Fsm.SetState(State.IDLE);
         }
 
-        public void PickUp()
+        public void PickUp(out Data.Product product)
         {
-            PendingProduct = false;
+            product = _pendingProducts.Dequeue();
             StartProduce();
         }
 
@@ -64,7 +65,7 @@ namespace Model
             if (ResourceTime.Value < _data.ResourceTime)
                 return;
 
-            if (PendingProduct)
+            if (_pendingProducts.Count > 0)
                 return;
             
             Fsm.SetState(State.PRODUCE);
