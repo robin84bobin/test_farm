@@ -13,6 +13,16 @@ namespace Model
 
         public abstract void Tick(float deltaTime);
 
+        public override void OnEnterState()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void OnExitState()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void Release()
         {
             base.Release();

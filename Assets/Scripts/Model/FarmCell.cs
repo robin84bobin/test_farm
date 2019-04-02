@@ -4,12 +4,23 @@ namespace Model
 {
     public class FarmCell 
     {
-        public readonly Data.User.UserFarmCell Data;
+        public FarmItem Item { get; private set; }
+        public Data.User.UserFarmCell userData;
+        private Data.FarmItem _data;
 
         public FarmCell(UserFarmCell userData)
         {
-            Data = userData;
-            
+            this.userData = userData;
+            if (string.IsNullOrEmpty(userData.UserFarmItemId))
+            {
+                _data = App.Instance.catalog.FarmItems[this.userData.UserFarmItemId];
+                Init(new FarmItem(_data));
+            }
+        }
+
+        private void Init(FarmItem farmItem)
+        {
+            Item = farmItem;
         }
     }
 }

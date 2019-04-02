@@ -7,19 +7,15 @@
             _farmItem = farmItem;
         }
 
+        public override void Tick(float deltaTime)
+        {
+            //
+        }
+
         public override void OnEnterState()
         {
             _farmItem.TryStartProduce();
         }
 
-        public override void OnExitState()
-        {
-            //throw new System.NotImplementedException();
-        }
-
-        public override void Tick(float deltaTime)
-        {
-            // new System.NotImplementedException();
-        }
     }
 }

@@ -10,7 +10,7 @@ namespace Model
         PRODUCE,
     }
 
-    public class FarmItem : TickableItem, IProducer, IEater
+    public class FarmItem : TickableItem
     {
         public event ProduceProductDelegate OnProduceComplete;
         public ReactiveParameter<float> Progress { get; private set; }
@@ -20,19 +20,22 @@ namespace Model
         public FSM<State, FarmItemState> Fsm { get; private set; }
 
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
+        public int PendingCount
+        {
+            get { return _pendingProducts.Count; }
+        }
 
         public FarmItem(Data.FarmItem data)
         {
             _data = data;
             
+            ResourceTime = new ReactiveParameter<float>(0f);
             Progress = new ReactiveParameter<float>(0f);
             Progress.OnValueChange += OnProgress;
             
-            ResourceTime = new ReactiveParameter<float>(0f);
+            
 
             var produceState = new ProduceState(this);
-            produceState.OnProduceComplete += OnProduceComplete;
-            
             Fsm = new FSM<State, FarmItemState>();
             Fsm.Add(produceState);
             Fsm.Add(new IdleState(this));
@@ -42,15 +45,22 @@ namespace Model
         {
             if (newvalue >= 1)
                 Progress.Value = 0;
+
+            Data.Product product = App.Instance.catalog.Products[_data.ProductId];
+            _pendingProducts.Enqueue(product);
             
+            if (OnProduceComplete != null) 
+                OnProduceComplete.Invoke(product.Id, _data.ProduceAmount);
+
             Fsm.SetState(State.IDLE);
         }
 
-        public void PickUp(out Data.Product product)
+        public bool PickUp(out Data.Product product)
         {
             product = _pendingProducts.Dequeue();
             if (_pendingProducts.Count <= 0)
                 TryStartProduce();
+            return product != null;
         }
 
         public bool Eat(IEatible food)
@@ -85,19 +95,13 @@ namespace Model
         {
             Fsm.CurrentState.Tick(deltaTime);
         }
+
+        public void ProduceComplete()
+        {
+            
+        }
     }
 
-
-    
-    public interface IProducer
-    {
-        event ProduceProductDelegate OnProduceComplete;
-    }
-
-    public interface IEater
-    {
-        bool Eat(IEatible food);
-    }
 
     public interface IEatible
     {

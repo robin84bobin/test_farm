@@ -1,15 +1,16 @@
 using System;
 using Model;
 using UnityEngine;
+using FarmItem = Model.FarmItem;
 
 namespace UI
 {
     public class FarmItemView : MonoBehaviour
     {
         [SerializeField] private UISprite _progressBar;
-        
         [SerializeField] private UILabel _resourceLabel;
         [SerializeField] private UISprite _resourceBar;
+        [SerializeField] private UISprite _productPendingSprite;
         
         private FarmItem _model;
 
@@ -53,6 +54,18 @@ namespace UI
         private void OnProduceComplete(string s, int amount)
         {
             throw new System.NotImplementedException();
+        }
+
+        void OnClick()
+        {
+            Data.Product product;
+            if (_model.PendingCount > 0)
+            {
+                if (_model.PickUp(out product))
+                {
+                    
+                }
+            }
         }
     }
 }
