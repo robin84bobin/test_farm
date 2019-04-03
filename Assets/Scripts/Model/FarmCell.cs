@@ -4,23 +4,29 @@ namespace Model
 {
     public class FarmCell 
     {
-        public FarmItem Item { get; private set; }
-        public Data.User.UserFarmCell userData;
+        public FarmItem Item { get; set; }
+        public Data.User.UserFarmCell userCellData;
         private Data.FarmItem _data;
 
-        public FarmCell(UserFarmCell userData)
+        public FarmCell(UserFarmCell userCellData)
         {
-            this.userData = userData;
-            if (string.IsNullOrEmpty(userData.UserFarmItemId))
-            {
-                _data = App.Instance.catalog.FarmItems[this.userData.UserFarmItemId];
-                Init(new FarmItem(_data));
-            }
+            this.userCellData = userCellData;
+            Init();
         }
 
-        private void Init(FarmItem farmItem)
+        public void Init(string farmItemId)
         {
-            Item = farmItem;
+            userCellData.UserFarmItemId = farmItemId;
+            Init();
+        }
+        
+        private void Init()
+        {
+            if (!string.IsNullOrEmpty(userCellData.UserFarmItemId))
+            {
+                _data = App.Instance.catalog.FarmItems[this.userCellData.UserFarmItemId];
+                Item = new FarmItem(_data);
+            }
         }
     }
 }

@@ -37,7 +37,7 @@ namespace UI.NGUIExtensions
                 if (container != null)
                 {
                     // Container found -- parent this object to the container
-                    mTrans.parent = (container.reparentTarget != null) ? container.reparentTarget : container.transform;
+                    //mTrans.parent = (container.reparentTarget != null) ? container.reparentTarget : container.transform;
 
                     Vector3 pos = mTrans.localPosition;
                     pos.z = 0f;

@@ -39,7 +39,7 @@ namespace UI
             //
             foreach (var cell in сells)
             {
-                _cells[cell.Value.userData.Index].Init(cell.Value);
+                _cells[cell.Value.userCellData.Index].Init(cell.Value);
             }
         }
     }
