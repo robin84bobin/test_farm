@@ -33,6 +33,7 @@ namespace Data.Repository
             var command = new InitStorageCommand<T>(dataStorage, _dbProxy);
             _initStoragesCommands.Add(command);
 
+            Storages.Add(collectionName, dataStorage);
             return dataStorage;
         }
 

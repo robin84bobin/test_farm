@@ -25,6 +25,10 @@ namespace Commands.Data
         private void OnGetData(Dictionary<string, T> items)
         {
             _storage.SetData(items);
+            foreach (var data in _storage)
+            {
+                data.Init();
+            }
             Complete();
         }
 

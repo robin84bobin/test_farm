@@ -6,6 +6,5 @@ namespace Data
         public string Currency { get; set; }
         public int BuyPrice { get; set; }
         public string BuyCurrencyId;
-
     }
 }

@@ -33,21 +33,23 @@ namespace Data.User
         {
             foreach (Currency currency in catalog.Currency.GetAll())
             {
-                this.Currency.Set(new UserCurrency()
-                {
-                    Id = currency.Id,
-                    Value = currency.Value
-                }, currency.Id, true);
+                UserCurrency c = new UserCurrency(){Type = currency.Type,CatalogDataId = currency.Id, Value = currency.Value};
+                c.Init();
+                this.Currency.Set(c, currency.Id, true);
             }
 
             foreach (ShopItem shopItem in catalog.ShopItems.GetAll())
             {
-                this.ShopItems.Set(new UserShopItem(){ItemId = shopItem.Id}, shopItem.Id, true);
+                UserShopItem s = new UserShopItem(){Type = shopItem.Type,CatalogDataId = shopItem.Id};
+                s.Init();
+                this.ShopItems.Set(s, shopItem.Id, true);
             }
 
             foreach (Product product in catalog.Products.GetAll())
             {
-                this.Products.Set(new UserProduct(){ItemId = product.Id}, product.Id, true);
+                UserProduct p = new UserProduct(){Type = product.Type,CatalogDataId = product.Id};
+                p.Init();
+                this.Products.Set(p, product.Id, true);
             }
 
             var size = App.Instance.catalog.GetSetting<FarmSize>("grid");
