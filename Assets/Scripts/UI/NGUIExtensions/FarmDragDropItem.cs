@@ -1,16 +1,12 @@
-using System;
 using Data;
 using UnityEngine;
 
 namespace UI.NGUIExtensions
 {
-    public class FarmDragDropItem : UIDragDropItem
+    public class FarmDragDropItem : UIDragDropItem, IDroppableData
     {
-        public event Action onFarmItemDropped;
-
         public bool dropClone = true;
-        public bool cloneOnce = true;
-        public bool removeCloneIfNotDropped = true;
+        public bool removeClone = true;
 
         public DataItem Data { get; set; }
 
@@ -36,15 +32,12 @@ namespace UI.NGUIExtensions
 
                 if (container != null)
                 {
-                    // Container found -- parent this object to the container
-                    //mTrans.parent = (container.reparentTarget != null) ? container.reparentTarget : container.transform;
-
                     Vector3 pos = mTrans.localPosition;
                     pos.z = 0f;
                     mTrans.localPosition = pos;
-                    container.OnDroppedObject(this.gameObject);
+                    container.OnDroppedObject(this);
                 }
-                else if (cloneOnDrag && removeCloneIfNotDropped)
+                else if (cloneOnDrag && removeClone)
                 {
                     NGUITools.Destroy(gameObject);
                     OnDragDropEnd();
@@ -71,18 +64,18 @@ namespace UI.NGUIExtensions
                 if (mTable != null) mTable.repositionNow = true;
                 if (mGrid != null) mGrid.repositionNow = true;
 
-                /*if (cloneOnce && cloneOnDrag)
-                {
-                    if (container!=null) 
-                        container.enabled = false;
-                    NGUITools.Destroy(this);
-                }*/
             }
-            else NGUITools.Destroy(gameObject);
+            
+            NGUITools.Destroy(gameObject);
 
             // We're now done
             OnDragDropEnd();
         }
 
+    }
+
+    public interface IDroppableData
+    {
+        DataItem Data { get; }
     }
 }

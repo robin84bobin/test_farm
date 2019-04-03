@@ -12,8 +12,4 @@ public class UIDragDropContainer : MonoBehaviour
 
 	protected virtual void Start () { if (reparentTarget == null) reparentTarget = transform; }
 
-	public virtual void OnDroppedObject(GameObject droppedObject)
-	{
-		
-	}
 }

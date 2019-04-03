@@ -27,7 +27,9 @@ public class ProductItemView : MonoBehaviour
 
 	private void CheckDragAvaLiable()
 	{
-		_dragDropItem.interactable = _model.Amount.Value > 0;
+		bool draggable = _model.Amount.Value > 0;
+		_dragDropItem.interactable = draggable;
+		_item.alpha = draggable ? 1 : 0.5;
 	}
 
 	private void InitView()

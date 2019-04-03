@@ -12,16 +12,16 @@ namespace UI.NGUIExtensions
     {
         public event Action<Product> OnProductRecieved;
         public event Action<string> OnFarmItemRecieved;
-        //private FarmItem _farmItem;
+        private FarmCell _model;
         
-        public override void OnDroppedObject(GameObject droppedObject)
+        public void OnDroppedObject(IDroppableData dropItem)
         {
-            base.OnDroppedObject(droppedObject);
-            var dropItem = droppedObject.GetComponent<FarmDragDropItem>();
+            //base.OnDroppedObject(droppedObject);
+            //var dropItem = droppedObject.GetComponent<FarmDragDropItem>();
 
             if (dropItem == null || dropItem.Data == null)
             {
-                Destroy(droppedObject);
+                //Destroy(droppedObject);
                 return;
             }
 
@@ -35,7 +35,7 @@ namespace UI.NGUIExtensions
             }
         }
 
-        void OnRecieved(GameObject droppedObject)
+        void OnRecieved()
         {
             var table = transform.parent.gameObject.GetComponent<UITable>();
             if (table != null)
@@ -43,15 +43,15 @@ namespace UI.NGUIExtensions
                 StartCoroutine(OnReposition(table));
             }
             
-            Destroy(droppedObject);
+            //Destroy(droppedObject);
         }
 
-        void RecieveShopItem(FarmDragDropItem dropItem)
+        void RecieveShopItem(IDroppableData dropItem)
         {
             if (_model.Item == null)
             {
                 App.Instance.FarmModel.ShopInventory.Items[dropItem.Data.Id].Spend();
-                Destroy(dropItem);
+                //Destroy(dropItem);
 
                 if (OnFarmItemRecieved != null)
                 {
@@ -60,11 +60,11 @@ namespace UI.NGUIExtensions
                 }
             }
             
-            OnRecieved(dropItem.gameObject);
+            OnRecieved();
         }
         
 
-        void RecieveProduct(FarmDragDropItem dropItem)
+        void RecieveProduct(IDroppableData dropItem)
         {
             if (_model.Item == null)
                return;  
@@ -72,7 +72,7 @@ namespace UI.NGUIExtensions
             if (OnProductRecieved != null)
                 OnProductRecieved.Invoke(dropItem.Data as Product);
 
-            OnRecieved(dropItem.gameObject);
+            OnRecieved();
         }
 
         private IEnumerator OnReposition(UITable table)
@@ -82,7 +82,7 @@ namespace UI.NGUIExtensions
             table.Reposition();
         }
 
-        private FarmCell _model;
+
         public void Init(FarmCell model)
         {
             _model = model;
