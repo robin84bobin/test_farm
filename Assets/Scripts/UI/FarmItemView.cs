@@ -31,10 +31,12 @@ namespace UI
                 case State.IDLE:
                     _resourceLabel.text = "EMPTY";
                     _progressBar.gameObject.SetActive(false);
+                    _resourceBar.gameObject.SetActive(false);
                     break;
                 case State.PRODUCE:
                     _resourceLabel.text = "RESOURCES";
                     _progressBar.gameObject.SetActive(true);
+                    _resourceBar.gameObject.SetActive(true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

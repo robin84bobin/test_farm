@@ -33,8 +33,6 @@ namespace Model
             Progress = new ReactiveParameter<float>(0f);
             Progress.OnValueChange += OnProgress;
             
-            
-
             var produceState = new ProduceState(this);
             Fsm = new FSM<State, FarmItemState>();
             Fsm.Add(produceState);
@@ -65,7 +63,7 @@ namespace Model
 
         public bool Eat(IEatible food)
         {
-            if (_data.ResourceProductId != food.Name)
+            if (!string.IsNullOrEmpty(_data.ResourceProductId) && _data.ResourceProductId != food.Name)
                 return false;
 
             ResourceTime.Value += _data.ResourceTime;
