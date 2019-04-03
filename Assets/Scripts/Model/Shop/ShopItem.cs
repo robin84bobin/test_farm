@@ -21,9 +21,7 @@ namespace Model
 
         public void Spend(int amount = 1)
         {
-            _userShopItem.Amount -= amount;
-            Amount.Value = _userShopItem.Amount;
-            UserRepository.Save();
+            ChangeAmount(-amount);
         }
 
         internal void Buy()
@@ -31,10 +29,15 @@ namespace Model
             int amount = 1;
             if (App.Instance.FarmModel.ShopInventory.Buy(data, amount))
             {
-                _userShopItem.Amount += amount;
-                Amount.Value = _userShopItem.Amount;
-                UserRepository.Save();
+                ChangeAmount(amount);
             }
+        }
+
+        void ChangeAmount(int value)
+        {
+            _userShopItem.Amount += value;
+            Amount.Value = _userShopItem.Amount;
+            UserRepository.Save();
         }
     }
 }

@@ -10,6 +10,6 @@ namespace Data
         public string Id = String.Empty;
         public string Type = String.Empty;
 
-        internal virtual void Init() { }
+        public virtual void Init() { }
     }
 }

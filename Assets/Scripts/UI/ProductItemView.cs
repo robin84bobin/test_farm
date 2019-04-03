@@ -17,19 +17,25 @@ public class ProductItemView : MonoBehaviour
 	public void Init(Model.Product product)
 	{
 		_model = product;
-		_dragDropItem = _item.GetComponent<FarmDragDropItem>();
-		_dragDropItem.Data = _model.data;
 		_model.Amount.OnValueChange += OnAmountChange;
 		
 		InitView();
 		CheckDragAvaLiable();
+		CheckSellAvaLiable();
+	}
+
+	private void CheckSellAvaLiable()
+	{
+		bool sellable = _model.IsSellable;
+		_sellButton.gameObject.SetActive(sellable);
+		_sellPriceLabel.gameObject.SetActive(sellable);
 	}
 
 	private void CheckDragAvaLiable()
 	{
 		bool draggable = _model.Amount.Value > 0;
 		_dragDropItem.interactable = draggable;
-		_item.alpha = draggable ? 1 : 0.5;
+		_item.alpha = draggable ? 1f : 0.5f;
 	}
 
 	private void InitView()
@@ -42,15 +48,19 @@ public class ProductItemView : MonoBehaviour
 		go.transform.localPosition = Vector3.zero;
 		go.transform.localEulerAngles = Vector3.zero;
 		go.transform.localScale = Vector3.one;
+		
+		_dragDropItem = go.GetComponent<FarmDragDropItem>();
+		_dragDropItem.Data = _model.data;
 	}
 
 	private void OnAmountChange(int oldvalue, int newvalue)
 	{
 		_amount.text = newvalue.ToString();
 		CheckDragAvaLiable();
+		CheckSellAvaLiable();
 	}
 	
-	public void OnBuyClick()
+	public void OnSellClick()
 	{
 		_model.Sell();
 	}

@@ -6,7 +6,7 @@ namespace Model
     {
         public FarmItem Item { get; set; }
         public Data.User.UserFarmCell userCellData;
-        private Data.FarmItem _data;
+        private Data.User.UserFarmItem _data;
 
         public FarmCell(UserFarmCell userCellData)
         {
@@ -24,7 +24,7 @@ namespace Model
         {
             if (!string.IsNullOrEmpty(userCellData.UserFarmItemId))
             {
-                _data = App.Instance.catalog.FarmItems[this.userCellData.UserFarmItemId];
+                _data = App.Instance.userRepository.FarmItems[this.userCellData.UserFarmItemId];
                 Item = new FarmItem(_data);
             }
         }

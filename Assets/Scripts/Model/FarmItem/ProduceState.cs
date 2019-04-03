@@ -16,7 +16,7 @@ namespace Model
             _farmItem = farmItem;
         }
 
-        public override void Tick(float deltaTime)
+        public override void Tick(int deltaTime)
         {
             _farmItem.Progress.Value += 1;
             _farmItem.ResourceTime.Value -= deltaTime;

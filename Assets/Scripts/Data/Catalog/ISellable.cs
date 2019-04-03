@@ -1,8 +1,8 @@
 namespace Data
 {
-    public interface IBuyable
+    public interface ISellable
     {
         string Currency { get; }
-        int BuyPrice { get; }
+        int SellPrice { get; }
     }
 }

@@ -17,12 +17,13 @@ namespace UI
         public void Init(FarmItem model)
         {
             _model = model;
-            //_model.OnProduceComplete += OnProduceComplete;
             _model.PendingCount.OnValueChange += OnPendingAmountChange;
             _model.Progress.OnValueChange += OnProgressChange;
             _model.ResourceTime.OnValueChange += OnResourceTimeChange;
 
             _model.Fsm.OnStateChanged += OnStateChange;
+            
+            RefreshPendingIndicator(_model.PendingCount.Value);
         }
 
         private void OnStateChange(FarmItemState state)
@@ -44,7 +45,7 @@ namespace UI
             }
         }
 
-        private void OnResourceTimeChange(float oldvalue, float newvalue)
+        private void OnResourceTimeChange(int oldvalue, int newvalue)
         {
             _resourceBar.fillAmount = newvalue;
         }

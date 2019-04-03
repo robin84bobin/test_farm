@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Data.User;
 using Logic.Parameters;
+using TMPro;
 
 namespace Model
 {
@@ -14,21 +16,26 @@ namespace Model
     {
         public event ProduceProductDelegate OnProduceComplete;
         public ReactiveParameter<float> Progress { get; private set; }
-        public ReactiveParameter<float> ResourceTime { get; private set; }
+        public ReactiveParameter<int> ResourceTime { get; private set; }
+        public ReactiveParameter<int> PendingCount { get; private set; }
 
-        public Data.FarmItem Data { get; private set; }
+        public UserFarmItem userFarmItem { get; private set; }
+        private Data.FarmItem _data;
+        
         public FSM<State, FarmItemState> Fsm { get; private set; }
 
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
-        public ReactiveParameter<int> PendingCount { get; private set; }
+        
 
-        public FarmItem(Data.FarmItem data)
+        public FarmItem(UserFarmItem userFarmItem)
         {
-            Data = data;
+            this.userFarmItem = userFarmItem;
+            if (!string.IsNullOrEmpty(userFarmItem.ItemId))
+                _data = App.Instance.catalog.FarmItems[userFarmItem.ItemId];
             
-            ResourceTime = new ReactiveParameter<float>(0f);
-            Progress = new ReactiveParameter<float>(0f);
-            PendingCount = new ReactiveParameter<int>();
+            ResourceTime = new ReactiveParameter<int>(userFarmItem.ResourceTime);
+            Progress = new ReactiveParameter<float>(userFarmItem.Progress);
+            PendingCount = new ReactiveParameter<int>(userFarmItem.PendingCount);
 
             var produceState = new ProduceState(this);
             Fsm = new FSM<State, FarmItemState>();
@@ -46,10 +53,17 @@ namespace Model
         {
             if (newvalue >= 1)
                 ProduceComplete();
+            else
+            {
+                Save();
+            }
         }
 
-        public bool PickUp()
+        public void PickUp()
         {
+            if (_pendingProducts.Count <= 0)
+                return;
+            
             Data.Product product = _pendingProducts.Dequeue();
             if (_pendingProducts.Count <= 0)
                 TryStartProduce();
@@ -58,15 +72,15 @@ namespace Model
 
             App.Instance.FarmModel.ProductInventory.Add(product);
             
-            return product != null;
+            Save();
         }
 
         public bool Eat(IEatible food)
         {
-            if (Data.ResourceProductId != food.Name)
+            if (_data.ResourceProductId != food.Name)
                 return false;
 
-            ResourceTime.Value += Data.ResourceTime;
+            ResourceTime.Value += _data.ResourceTime;
             TryStartProduce();
             return true;
         }
@@ -74,16 +88,17 @@ namespace Model
         public void TryStartProduce()
         {
             //если не нужны ресурсы для производства - восполняем время
-            if (string.IsNullOrEmpty(Data.ResourceProductId))
-                ResourceTime.Value = Data.ResourceTime;
+            if (string.IsNullOrEmpty(_data.ResourceProductId))
+                ResourceTime.Value = _data.ResourceTime;
             
-            if (ResourceTime.Value < Data.ResourceTime)
+            if (ResourceTime.Value < _data.ResourceTime)
                 return;
 
             if (_pendingProducts.Count > 0)
                 return;
             
             Fsm.SetState(State.PRODUCE);
+            Save();
         }
 
         public override void Release()
@@ -93,7 +108,7 @@ namespace Model
             OnProduceComplete = null;
         }
 
-        protected override void OnTick(float deltaTime)
+        protected override void OnTick(int deltaTime)
         {
             Fsm.CurrentState.Tick(deltaTime);
         }
@@ -102,14 +117,24 @@ namespace Model
         {
             Progress.Value = 0;
 
-            Data.Product product = App.Instance.catalog.Products[Data.ProductId];
+            Data.Product product = App.Instance.catalog.Products[_data.ProductId];
             _pendingProducts.Enqueue(product);
             PendingCount.Value = _pendingProducts.Count;
             
             if (OnProduceComplete != null) 
-                OnProduceComplete.Invoke(product.Id, Data.ProduceAmount);
+                OnProduceComplete.Invoke(product.Id, _data.ProduceAmount);
 
             Fsm.SetState(State.IDLE);
+            
+            Save();
+        }
+
+        void Save()
+        {
+            userFarmItem.ResourceTime = ResourceTime.Value;
+            userFarmItem.Progress = Progress.Value;
+            userFarmItem.PendingCount = PendingCount.Value;
+            UserRepository.Save();
         }
     }
 

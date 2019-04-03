@@ -1,9 +1,10 @@
 ﻿namespace Data.User
 {
-    public class UserFarmItem: DataItem
+    public class UserFarmItem: UserDataItem<U>
     {
         public string ItemId;
-        public int Progress;
-        public int ResourceAmount;
+        public float Progress;
+        public int ResourceTime;
+        public int PendingCount;
     }
 }

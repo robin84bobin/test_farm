@@ -12,7 +12,7 @@
             App.Instance.OnTick -= OnTick;
         }
 
-        protected virtual void OnTick(float deltaTime)
+        protected virtual void OnTick(int deltaTime)
         {
         }
     }

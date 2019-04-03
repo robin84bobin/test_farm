@@ -19,7 +19,7 @@ namespace Model
 
         public void Add(Data.Product product, int amount = 1)
         {
-            Items[product.Id].Amount.Value += amount;
+            Items[product.Id].ChangeAmount(amount);
         }
 
         

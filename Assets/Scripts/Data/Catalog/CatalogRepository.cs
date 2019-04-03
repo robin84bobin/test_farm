@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Data.Repository;
 
 namespace Data.Catalog
@@ -12,7 +13,8 @@ namespace Data.Catalog
         public CatalogRepository(IDataBaseProxy dbProxy) : base(dbProxy)
         {
         }
-        
+
+
         public override void Init()
         {
             Currency = CreateStorage<Currency>("currency");

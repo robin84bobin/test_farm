@@ -9,14 +9,16 @@ namespace Model
         
         public Data.Product data { get; private set; }
 
-        public void OnPickUp()
+        public bool IsSellable
         {
-            Amount.Value ++;
+            get
+            {
+                return Amount.Value > 0 && data.SellPrice > 0 && !string.IsNullOrEmpty(data.Currency);
+            }
         }
-        
+
         private UserProduct _userProduct;
         
-
         public Product(UserProduct userProduct)
         {
             _userProduct = userProduct;
@@ -27,13 +29,21 @@ namespace Model
 
         public void Sell()
         {
+            if (!IsSellable)
+                return;
+            
             int amount = 1;
             if (App.Instance.FarmModel.ShopInventory.Sell(data))
             {
-                _userProduct.Amount += amount;
-                Amount.Value = _userProduct.Amount;
-                UserRepository.Save();
+               ChangeAmount(-amount);
             }
+        }
+
+        public void ChangeAmount(int value)
+        {
+            _userProduct.Amount += value;
+            Amount.Value = _userProduct.Amount;
+            UserRepository.Save();
         }
     }
 }

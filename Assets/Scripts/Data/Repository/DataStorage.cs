@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Data
 {
-    public class DataStorage<T> where T : DataItem, new()
+    public class DataStorage<T> : IDataStorage where T : DataItem, new()
     {
         public int Count
         {
@@ -130,6 +131,11 @@ namespace Data
         }
 
 
+        public object GetObject(string id)
+        {
+            return Get(id);
+        }
+        
         public T Get(string id)
         {
             if (!_items.ContainsKey(id))
@@ -204,5 +210,10 @@ namespace Data
 
         #endregion
 
+    }
+
+    public interface IDataStorage
+    {
+        object GetObject(string id);
     }
 }

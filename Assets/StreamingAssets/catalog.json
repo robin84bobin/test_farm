@@ -15,19 +15,19 @@
         "Id": "0",
         "FarmItemId": "wheat",
         "BuyPrice": 10,
-        "BuyCurrencyId": "coins"
+		"Currency":"coins"
       },
       {
         "Id": "1",
         "FarmItemId": "hen",
         "BuyPrice": 20,
-        "BuyCurrencyId": "coins"
+		"Currency":"coins"
       },
       {
         "Id": "2",
         "FarmItemId": "cow",
         "BuyPrice": 30,
-        "BuyCurrencyId": "coins"
+		"Currency":"coins"
       }
     ],
     "farmItems": [
@@ -61,11 +61,13 @@
       },
       {
         "Id": "milk",
-        "SellPrice": 2
+        "SellPrice": 2,
+		"Currency":"coins"
       },
       {
         "Id": "egg",
-        "SellPrice": 1
+        "SellPrice": 1,
+		"Currency":"coins"
       }
     ]
   }

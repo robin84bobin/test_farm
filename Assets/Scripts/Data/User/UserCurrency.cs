@@ -1,6 +1,8 @@
-﻿namespace Data.User
+﻿using Data.Catalog;
+
+namespace Data.User
 {
-    public class UserCurrency  :DataItem
+    public class UserCurrency  :UserDataItem<Currency>
     {
         public int Value;
     }

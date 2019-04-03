@@ -7,13 +7,18 @@ namespace Model
 {
     public class ShopInventory
     {
-        public ReactiveParameter<int> Coins;
+        public Dictionary<string,ReactiveParameter<int>> Currencies;
         public Dictionary<string, Model.ShopItem> Items;
 
         public void Init()
         {
             int coinsValue = App.Instance.userRepository.Currency["coins"].Value;
-            Coins = new ReactiveParameter<int>(coinsValue);
+            
+            Currencies = new Dictionary<string, ReactiveParameter<int>>();
+            foreach (var currency in App.Instance.userRepository.Currency)
+            {
+                Currencies.Add(currency.Id, new ReactiveParameter<int>(currency.Value));
+            }
             
             Items = new Dictionary<string, Model.ShopItem>();
             foreach (var shopItem in App.Instance.userRepository.ShopItems.GetAll())
@@ -24,25 +29,25 @@ namespace Model
         
         public bool Buy(IBuyable item, int amount = 1)
         {
-            int coins = item.BuyPrice * amount;
-            if (Coins.Value < coins)
+            int totalPrice = item.BuyPrice * amount;
+            if (Currencies[item.Currency].Value < totalPrice)
                 return false;
             
-            SetCoinsValue(Coins.Value - coins);
+            SetCurrencyValue(item.Currency, Currencies[item.Currency].Value - totalPrice);
             return true;
         }
         
         public bool Sell(ISellable item, int amount = 1)
         {
-            int coins = item.SellPrice * amount;
-            SetCoinsValue(Coins.Value - coins);
+            int totalPrice = item.SellPrice * amount;
+            SetCurrencyValue(item.Currency, Currencies[item.Currency].Value + totalPrice);
             return true;
         }
         
-        void SetCoinsValue(int value)
+        void SetCurrencyValue(string currencyId,int value)
         {
-            Coins.Value = value;
-            App.Instance.userRepository.Currency["coins"].Value = Coins.Value;
+            Currencies[currencyId].Value = value;
+            App.Instance.userRepository.Currency[currencyId].Value = value;
             UserRepository.Save();
         }
         

@@ -18,10 +18,7 @@ public class ShopItemView : MonoBehaviour
 	public void Init(Model.ShopItem shopItem)
 	{
 		_model = shopItem;
-		_dragDropItem = _item.GetComponent<FarmDragDropItem>();
-		_dragDropItem.Data = _model.data;
 		_model.Amount.OnValueChange += OnAmountChange;
-		
 		InitView();
 		CheckDragAvaLiable();
 	}
@@ -31,7 +28,7 @@ public class ShopItemView : MonoBehaviour
 	{
 		bool draggable = _model.Amount.Value > 0;
 		_dragDropItem.interactable = draggable;
-		_itemPlaceHolder.alpha = draggable ? 1 : 0.5;
+		_itemPlaceHolder.alpha = draggable ? 1f : 0.5f;
 	}
 
 	private void OnAmountChange(int oldvalue, int newvalue)
@@ -50,6 +47,9 @@ public class ShopItemView : MonoBehaviour
 		_item.transform.localPosition = Vector3.zero;
 		_item.transform.localEulerAngles = Vector3.zero;
 		_item.transform.localScale = Vector3.one;
+		
+		_dragDropItem = _item.GetComponent<FarmDragDropItem>();
+		_dragDropItem.Data = _model.data;
 	}
 
 	public void OnBuyClick()

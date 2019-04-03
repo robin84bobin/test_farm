@@ -10,11 +10,11 @@ using UnityEngine.SceneManagement;
 
 public class App : MonoBehaviour
 {
-    const float TiCK_DELTA_TIME = 1f;
+    const int TiCK_DELTA_TIME = 1;
 
 
     public static App Instance; 
-    public event Action<float> OnTick = delegate { };
+    public event Action<int> OnTick = delegate { };
 
     public CatalogRepository catalog { get; private set; }
     public UserRepository userRepository { get; private set; }
@@ -67,7 +67,7 @@ public class App : MonoBehaviour
     }
 
     private float _nextTickTime;
-    void Update()
+    void FixedUpdate()
     {
         if(Time.time >= _nextTickTime)
         {
