@@ -45,16 +45,7 @@ namespace Model
         private void OnProgress(float oldvalue, float newvalue)
         {
             if (newvalue >= 1)
-                Progress.Value = 0;
-
-            Data.Product product = App.Instance.catalog.Products[Data.ProductId];
-            _pendingProducts.Enqueue(product);
-            PendingCount.Value = _pendingProducts.Count;
-            
-            if (OnProduceComplete != null) 
-                OnProduceComplete.Invoke(product.Id, Data.ProduceAmount);
-
-            Fsm.SetState(State.IDLE);
+                ProduceComplete();
         }
 
         public bool PickUp()
@@ -64,6 +55,9 @@ namespace Model
                 TryStartProduce();
 
             PendingCount.Value = _pendingProducts.Count;
+
+            App.Instance.FarmModel.ProductInventory.Add(product);
+            
             return product != null;
         }
 
@@ -106,7 +100,16 @@ namespace Model
 
         public void ProduceComplete()
         {
+            Progress.Value = 0;
+
+            Data.Product product = App.Instance.catalog.Products[Data.ProductId];
+            _pendingProducts.Enqueue(product);
+            PendingCount.Value = _pendingProducts.Count;
             
+            if (OnProduceComplete != null) 
+                OnProduceComplete.Invoke(product.Id, Data.ProduceAmount);
+
+            Fsm.SetState(State.IDLE);
         }
     }
 

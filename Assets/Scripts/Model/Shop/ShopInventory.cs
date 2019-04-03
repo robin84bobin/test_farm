@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data;
 using Data.User;
 using Logic.Parameters;
 
@@ -21,17 +22,23 @@ namespace Model
             }
         }
         
-        public bool Buy(Data.ShopItem shopItemData, int amount = 1)
+        public bool Buy(IBuyable item, int amount = 1)
         {
-            int coins = shopItemData.BuyPrice * amount;
-            
+            int coins = item.BuyPrice * amount;
             if (Coins.Value < coins)
                 return false;
             
             SetCoinsValue(Coins.Value - coins);
             return true;
         }
-
+        
+        public bool Sell(ISellable item, int amount = 1)
+        {
+            int coins = item.SellPrice * amount;
+            SetCoinsValue(Coins.Value - coins);
+            return true;
+        }
+        
         void SetCoinsValue(int value)
         {
             Coins.Value = value;

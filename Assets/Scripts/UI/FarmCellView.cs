@@ -39,17 +39,20 @@ namespace UI
         {
             _dropContainer.OnProductRecieved += OnProductDrop;
             _dropContainer.OnFarmItemRecieved += OnFarmItemDrop;
+            _dropContainer.Init(_model);
         }
 
-        private void OnFarmItemDrop(FarmItem farmItem)
+        private void OnFarmItemDrop(string farmItemId)
         {
-            _model.Init(farmItem.Id);
+            //var farmItem = App.Instance.catalog.FarmItems[farmItemId];
+            
+            _model.Init(farmItemId);
             CreateFarmItem();
         }
 
         private void OnProductDrop(Product obj)
         {
-            //
+            if (_model.Item == null) return;
         }
 
     }

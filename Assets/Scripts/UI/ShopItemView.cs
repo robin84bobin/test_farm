@@ -18,11 +18,11 @@ public class ShopItemView : MonoBehaviour
 	public void Init(Model.ShopItem shopItem)
 	{
 		_model = shopItem;
-		InitView();
 		_dragDropItem = _item.GetComponent<FarmDragDropItem>();
 		_dragDropItem.Data = _model.data;
 		_model.Amount.OnValueChange += OnAmountChange;
-
+		
+		InitView();
 		CheckDragAvaLiable();
 	}
 

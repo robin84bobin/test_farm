@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data.User;
 using Logic.Parameters;
 
 namespace Model
@@ -10,11 +11,18 @@ namespace Model
         public void Init()
         {
             Items = new Dictionary<string, Product>();
-            foreach (var product in App.Instance.userRepository.Products.GetAll())
+            foreach (var userProduct in App.Instance.userRepository.Products.GetAll())
             {
-                Items.Add(product.ItemId, new Product(product));
+                Items.Add(userProduct.ItemId, new Product(userProduct));
             }
         }
 
+        public void Add(Data.Product product, int amount = 1)
+        {
+            Items[product.Id].Amount.Value += amount;
+        }
+
+        
+        
     }
 }
