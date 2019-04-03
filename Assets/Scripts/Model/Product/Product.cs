@@ -3,28 +3,22 @@ using Logic.Parameters;
 
 namespace Model
 {
-    public class Product
+    public class Product : BaseModelItem<UserProduct>
     {
         public ReactiveParameter<int> Amount;
         
-        public Data.Product data { get; private set; }
-
         public bool IsSellable
         {
             get
             {
-                return Amount.Value > 0 && data.SellPrice > 0 && !string.IsNullOrEmpty(data.Currency);
+                return Amount.Value > 0 && 
+                       _userData.CatalogData.SellPrice > 0 && 
+                       !string.IsNullOrEmpty(_userData.CatalogData.Currency);
             }
         }
 
-        private UserProduct _userProduct;
-        
-        public Product(UserProduct userProduct)
+        public Product(UserProduct userProduct) : base(userProduct)
         {
-            _userProduct = userProduct;
-            Amount = new ReactiveParameter<int>(_userProduct.Amount);
-            
-            data = App.Instance.catalog.Products[_userProduct.ItemId];
         }
 
         public void Sell()
@@ -33,7 +27,7 @@ namespace Model
                 return;
             
             int amount = 1;
-            if (App.Instance.FarmModel.ShopInventory.Sell(data))
+            if (App.Instance.FarmModel.ShopInventory.Sell(_userData.CatalogData))
             {
                ChangeAmount(-amount);
             }
@@ -41,8 +35,18 @@ namespace Model
 
         public void ChangeAmount(int value)
         {
-            _userProduct.Amount += value;
-            Amount.Value = _userProduct.Amount;
+            Amount.Value += value;
+            SaveData();
+        }
+
+        protected override void InitData()
+        {
+            Amount = new ReactiveParameter<int>(_userData.Amount);
+        }
+
+        protected override void SaveData()
+        {
+            _userData.Amount = Amount.Value;
             UserRepository.Save();
         }
     }

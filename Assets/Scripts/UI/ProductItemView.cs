@@ -41,16 +41,16 @@ public class ProductItemView : MonoBehaviour
 	private void InitView()
 	{
 		_amount.text = _model.Amount.Value.ToString();
-		_sellPriceLabel.text = "Price: " + _model.data.SellPrice;
+		_sellPriceLabel.text = "Price: " + _model.UserData.CatalogData.SellPrice;
 		
-		GameObject source = (GameObject)Resources.Load("UI/Products/"+_model.data.Id, typeof(GameObject));
+		GameObject source = (GameObject)Resources.Load("UI/Products/"+_model.UserData.Id, typeof(GameObject));
 		GameObject go = Instantiate(source, _item.transform);
 		go.transform.localPosition = Vector3.zero;
 		go.transform.localEulerAngles = Vector3.zero;
 		go.transform.localScale = Vector3.one;
 		
 		_dragDropItem = go.GetComponent<FarmDragDropItem>();
-		_dragDropItem.Data = _model.data;
+		_dragDropItem.Data = _model.UserData.CatalogData;
 	}
 
 	private void OnAmountChange(int oldvalue, int newvalue)

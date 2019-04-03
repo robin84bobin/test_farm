@@ -2,7 +2,7 @@
   "catalog": {
     "currency": [
       {
-        "Value": 100,
+        "Value": 90,
         "CatalogDataId": "coins",
         "Id": "coins",
         "Type": "currency",
@@ -15,7 +15,6 @@
     ],
     "shop": [
       {
-        "ItemId": null,
         "Amount": 0,
         "CatalogDataId": "0",
         "Id": "0",
@@ -30,7 +29,6 @@
         }
       },
       {
-        "ItemId": null,
         "Amount": 0,
         "CatalogDataId": "1",
         "Id": "1",
@@ -45,7 +43,6 @@
         }
       },
       {
-        "ItemId": null,
         "Amount": 0,
         "CatalogDataId": "2",
         "Id": "2",
@@ -62,7 +59,6 @@
     ],
     "products": [
       {
-        "ItemId": null,
         "Amount": 0,
         "CatalogDataId": "seed",
         "Id": "seed",
@@ -75,7 +71,6 @@
         }
       },
       {
-        "ItemId": null,
         "Amount": 0,
         "CatalogDataId": "milk",
         "Id": "milk",
@@ -88,7 +83,6 @@
         }
       },
       {
-        "ItemId": null,
         "Amount": 0,
         "CatalogDataId": "egg",
         "Id": "egg",
@@ -411,7 +405,7 @@
       },
       {
         "Index": 51,
-        "UserFarmItemId": null,
+        "UserFarmItemId": "wheat",
         "Id": "51",
         "Type": ""
       },

@@ -23,7 +23,7 @@ namespace Model
             Items = new Dictionary<string, Model.ShopItem>();
             foreach (var shopItem in App.Instance.userRepository.ShopItems.GetAll())
             {
-                Items.Add(shopItem.ItemId, new ShopItem(shopItem));
+                Items.Add(shopItem.Id, new ShopItem(shopItem));
             }
         }
         

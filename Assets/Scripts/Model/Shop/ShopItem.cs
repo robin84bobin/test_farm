@@ -4,19 +4,13 @@ using Logic.Parameters;
 
 namespace Model
 {
-    public class ShopItem
+    public class ShopItem : BaseModelItem<UserShopItem>
     {
         public ReactiveParameter<int> Amount;
         
-        public Data.ShopItem data { get; private set; }
-        private UserShopItem _userShopItem;
 
-        public ShopItem(UserShopItem userShopItem)
+        public ShopItem(UserShopItem userShopItem) : base(userShopItem)
         {
-            _userShopItem = userShopItem;
-            data = App.Instance.catalog.ShopItems[_userShopItem.ItemId];
-            
-            Amount = new ReactiveParameter<int>(_userShopItem.Amount);
         }
 
         public void Spend(int amount = 1)
@@ -27,7 +21,7 @@ namespace Model
         internal void Buy()
         {
             int amount = 1;
-            if (App.Instance.FarmModel.ShopInventory.Buy(data, amount))
+            if (App.Instance.FarmModel.ShopInventory.Buy(_userData.CatalogData, amount))
             {
                 ChangeAmount(amount);
             }
@@ -35,8 +29,19 @@ namespace Model
 
         void ChangeAmount(int value)
         {
-            _userShopItem.Amount += value;
-            Amount.Value = _userShopItem.Amount;
+            Amount.Value += value;
+            SaveData();
+        }
+
+
+        protected override void InitData()
+        {
+            Amount = new ReactiveParameter<int>(_userData.Amount);
+        }
+
+        protected override void SaveData()
+        {
+            _userData.Amount = Amount.Value;
             UserRepository.Save();
         }
     }

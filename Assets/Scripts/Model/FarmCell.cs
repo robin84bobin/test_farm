@@ -2,31 +2,39 @@
 
 namespace Model
 {
-    public class FarmCell 
+    public class FarmCell : BaseModelItem<UserFarmCell>
     {
         public FarmItem Item { get; set; }
-        public Data.User.UserFarmCell userCellData;
-        private Data.User.UserFarmItem _data;
 
-        public FarmCell(UserFarmCell userCellData)
+        public FarmCell(UserFarmCell userCellData) : base(userCellData)
         {
-            this.userCellData = userCellData;
             Init();
         }
 
         public void Init(string farmItemId)
         {
-            userCellData.UserFarmItemId = farmItemId;
+            _userData.UserFarmItemId = farmItemId;
             Init();
+            SaveData();
         }
         
         private void Init()
         {
-            if (!string.IsNullOrEmpty(userCellData.UserFarmItemId))
+            if (!string.IsNullOrEmpty(_userData.UserFarmItemId))
             {
-                _data = App.Instance.userRepository.FarmItems[this.userCellData.UserFarmItemId];
-                Item = new FarmItem(_data);
+                var userFarmItemData = App.Instance.userRepository.FarmItems[_userData.UserFarmItemId];
+                Item = new FarmItem(userFarmItemData);
             }
+        }
+
+        protected override void InitData()
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        protected override void SaveData()
+        {
+            UserRepository.Save();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Model
             Items = new Dictionary<string, Product>();
             foreach (var userProduct in App.Instance.userRepository.Products.GetAll())
             {
-                Items.Add(userProduct.ItemId, new Product(userProduct));
+                Items.Add(userProduct.Id, new Product(userProduct));
             }
         }
 

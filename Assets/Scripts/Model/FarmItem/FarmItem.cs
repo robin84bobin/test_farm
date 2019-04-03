@@ -12,31 +12,21 @@ namespace Model
         PRODUCE,
     }
 
-    public class FarmItem : TickableItem
+    public class FarmItem : BaseModelItem<UserFarmItem>
     {
         public event ProduceProductDelegate OnProduceComplete;
         public ReactiveParameter<float> Progress { get; private set; }
         public ReactiveParameter<int> ResourceTime { get; private set; }
         public ReactiveParameter<int> PendingCount { get; private set; }
 
-        public UserFarmItem userFarmItem { get; private set; }
-        private Data.FarmItem _data;
         
         public FSM<State, FarmItemState> Fsm { get; private set; }
 
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
         
 
-        public FarmItem(UserFarmItem userFarmItem)
+        public FarmItem(UserFarmItem userFarmItem) : base(userFarmItem)
         {
-            this.userFarmItem = userFarmItem;
-            if (!string.IsNullOrEmpty(userFarmItem.ItemId))
-                _data = App.Instance.catalog.FarmItems[userFarmItem.ItemId];
-            
-            ResourceTime = new ReactiveParameter<int>(userFarmItem.ResourceTime);
-            Progress = new ReactiveParameter<float>(userFarmItem.Progress);
-            PendingCount = new ReactiveParameter<int>(userFarmItem.PendingCount);
-
             var produceState = new ProduceState(this);
             Fsm = new FSM<State, FarmItemState>();
             Fsm.Add(produceState);
@@ -55,7 +45,7 @@ namespace Model
                 ProduceComplete();
             else
             {
-                Save();
+                SaveData();
             }
         }
 
@@ -72,15 +62,15 @@ namespace Model
 
             App.Instance.FarmModel.ProductInventory.Add(product);
             
-            Save();
+            SaveData();
         }
 
         public bool Eat(IEatible food)
         {
-            if (_data.ResourceProductId != food.Name)
+            if (_userData.CatalogData.ResourceProductId != food.Name)
                 return false;
 
-            ResourceTime.Value += _data.ResourceTime;
+            ResourceTime.Value += _userData.CatalogData.ResourceTime;
             TryStartProduce();
             return true;
         }
@@ -88,17 +78,17 @@ namespace Model
         public void TryStartProduce()
         {
             //если не нужны ресурсы для производства - восполняем время
-            if (string.IsNullOrEmpty(_data.ResourceProductId))
-                ResourceTime.Value = _data.ResourceTime;
+            if (string.IsNullOrEmpty(_userData.CatalogData.ResourceProductId))
+                ResourceTime.Value = _userData.CatalogData.ResourceTime;
             
-            if (ResourceTime.Value < _data.ResourceTime)
+            if (ResourceTime.Value < _userData.CatalogData.ResourceTime)
                 return;
 
             if (_pendingProducts.Count > 0)
                 return;
             
             Fsm.SetState(State.PRODUCE);
-            Save();
+            SaveData();
         }
 
         public override void Release()
@@ -117,23 +107,30 @@ namespace Model
         {
             Progress.Value = 0;
 
-            Data.Product product = App.Instance.catalog.Products[_data.ProductId];
+            Data.Product product = App.Instance.catalog.Products[_userData.CatalogData.ProductId];
             _pendingProducts.Enqueue(product);
             PendingCount.Value = _pendingProducts.Count;
             
             if (OnProduceComplete != null) 
-                OnProduceComplete.Invoke(product.Id, _data.ProduceAmount);
+                OnProduceComplete.Invoke(product.Id, _userData.CatalogData.ProduceAmount);
 
             Fsm.SetState(State.IDLE);
             
-            Save();
+            SaveData();
         }
 
-        void Save()
+        protected override void InitData()
         {
-            userFarmItem.ResourceTime = ResourceTime.Value;
-            userFarmItem.Progress = Progress.Value;
-            userFarmItem.PendingCount = PendingCount.Value;
+            ResourceTime = new ReactiveParameter<int>(_userData.ResourceTime);
+            Progress = new ReactiveParameter<float>(_userData.Progress);
+            PendingCount = new ReactiveParameter<int>(_userData.PendingCount);
+        }
+
+        protected override void SaveData()
+        {
+            _userData.ResourceTime = ResourceTime.Value;
+            _userData.Progress = Progress.Value;
+            _userData.PendingCount = PendingCount.Value;
             UserRepository.Save();
         }
     }
