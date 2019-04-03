@@ -53,13 +53,13 @@ namespace UI
 
         private void OnProduceComplete(string s, int amount)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
         void OnClick()
         {
             Data.Product product;
-            if (_model.PendingCount > 0)
+            if (_model != null && _model.PendingCount > 0)
             {
                 if (_model.PickUp(out product))
                 {

@@ -33,7 +33,7 @@ namespace Model
 
         public void SetState(TStateName key, bool restartCurrentState = false)
         {
-            if (!restartCurrentState && CurrentState.Name.Equals(key))
+            if (!restartCurrentState && CurrentState != null && CurrentState.Name.Equals(key))
                 return;
             
             if (CurrentState != null)

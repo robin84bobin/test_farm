@@ -16,7 +16,7 @@ namespace Model
         public ReactiveParameter<float> Progress { get; private set; }
         public ReactiveParameter<float> ResourceTime { get; private set; }
 
-        private Data.FarmItem _data;
+        public Data.FarmItem Data { get; private set; }
         public FSM<State, FarmItemState> Fsm { get; private set; }
 
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
@@ -27,13 +27,10 @@ namespace Model
 
         public FarmItem(Data.FarmItem data)
         {
-            _data = data;
+            Data = data;
             
             ResourceTime = new ReactiveParameter<float>(0f);
             Progress = new ReactiveParameter<float>(0f);
-            Progress.OnValueChange += OnProgress;
-            
-            
 
             var produceState = new ProduceState(this);
             Fsm = new FSM<State, FarmItemState>();
@@ -41,16 +38,22 @@ namespace Model
             Fsm.Add(new IdleState(this));
         }
 
+        public void OnInitInCell()
+        {
+            Progress.OnValueChange += OnProgress;
+            Fsm.SetState(State.IDLE);
+        }
+
         private void OnProgress(float oldvalue, float newvalue)
         {
             if (newvalue >= 1)
                 Progress.Value = 0;
 
-            Data.Product product = App.Instance.catalog.Products[_data.ProductId];
+            Data.Product product = App.Instance.catalog.Products[Data.ProductId];
             _pendingProducts.Enqueue(product);
             
             if (OnProduceComplete != null) 
-                OnProduceComplete.Invoke(product.Id, _data.ProduceAmount);
+                OnProduceComplete.Invoke(product.Id, Data.ProduceAmount);
 
             Fsm.SetState(State.IDLE);
         }
@@ -65,17 +68,17 @@ namespace Model
 
         public bool Eat(IEatible food)
         {
-            if (_data.ResourceProductId != food.Name)
+            if (Data.ResourceProductId != food.Name)
                 return false;
 
-            ResourceTime.Value += _data.ResourceTime;
+            ResourceTime.Value += Data.ResourceTime;
             TryStartProduce();
             return true;
         }
 
         public void TryStartProduce()
         {
-            if (ResourceTime.Value < _data.ResourceTime)
+            if (ResourceTime.Value < Data.ResourceTime)
                 return;
 
             if (_pendingProducts.Count > 0)
