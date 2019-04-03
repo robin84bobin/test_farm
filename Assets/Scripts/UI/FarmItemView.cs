@@ -10,14 +10,15 @@ namespace UI
         [SerializeField] private UISprite _progressBar;
         [SerializeField] private UILabel _resourceLabel;
         [SerializeField] private UISprite _resourceBar;
-        [SerializeField] private UISprite _productPendingSprite;
+        [SerializeField] private UILabel _productPendingCount;
         
         private FarmItem _model;
 
         public void Init(FarmItem model)
         {
             _model = model;
-            _model.OnProduceComplete += OnProduceComplete;
+            //_model.OnProduceComplete += OnProduceComplete;
+            _model.PendingCount.OnValueChange += OnPendingAmountChange;
             _model.Progress.OnValueChange += OnProgressChange;
             _model.ResourceTime.OnValueChange += OnResourceTimeChange;
 
@@ -53,21 +54,31 @@ namespace UI
             _progressBar.fillAmount = newvalue;
         }
 
-        private void OnProduceComplete(string s, int amount)
+        private void OnPendingAmountChange(int oldValue, int amount)
         {
-            //throw new System.NotImplementedException();
+            RefreshPendingIndicator(amount);
         }
 
         void OnClick()
         {
-            Data.Product product;
-            if (_model != null && _model.PendingCount > 0)
+            if (_model != null)
             {
-                if (_model.PickUp(out product))
-                {
-                    
-                }
+                _model.PickUp();
             }
+        }
+
+        private void RefreshPendingIndicator(int amount)
+        {
+            if (_model == null)
+            {
+                _productPendingCount.gameObject.SetActive(false);
+                return;
+            }
+            
+            bool visible = amount > 0;
+            _productPendingCount.gameObject.SetActive(visible);;
+            if (visible)
+                _productPendingCount.text = _model.PendingCount.ToString();
         }
     }
 }

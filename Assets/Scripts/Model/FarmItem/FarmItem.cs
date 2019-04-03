@@ -20,10 +20,7 @@ namespace Model
         public FSM<State, FarmItemState> Fsm { get; private set; }
 
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
-        public int PendingCount
-        {
-            get { return _pendingProducts.Count; }
-        }
+        public ReactiveParameter<int> PendingCount { get; private set; }
 
         public FarmItem(Data.FarmItem data)
         {
@@ -31,6 +28,7 @@ namespace Model
             
             ResourceTime = new ReactiveParameter<float>(0f);
             Progress = new ReactiveParameter<float>(0f);
+            PendingCount = new ReactiveParameter<int>();
 
             var produceState = new ProduceState(this);
             Fsm = new FSM<State, FarmItemState>();
@@ -51,6 +49,7 @@ namespace Model
 
             Data.Product product = App.Instance.catalog.Products[Data.ProductId];
             _pendingProducts.Enqueue(product);
+            PendingCount.Value = _pendingProducts.Count;
             
             if (OnProduceComplete != null) 
                 OnProduceComplete.Invoke(product.Id, Data.ProduceAmount);
@@ -58,11 +57,13 @@ namespace Model
             Fsm.SetState(State.IDLE);
         }
 
-        public bool PickUp(out Data.Product product)
+        public bool PickUp()
         {
-            product = _pendingProducts.Dequeue();
+            Data.Product product = _pendingProducts.Dequeue();
             if (_pendingProducts.Count <= 0)
                 TryStartProduce();
+
+            PendingCount.Value = _pendingProducts.Count;
             return product != null;
         }
 
