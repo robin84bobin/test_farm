@@ -8,28 +8,34 @@ namespace Model
 
         public FarmCell(UserFarmCell userCellData) : base(userCellData)
         {
-            Init();
         }
 
         public void Init(string farmItemId)
         {
-            _userData.UserFarmItemId = farmItemId;
-            Init();
+            CreateFarmItem(farmItemId);
             SaveData();
         }
-        
-        private void Init()
+
+        private void CreateFarmItem(string farmItemId)
         {
-            if (!string.IsNullOrEmpty(_userData.UserFarmItemId))
-            {
-                var userFarmItemData = App.Instance.userRepository.FarmItems[_userData.UserFarmItemId];
-                Item = new FarmItem(userFarmItemData);
-            }
+            _userData.UserFarmItemId = _userData.Id;
+            var userFarmItemData = new UserFarmItem();
+            userFarmItemData.Id = _userData.UserFarmItemId;
+            userFarmItemData.CatalogDataId = farmItemId;
+            userFarmItemData.Type = App.Instance.userRepository.FarmItems.CollectionName;
+            userFarmItemData.Init(); //App.Instance.userRepository.FarmItems[_userData.UserFarmItemId];
+            App.Instance.userRepository.FarmItems.Set(userFarmItemData, this._userData.Id);
+            Item = new FarmItem(userFarmItemData);
         }
+
 
         protected override void InitData()
         {
-            //throw new System.NotImplementedException();
+            if (!string.IsNullOrEmpty(_userData.UserFarmItemId))
+            {
+                UserFarmItem userFarmItemData = App.Instance.userRepository.FarmItems[_userData.UserFarmItemId];
+                Item = new FarmItem(userFarmItemData);
+            }
         }
 
         protected override void SaveData()

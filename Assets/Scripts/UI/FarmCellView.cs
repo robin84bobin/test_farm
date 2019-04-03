@@ -23,7 +23,7 @@ namespace UI
 
         private void CreateFarmItem()
         {
-            GameObject source = (GameObject)Resources.Load("UI/FarmItems/"+_model.UserData.Id, typeof(GameObject));
+            GameObject source = (GameObject)Resources.Load("UI/FarmItems/"+_model.Item.UserData.CatalogDataId, typeof(GameObject));
             _item = Instantiate(source, _itemPlaceholder);
             _item.transform.localPosition = Vector3.zero;
             _item.transform.localEulerAngles = Vector3.zero;

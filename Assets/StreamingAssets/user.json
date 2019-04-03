@@ -2,7 +2,7 @@
   "catalog": {
     "currency": [
       {
-        "Value": 90,
+        "Value": 0,
         "CatalogDataId": "coins",
         "Id": "coins",
         "Type": "currency",
@@ -15,13 +15,12 @@
     ],
     "shop": [
       {
-        "Amount": 0,
+        "Amount": 2,
         "CatalogDataId": "0",
         "Id": "0",
         "Type": "shop",
         "CatalogData": {
           "FarmItemId": "wheat",
-          "BuyCurrencyId": null,
           "Id": "0",
           "Type": "shop",
           "Currency": "coins",
@@ -35,7 +34,6 @@
         "Type": "shop",
         "CatalogData": {
           "FarmItemId": "hen",
-          "BuyCurrencyId": null,
           "Id": "1",
           "Type": "shop",
           "Currency": "coins",
@@ -43,13 +41,12 @@
         }
       },
       {
-        "Amount": 0,
+        "Amount": 1,
         "CatalogDataId": "2",
         "Id": "2",
         "Type": "shop",
         "CatalogData": {
           "FarmItemId": "cow",
-          "BuyCurrencyId": null,
           "Id": "2",
           "Type": "shop",
           "Currency": "coins",
@@ -59,7 +56,7 @@
     ],
     "products": [
       {
-        "Amount": 0,
+        "Amount": 7,
         "CatalogDataId": "seed",
         "Id": "seed",
         "Type": "products",
@@ -95,391 +92,464 @@
         }
       }
     ],
-    "farmItems": [],
+    "farmItems": [
+      {
+        "Progress": 0.0,
+        "ResourceTime": 0,
+        "PendingCount": 1,
+        "CatalogDataId": "wheat",
+        "Id": "59",
+        "Type": "farmItems",
+        "CatalogData": {
+          "ProductId": "seed",
+          "ProducePeriod": 10,
+          "ProduceAmount": 0,
+          "ProduceDuration": 0,
+          "ResourceProductId": null,
+          "ResourceTime": 0,
+          "Id": "wheat",
+          "Type": "farmItems"
+        }
+      },
+      {
+        "Progress": 0.0,
+        "ResourceTime": 0,
+        "PendingCount": 1,
+        "CatalogDataId": "wheat",
+        "Id": "35",
+        "Type": "farmItems",
+        "CatalogData": {
+          "ProductId": "seed",
+          "ProducePeriod": 10,
+          "ProduceAmount": 0,
+          "ProduceDuration": 0,
+          "ResourceProductId": null,
+          "ResourceTime": 0,
+          "Id": "wheat",
+          "Type": "farmItems"
+        }
+      },
+      {
+        "Progress": 0.0,
+        "ResourceTime": 0,
+        "PendingCount": 1,
+        "CatalogDataId": "wheat",
+        "Id": "51",
+        "Type": "farmItems",
+        "CatalogData": {
+          "ProductId": "seed",
+          "ProducePeriod": 10,
+          "ProduceAmount": 0,
+          "ProduceDuration": 0,
+          "ResourceProductId": null,
+          "ResourceTime": 0,
+          "Id": "wheat",
+          "Type": "farmItems"
+        }
+      },
+      {
+        "Progress": 0.0,
+        "ResourceTime": 0,
+        "PendingCount": 0,
+        "CatalogDataId": "hen",
+        "Id": "57",
+        "Type": "farmItems",
+        "CatalogData": {
+          "ProductId": "egg",
+          "ProducePeriod": 20,
+          "ProduceAmount": 1,
+          "ProduceDuration": 20,
+          "ResourceProductId": "seed",
+          "ResourceTime": 30,
+          "Id": "hen",
+          "Type": "farmItems"
+        }
+      }
+    ],
     "cells": [
       {
         "Index": 0,
         "UserFarmItemId": null,
         "Id": "0",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 1,
         "UserFarmItemId": null,
         "Id": "1",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 2,
         "UserFarmItemId": null,
         "Id": "2",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 3,
         "UserFarmItemId": null,
         "Id": "3",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 4,
         "UserFarmItemId": null,
         "Id": "4",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 5,
         "UserFarmItemId": null,
         "Id": "5",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 6,
         "UserFarmItemId": null,
         "Id": "6",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 7,
         "UserFarmItemId": null,
         "Id": "7",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 8,
         "UserFarmItemId": null,
         "Id": "8",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 9,
         "UserFarmItemId": null,
         "Id": "9",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 10,
         "UserFarmItemId": null,
         "Id": "10",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 11,
         "UserFarmItemId": null,
         "Id": "11",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 12,
         "UserFarmItemId": null,
         "Id": "12",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 13,
         "UserFarmItemId": null,
         "Id": "13",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 14,
         "UserFarmItemId": null,
         "Id": "14",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 15,
         "UserFarmItemId": null,
         "Id": "15",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 16,
         "UserFarmItemId": null,
         "Id": "16",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 17,
         "UserFarmItemId": null,
         "Id": "17",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 18,
         "UserFarmItemId": null,
         "Id": "18",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 19,
         "UserFarmItemId": null,
         "Id": "19",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 20,
         "UserFarmItemId": null,
         "Id": "20",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 21,
         "UserFarmItemId": null,
         "Id": "21",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 22,
         "UserFarmItemId": null,
         "Id": "22",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 23,
         "UserFarmItemId": null,
         "Id": "23",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 24,
         "UserFarmItemId": null,
         "Id": "24",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 25,
         "UserFarmItemId": null,
         "Id": "25",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 26,
         "UserFarmItemId": null,
         "Id": "26",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 27,
         "UserFarmItemId": null,
         "Id": "27",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 28,
         "UserFarmItemId": null,
         "Id": "28",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 29,
         "UserFarmItemId": null,
         "Id": "29",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 30,
         "UserFarmItemId": null,
         "Id": "30",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 31,
         "UserFarmItemId": null,
         "Id": "31",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 32,
         "UserFarmItemId": null,
         "Id": "32",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 33,
         "UserFarmItemId": null,
         "Id": "33",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 34,
         "UserFarmItemId": null,
         "Id": "34",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 35,
-        "UserFarmItemId": null,
+        "UserFarmItemId": "35",
         "Id": "35",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 36,
         "UserFarmItemId": null,
         "Id": "36",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 37,
         "UserFarmItemId": null,
         "Id": "37",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 38,
         "UserFarmItemId": null,
         "Id": "38",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 39,
         "UserFarmItemId": null,
         "Id": "39",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 40,
         "UserFarmItemId": null,
         "Id": "40",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 41,
         "UserFarmItemId": null,
         "Id": "41",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 42,
         "UserFarmItemId": null,
         "Id": "42",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 43,
         "UserFarmItemId": null,
         "Id": "43",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 44,
         "UserFarmItemId": null,
         "Id": "44",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 45,
         "UserFarmItemId": null,
         "Id": "45",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 46,
         "UserFarmItemId": null,
         "Id": "46",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 47,
         "UserFarmItemId": null,
         "Id": "47",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 48,
         "UserFarmItemId": null,
         "Id": "48",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 49,
         "UserFarmItemId": null,
         "Id": "49",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 50,
         "UserFarmItemId": null,
         "Id": "50",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 51,
-        "UserFarmItemId": "wheat",
+        "UserFarmItemId": "51",
         "Id": "51",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 52,
         "UserFarmItemId": null,
         "Id": "52",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 53,
         "UserFarmItemId": null,
         "Id": "53",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 54,
         "UserFarmItemId": null,
         "Id": "54",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 55,
         "UserFarmItemId": null,
         "Id": "55",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 56,
         "UserFarmItemId": null,
         "Id": "56",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 57,
-        "UserFarmItemId": null,
+        "UserFarmItemId": "57",
         "Id": "57",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 58,
         "UserFarmItemId": null,
         "Id": "58",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 59,
-        "UserFarmItemId": null,
+        "UserFarmItemId": "59",
         "Id": "59",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 60,
         "UserFarmItemId": null,
         "Id": "60",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 61,
         "UserFarmItemId": null,
         "Id": "61",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 62,
         "UserFarmItemId": null,
         "Id": "62",
-        "Type": ""
+        "Type": "cells"
       },
       {
         "Index": 63,
         "UserFarmItemId": null,
         "Id": "63",
-        "Type": ""
+        "Type": "cells"
       }
     ]
   }

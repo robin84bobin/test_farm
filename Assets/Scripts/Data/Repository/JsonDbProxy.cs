@@ -58,6 +58,7 @@ namespace Data
             foreach (var item in items)
             {
                 item.Type = collection;
+                Debug.Log(collection + " : " + item.Id);
                 itemsDict.Add(item.Id, item);
             }
             callback.Invoke(itemsDict);

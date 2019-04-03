@@ -52,6 +52,7 @@ namespace Data.User
                 this.Products.Set(p, product.Id, true);
             }
 
+
             var size = App.Instance.catalog.GetSetting<FarmSize>("grid");
             for (int index = 0; index < (size.height*size.width); index++)
             {
