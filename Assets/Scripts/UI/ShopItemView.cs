@@ -42,7 +42,7 @@ public class ShopItemView : MonoBehaviour
 		_amountLabel.text = _model.Amount.Value.ToString();
 		_priceLabel.text = "Price: " + _model.UserData.CatalogData.BuyPrice;
 		
-		GameObject source = (GameObject)Resources.Load("UI/FarmItems/"+_model.UserData.CatalogData.FarmItemId, typeof(GameObject));
+		GameObject source = (GameObject)Resources.Load("UI/FarmItems/DragItems/"+_model.UserData.CatalogData.FarmItemId, typeof(GameObject));
 		_item = Instantiate(source, _itemPlaceHolder.transform);
 		_item.transform.localPosition = Vector3.zero;
 		_item.transform.localEulerAngles = Vector3.zero;

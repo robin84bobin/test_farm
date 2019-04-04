@@ -2,7 +2,7 @@
 {
     public class TickableItem
     {
-        public TickableItem()
+        public void EnableTick()
         {
             App.Instance.OnTick += OnTick;
         }

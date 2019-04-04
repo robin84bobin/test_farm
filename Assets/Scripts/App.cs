@@ -27,7 +27,7 @@ public class App : MonoBehaviour
     void Awake()
     {
         CatalogPath = Application.streamingAssetsPath + "/catalog.json";
-        UserRepositoryPath = Application.streamingAssetsPath + "/user.json";
+        UserRepositoryPath = Application.persistentDataPath + "/user.json";
         
         if (Instance==null)
         {
@@ -73,6 +73,7 @@ public class App : MonoBehaviour
         {
             _nextTickTime = Time.time + TiCK_DELTA_TIME;
             OnTick.Invoke(TiCK_DELTA_TIME);
+            Debug.Log("tick: " + Time.time);
         }
     }
 }

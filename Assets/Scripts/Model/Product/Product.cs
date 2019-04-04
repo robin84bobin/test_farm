@@ -29,8 +29,13 @@ namespace Model
             int amount = 1;
             if (App.Instance.FarmModel.ShopInventory.Sell(_userData.CatalogData))
             {
-               ChangeAmount(-amount);
+               Spend(amount);
             }
+        }
+        
+        public void Spend(int amount = 1)
+        {
+            ChangeAmount(-amount);
         }
 
         public void ChangeAmount(int value)

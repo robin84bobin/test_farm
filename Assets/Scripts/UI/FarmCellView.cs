@@ -29,7 +29,6 @@ namespace UI
             _item.transform.localEulerAngles = Vector3.zero;
             _item.transform.localScale = Vector3.one;
 
-            _item.gameObject.GetComponent<FarmDragDropItem>().enabled = false;
             _item.gameObject.GetComponent<FarmItemView>().Init(_model.Item);
             
             _model.Item.OnInitInCell();
@@ -50,9 +49,10 @@ namespace UI
             CreateFarmItem();
         }
 
-        private void OnProductDrop(Product obj)
+        private void OnProductDrop(Product product)
         {
             if (_model.Item == null) return;
+            _model.Item.Eat(product);
         }
 
     }

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using Data.User;
 using Logic.Parameters;
-using TMPro;
+using UnityEngine;
 
 namespace Model
 {
@@ -18,6 +17,7 @@ namespace Model
         public ReactiveParameter<float> Progress { get; private set; }
         public ReactiveParameter<int> ResourceTime { get; private set; }
         public ReactiveParameter<int> PendingCount { get; private set; }
+        public int ResourceMax{ get; private set; }
 
         
         public FSM<State, FarmItemState> Fsm { get; private set; }
@@ -36,12 +36,24 @@ namespace Model
         public void OnInitInCell()
         {
             Progress.OnValueChange += OnProgress;
+            ResourceTime.OnValueChange += OnResourceChanged;
             Fsm.SetState(State.IDLE);
+            EnableTick();
+        }
+
+        private void OnResourceChanged(int oldvalue, int newvalue)
+        {
+            Debug.Log("OnResourceChanged:" + newvalue);
+            if (newvalue <= 0)
+            {
+                ResourceTime.Value = 0;
+            }
         }
 
         private void OnProgress(float oldvalue, float newvalue)
         {
-            if (newvalue >= 1)
+            Debug.Log("OnProgress:" + newvalue);
+            if (newvalue >= _userData.CatalogData.ProduceDuration)
                 ProduceComplete();
             else
             {
@@ -65,12 +77,14 @@ namespace Model
             SaveData();
         }
 
-        public bool Eat(IEatible food)
+        public bool Eat(Data.Product product)
         {
-            if (_userData.CatalogData.ResourceProductId != food.Name)
+            if (_userData.CatalogData.ResourceProductId != product.Id)
                 return false;
 
+            App.Instance.FarmModel.ProductInventory.Items[product.Id].Spend();
             ResourceTime.Value += _userData.CatalogData.ResourceTime;
+            ResourceMax = ResourceTime.Value;
             TryStartProduce();
             return true;
         }
@@ -79,9 +93,9 @@ namespace Model
         {
             //если не нужны ресурсы для производства - восполняем время
             if (string.IsNullOrEmpty(_userData.CatalogData.ResourceProductId))
-                ResourceTime.Value = _userData.CatalogData.ResourceTime;
+                ResourceTime.Value = _userData.CatalogData.ProduceDuration;
             
-            if (ResourceTime.Value < _userData.CatalogData.ResourceTime)
+            if (!IsEnoughResources)
                 return;
 
             if (_pendingProducts.Count > 0)
@@ -89,6 +103,11 @@ namespace Model
             
             Fsm.SetState(State.PRODUCE);
             SaveData();
+        }
+
+        public bool IsEnoughResources
+        {
+            get { return ResourceTime.Value >= _userData.CatalogData.ProduceDuration; }
         }
 
         public override void Release()
@@ -107,8 +126,7 @@ namespace Model
         {
             Progress.Value = 0;
 
-            Data.Product product = App.Instance.catalog.Products[_userData.CatalogData.ProductId];
-            _pendingProducts.Enqueue(product);
+            var product = CreateProduct();
             PendingCount.Value = _pendingProducts.Count;
             
             if (OnProduceComplete != null) 
@@ -119,11 +137,23 @@ namespace Model
             SaveData();
         }
 
+        private Data.Product CreateProduct()
+        {
+            Data.Product product = App.Instance.catalog.Products[_userData.CatalogData.ProductId];
+            _pendingProducts.Enqueue(product);
+            return product;
+        }
+
         protected override void InitData()
         {
             ResourceTime = new ReactiveParameter<int>(_userData.ResourceTime);
             Progress = new ReactiveParameter<float>(_userData.Progress);
             PendingCount = new ReactiveParameter<int>(_userData.PendingCount);
+
+            ResourceMax = ResourceTime.Value;
+
+            for (int i = 0; i < PendingCount.Value; i++)
+                CreateProduct();
         }
 
         protected override void SaveData()

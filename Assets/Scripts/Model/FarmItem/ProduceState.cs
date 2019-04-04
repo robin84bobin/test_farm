@@ -1,7 +1,4 @@
 ﻿
-using Logic.Parameters;
-
-
 namespace Model
 {
 
@@ -18,8 +15,11 @@ namespace Model
 
         public override void Tick(int deltaTime)
         {
-            _farmItem.Progress.Value += 1;
-            _farmItem.ResourceTime.Value -= deltaTime;
+            if (_farmItem.ResourceTime.Value > 0)
+            {
+                _farmItem.ResourceTime.Value -= deltaTime;
+                _farmItem.Progress.Value += deltaTime;
+            }
         }
 
     }

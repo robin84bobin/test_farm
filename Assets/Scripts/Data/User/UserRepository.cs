@@ -15,6 +15,7 @@ namespace Data.User
         
         public UserRepository(IDataBaseProxy dbProxy) : base(dbProxy)
         {
+            EnableTick();
         }
 
         public override void Init()

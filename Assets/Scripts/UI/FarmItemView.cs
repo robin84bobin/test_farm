@@ -1,6 +1,7 @@
 using System;
 using Model;
 using UnityEngine;
+using UnityEngine.Networking.NetworkSystem;
 using FarmItem = Model.FarmItem;
 
 namespace UI
@@ -19,40 +20,47 @@ namespace UI
             _model = model;
             _model.PendingCount.OnValueChange += OnPendingAmountChange;
             _model.Progress.OnValueChange += OnProgressChange;
-            _model.ResourceTime.OnValueChange += OnResourceTimeChange;
+           
+            if (_model.UserData.CatalogData.ResourceTime > 0)
+                _model.ResourceTime.OnValueChange += UpdateResourceView;
 
             _model.Fsm.OnStateChanged += OnStateChange;
+
+            InitView();
+        }
+
+        void Start()
+        {
+            InitView();
+        }
+        
+        private void InitView()
+        {
+            bool enableResource = _model.UserData.CatalogData.ResourceTime <= 0 || _model.ResourceTime.Value <= 0;
+            _resourceLabel.text = !enableResource ? _model.ResourceTime.Value.ToString():"EMPTY";
+            _resourceBar.gameObject.SetActive(!enableResource);
+
+            _resourceBar.color = _model.IsEnoughResources ? Color.green : Color.red;
             
             RefreshPendingIndicator(_model.PendingCount.Value);
         }
 
         private void OnStateChange(FarmItemState state)
         {
-            switch (_model.Fsm.CurrentState.Name)
-            {
-                case State.IDLE:
-                    _resourceLabel.text = "EMPTY";
-                    _progressBar.gameObject.SetActive(false);
-                    _resourceBar.gameObject.SetActive(false);
-                    break;
-                case State.PRODUCE:
-                    _resourceLabel.text = "RESOURCES";
-                    _progressBar.gameObject.SetActive(true);
-                    _resourceBar.gameObject.SetActive(true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            InitView();
+            _progressBar.gameObject.SetActive(state.Name == State.PRODUCE);
         }
 
-        private void OnResourceTimeChange(int oldvalue, int newvalue)
+        private void UpdateResourceView(int oldvalue = 0, int newvalue = 0)
         {
-            _resourceBar.fillAmount = newvalue;
+            _resourceBar.color = _model.IsEnoughResources ? Color.green : Color.red;
+            _resourceLabel.text = _model.ResourceTime.Value.ToString();
+            _resourceBar.fillAmount = (float) _model.ResourceTime.Value / (float) _model.ResourceMax;//UserData.CatalogData.ResourceTime;
         }
 
         private void OnProgressChange(float oldvalue, float newvalue)
         {
-            _progressBar.fillAmount = newvalue;
+            _progressBar.fillAmount = newvalue/_model.UserData.CatalogData.ProduceDuration;
         }
 
         private void OnPendingAmountChange(int oldValue, int amount)
@@ -77,9 +85,9 @@ namespace UI
             }
             
             bool visible = amount > 0;
-            _productPendingCount.gameObject.SetActive(visible);;
+            _productPendingCount.gameObject.SetActive(visible);
             if (visible)
-                _productPendingCount.text = _model.PendingCount.ToString();
+                _productPendingCount.text = _model.PendingCount.Value.ToString();
         }
     }
 }

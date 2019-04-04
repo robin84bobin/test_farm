@@ -16,12 +16,8 @@ namespace UI.NGUIExtensions
         
         public void OnDroppedObject(IDroppableData dropItem)
         {
-            //base.OnDroppedObject(droppedObject);
-            //var dropItem = droppedObject.GetComponent<FarmDragDropItem>();
-
             if (dropItem == null || dropItem.Data == null)
             {
-                //Destroy(droppedObject);
                 return;
             }
 
@@ -29,7 +25,7 @@ namespace UI.NGUIExtensions
             {
                RecieveShopItem(dropItem);
             }
-            else if (dropItem.Data.Type == "product")
+            else if (dropItem.Data.Type == "products")
             {
                RecieveProduct(dropItem);
             }
@@ -51,8 +47,6 @@ namespace UI.NGUIExtensions
             if (_model.Item == null)
             {
                 App.Instance.FarmModel.ShopInventory.Items[dropItem.Data.Id].Spend();
-                //Destroy(dropItem);
-
                 if (OnFarmItemRecieved != null)
                 {
                     ShopItem shopItem = dropItem.Data as ShopItem;
@@ -68,7 +62,7 @@ namespace UI.NGUIExtensions
         {
             if (_model.Item == null)
                return;  
-
+           
             if (OnProductRecieved != null)
                 OnProductRecieved.Invoke(dropItem.Data as Product);
 

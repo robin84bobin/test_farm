@@ -280,8 +280,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 1.7352941
   keepCrispWhenShrunk: 1
-  mTrueTypeFont: {fileID: 3459068928204737762, guid: 0000000000000000d000000000000000,
-    type: 0}
+  mTrueTypeFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   mFont: {fileID: 0}
   mText: 0
   mFontSize: 30
@@ -347,8 +346,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 3.1
   keepCrispWhenShrunk: 1
-  mTrueTypeFont: {fileID: 3459068928204737762, guid: 0000000000000000d000000000000000,
-    type: 0}
+  mTrueTypeFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   mFont: {fileID: 0}
   mText: SELL
   mFontSize: 18
@@ -414,8 +412,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 1.7647059
   keepCrispWhenShrunk: 1
-  mTrueTypeFont: {fileID: 3459068928204737762, guid: 0000000000000000d000000000000000,
-    type: 0}
+  mTrueTypeFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   mFont: {fileID: 0}
   mText: 'PRICE:
 

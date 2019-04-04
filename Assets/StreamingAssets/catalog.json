@@ -34,24 +34,22 @@
       {
         "Id": "wheat",
         "ProductId": "seed",
-        "ProducePeriod": 10
+        "ProduceDuration": 10
       },
       {
         "Id": "hen",
-        "ProducePeriod": 20,
+        "ProduceDuration": 10,
         "ProductId": "egg",
+		"ProduceAmount": 1,
         "ResourceProductId": "seed",
-        "ProduceAmount": 1,
-        "ProduceDuration": 20,
         "ResourceTime":30
       },
       {
         "Id": "cow",
-        "ProducePeriod": 20,
-        "ProductId": "milk",
-        "ResourceProductId": "seed",
-        "ProduceAmount": 1,
         "ProduceDuration": 20,
+        "ProductId": "milk",
+		"ProduceAmount": 1,
+        "ResourceProductId": "seed",
         "ResourceTime":20
       }
     ],
