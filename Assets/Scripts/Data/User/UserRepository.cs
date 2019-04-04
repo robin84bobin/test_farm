@@ -54,7 +54,7 @@ namespace Data.User
             }
 
 
-            var size = App.Instance.catalog.GetSetting<FarmSize>("grid");
+            var size = catalog.GetSetting<FarmSize>("grid");
             for (int index = 0; index < (size.height*size.width); index++)
             {
                 var cell = new UserFarmCell() {Index = index, Id = index.ToString()};

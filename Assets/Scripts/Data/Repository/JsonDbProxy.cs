@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using InternalNewtonsoft.Json.Linq;
@@ -73,8 +74,15 @@ namespace Data
 
         private void TryRefreshData()
         {
+            if (_path.Contains("://"))
+            {
+                App.Instance.StartCoroutine(LoadWWW());
+                return;
+            }
+            
             if (!IsFileExist(_path))
                 File.CreateText(_path).Close();
+
 
             if (string.IsNullOrEmpty(_dataJson) || File.GetLastWriteTime(_path) > _lastReadTime)
             {
@@ -82,6 +90,14 @@ namespace Data
                 _lastReadTime = DateTime.Now;
             }
         }
+
+        private IEnumerator LoadWWW()
+        {
+            WWW www = new WWW(_path);
+            yield return www;
+            _dataJson = www.text;
+            _lastReadTime = DateTime.Now;
+        } 
 
         public void SaveCollection<T>(string collection, Dictionary<string, T> items, Action callback = null)
             where T : DataItem, new()

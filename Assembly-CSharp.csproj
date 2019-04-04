@@ -57,8 +57,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ItemDragHandler.cs" />
-    <Compile Include="Assets\ItemDropHandler.cs" />
     <Compile Include="Assets\NGUI\RSAddons\Scripts\MSPopupListContainer.cs" />
     <Compile Include="Assets\NGUI\RSAddons\Scripts\RSNGUITools.cs" />
     <Compile Include="Assets\NGUI\RSAddons\Scripts\RSToggle.cs" />
@@ -179,6 +177,8 @@
     <Compile Include="Assets\Scripts\Data\Catalog\CatalogRepository.cs" />
     <Compile Include="Assets\Scripts\Data\Catalog\Currency.cs" />
     <Compile Include="Assets\Scripts\Data\Catalog\FarmItem.cs" />
+    <Compile Include="Assets\Scripts\Data\Catalog\IBuyable.cs" />
+    <Compile Include="Assets\Scripts\Data\Catalog\ISellable.cs" />
     <Compile Include="Assets\Scripts\Data\Catalog\Product.cs" />
     <Compile Include="Assets\Scripts\Data\Catalog\ShopItem.cs" />
     <Compile Include="Assets\Scripts\Data\Repository\DataItem.cs" />
@@ -188,11 +188,13 @@
     <Compile Include="Assets\Scripts\Data\Repository\Repository.cs" />
     <Compile Include="Assets\Scripts\Data\User\FarmSize.cs" />
     <Compile Include="Assets\Scripts\Data\User\UserCurrency.cs" />
+    <Compile Include="Assets\Scripts\Data\User\UserDataItem.cs" />
     <Compile Include="Assets\Scripts\Data\User\UserFarmCell.cs" />
     <Compile Include="Assets\Scripts\Data\User\UserFarmItem.cs" />
     <Compile Include="Assets\Scripts\Data\User\UserProduct.cs" />
     <Compile Include="Assets\Scripts\Data\User\UserRepository.cs" />
     <Compile Include="Assets\Scripts\Data\User\UserShopItem.cs" />
+    <Compile Include="Assets\Scripts\Model\BaseModel.cs" />
     <Compile Include="Assets\Scripts\Model\Farm.cs" />
     <Compile Include="Assets\Scripts\Model\FarmCell.cs" />
     <Compile Include="Assets\Scripts\Model\FarmItem\FarmItem.cs" />
@@ -201,11 +203,12 @@
     <Compile Include="Assets\Scripts\Model\FarmItem\ProduceState.cs" />
     <Compile Include="Assets\Scripts\Model\FSM\BaseState.cs" />
     <Compile Include="Assets\Scripts\Model\FSM\FSM.cs" />
-    <Compile Include="Assets\Scripts\Model\Product.cs" />
-    <Compile Include="Assets\Scripts\Model\ProductInventory.cs" />
+    <Compile Include="Assets\Scripts\Model\Product\Product.cs" />
+    <Compile Include="Assets\Scripts\Model\Product\ProductInventory.cs" />
+    <Compile Include="Assets\Scripts\Model\Product\ProductState.cs" />
     <Compile Include="Assets\Scripts\Model\ReactiveParameter.cs" />
-    <Compile Include="Assets\Scripts\Model\ShopInventory.cs" />
-    <Compile Include="Assets\Scripts\Model\ShopItem.cs" />
+    <Compile Include="Assets\Scripts\Model\Shop\ShopInventory.cs" />
+    <Compile Include="Assets\Scripts\Model\Shop\ShopItem.cs" />
     <Compile Include="Assets\Scripts\Model\TickableItem.cs" />
     <Compile Include="Assets\Scripts\UI\FarmCellView.cs" />
     <Compile Include="Assets\Scripts\UI\FarmItemView.cs" />
