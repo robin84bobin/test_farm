@@ -1,8 +1,6 @@
-using Data.User;
 using Model;
 using UI.NGUIExtensions;
 using UnityEngine;
-using FarmItem = Data.FarmItem;
 using Product = Data.Product;
 
 namespace UI
@@ -43,8 +41,6 @@ namespace UI
 
         private void OnFarmItemDrop(string farmItemId)
         {
-            //var farmItem = App.Instance.catalog.FarmItems[farmItemId];
-            
             _model.Init(farmItemId);
             CreateFarmItem();
         }

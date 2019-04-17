@@ -1,11 +1,16 @@
-
 using Data.Catalog;
-using Model;
 
 namespace Data.User
 {
     public class UserRepository : Repository.Repository
     {
+        public const string CURRENCY = "currency";
+        public const string SHOP = "shop";
+        public const string PRODUCTS = "products";
+        public const string FARM_ITEMS = "farmItems";
+        public const string CELLS = "cells";
+        public const string GRID = "grid";
+        
         public  DataStorage<UserCurrency> Currency;
         public  DataStorage<UserShopItem> ShopItems;
         public  DataStorage<UserFarmItem> FarmItems;
@@ -20,11 +25,11 @@ namespace Data.User
 
         public override void Init()
         {
-            Currency = CreateStorage<UserCurrency>("currency");
-            ShopItems = CreateStorage<UserShopItem>("shop");
-            Products = CreateStorage<UserProduct>("products");
-            FarmItems = CreateStorage<UserFarmItem>("farmItems");
-            Cells = CreateStorage<UserFarmCell>("cells");
+            Currency = CreateStorage<UserCurrency>(CURRENCY);
+            ShopItems = CreateStorage<UserShopItem>(SHOP);
+            Products = CreateStorage<UserProduct>(PRODUCTS);
+            FarmItems = CreateStorage<UserFarmItem>(FARM_ITEMS);
+            Cells = CreateStorage<UserFarmCell>(CELLS);
 
             _dbProxy.OnInitialized += OnDbInitComplete;
             _dbProxy.Init();
@@ -54,7 +59,7 @@ namespace Data.User
             }
 
 
-            var size = catalog.GetSetting<FarmSize>("grid");
+            var size = catalog.GetSetting<FarmSize>(GRID);
             for (int index = 0; index < (size.height*size.width); index++)
             {
                 var cell = new UserFarmCell() {Index = index, Id = index.ToString()};

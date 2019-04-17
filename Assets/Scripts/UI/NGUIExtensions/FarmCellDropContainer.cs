@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Data.User;
 using Model;
 using UnityEngine;
 using FarmItem = Data.FarmItem;
@@ -21,11 +22,11 @@ namespace UI.NGUIExtensions
                 return;
             }
 
-            if (dropItem.Data.Type == "shop")
+            if (dropItem.Data.Type == UserRepository.SHOP)
             {
                RecieveShopItem(dropItem);
             }
-            else if (dropItem.Data.Type == "products")
+            else if (dropItem.Data.Type == UserRepository.PRODUCTS)
             {
                RecieveProduct(dropItem);
             }
@@ -38,8 +39,6 @@ namespace UI.NGUIExtensions
             {
                 StartCoroutine(OnReposition(table));
             }
-            
-            //Destroy(droppedObject);
         }
 
         void RecieveShopItem(IDroppableData dropItem)
@@ -53,7 +52,6 @@ namespace UI.NGUIExtensions
                     OnFarmItemRecieved.Invoke(shopItem.FarmItemId);
                 }
             }
-            
             OnRecieved();
         }
         

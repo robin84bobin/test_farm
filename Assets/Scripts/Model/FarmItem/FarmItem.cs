@@ -18,10 +18,8 @@ namespace Model
         public ReactiveParameter<int> ResourceTime { get; private set; }
         public ReactiveParameter<int> PendingCount { get; private set; }
         public int ResourceMax{ get; private set; }
-
         
         public FSM<State, FarmItemState> Fsm { get; private set; }
-
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
         
 

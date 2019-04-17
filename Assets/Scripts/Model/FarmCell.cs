@@ -23,7 +23,7 @@ namespace Model
             userFarmItemData.Id = _userData.UserFarmItemId;
             userFarmItemData.CatalogDataId = farmItemId;
             userFarmItemData.Type = App.Instance.userRepository.FarmItems.CollectionName;
-            userFarmItemData.Init(); //App.Instance.userRepository.FarmItems[_userData.UserFarmItemId];
+            userFarmItemData.Init(); 
             App.Instance.userRepository.FarmItems.Set(userFarmItemData, this._userData.Id);
             Item = new FarmItem(userFarmItemData);
         }

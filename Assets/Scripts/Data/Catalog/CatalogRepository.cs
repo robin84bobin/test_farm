@@ -5,10 +5,10 @@ namespace Data.Catalog
 {
     public class CatalogRepository : Repository.Repository
     {
-        public  DataStorage<Currency> Currency;
-        public  DataStorage<ShopItem> ShopItems;
-        public  DataStorage<Product> Products;
-        public  DataStorage<FarmItem> FarmItems;
+        public DataStorage<Currency> Currency;
+        public DataStorage<ShopItem> ShopItems;
+        public DataStorage<Product> Products;
+        public DataStorage<FarmItem> FarmItems;
         
         public CatalogRepository(IDataBaseProxy dbProxy) : base(dbProxy)
         {

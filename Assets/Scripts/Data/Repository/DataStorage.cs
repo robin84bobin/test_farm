@@ -13,12 +13,8 @@ namespace Data
             get { return _items.Count; }
         }
 
-
         private bool ReadOnly { get; set; }
 
-        /// <summary>
-        /// имя таблицы/коллекции в базе данных
-        /// </summary>
         public string CollectionName { get; private set; }
 
         private Dictionary<string, T> _items = new Dictionary<string, T>();
@@ -29,12 +25,6 @@ namespace Data
             get { return Get(id); }
             set { Set(value); }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="collectionName"> имя таблицы/коллекции в базе данных</param>
-        /// <param name="readOnly"></param>
 
         public DataStorage(string collectionName, IDataBaseProxy dbProxy, bool readOnly = false)
         {

@@ -1,5 +1,4 @@
 using Data;
-using Data.User;
 
 namespace Model
 {
@@ -15,6 +14,7 @@ namespace Model
             _userData = userData;
             InitData();
         }
+        
         protected abstract void InitData();
         protected abstract void SaveData();
     }

@@ -94,7 +94,11 @@ namespace Data
         private IEnumerator LoadWWW()
         {
             WWW www = new WWW(_path);
-            yield return www;
+            while (!www.isDone)
+            {
+                yield return null;
+            }
+            
             _dataJson = www.text;
             _lastReadTime = DateTime.Now;
         } 

@@ -55,7 +55,7 @@ namespace UI
         {
             _resourceBar.color = _model.IsEnoughResources ? Color.green : Color.red;
             _resourceLabel.text = _model.ResourceTime.Value.ToString();
-            _resourceBar.fillAmount = (float) _model.ResourceTime.Value / (float) _model.ResourceMax;//UserData.CatalogData.ResourceTime;
+            _resourceBar.fillAmount = (float) _model.ResourceTime.Value / (float) _model.ResourceMax;
         }
 
         private void OnProgressChange(float oldvalue, float newvalue)

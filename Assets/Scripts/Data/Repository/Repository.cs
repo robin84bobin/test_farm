@@ -22,11 +22,6 @@ namespace Data.Repository
             _initStoragesCommands = new List<Command>();
         }
 
-        /// <summary>
-        /// register storage to init later
-        /// </summary>
-        /// <param name="dataStorage"></param>
-        /// <typeparam name="T"></typeparam>
         protected DataStorage<T> CreateStorage<T>(string collectionName) where T : DataItem, new()
         {
             var dataStorage = new DataStorage<T>(collectionName, _dbProxy);
