@@ -6,7 +6,7 @@ using Model;
 
 namespace Data.Repository
 {
-    public abstract class Repository : TickableItem
+    public abstract class Repository 
     {
         public abstract void Init();
         public Dictionary<string, IDataStorage> Storages = new Dictionary<string, IDataStorage>();

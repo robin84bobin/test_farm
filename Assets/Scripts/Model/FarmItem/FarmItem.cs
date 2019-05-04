@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Data.User;
 using Logic.Parameters;
 using UnityEngine;
+using Zenject;
 
 namespace Model
 {
@@ -11,13 +12,13 @@ namespace Model
         PRODUCE,
     }
 
-    public class FarmItem : BaseModelItem<UserFarmItem>
+    public class FarmItem : BaseModelItem<UserFarmItem>, IFixedTickable
     {
         public event ProduceProductDelegate OnProduceComplete;
         public ReactiveParameter<float> Progress { get; private set; }
-        public ReactiveParameter<int> ResourceTime { get; private set; }
+        public ReactiveParameter<float> ResourceTime { get; private set; }
         public ReactiveParameter<int> PendingCount { get; private set; }
-        public int ResourceMax{ get; private set; }
+        public float ResourceMax{ get; private set; }
         
         public FSM<State, FarmItemState> Fsm { get; private set; }
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
@@ -36,10 +37,10 @@ namespace Model
             Progress.OnValueChange += OnProgress;
             ResourceTime.OnValueChange += OnResourceChanged;
             Fsm.SetState(State.IDLE);
-            EnableTick();
+            
         }
 
-        private void OnResourceChanged(int oldvalue, int newvalue)
+        private void OnResourceChanged(float oldvalue, float newvalue)
         {
             Debug.Log("OnResourceChanged:" + newvalue);
             if (newvalue <= 0)
@@ -108,16 +109,15 @@ namespace Model
             get { return ResourceTime.Value >= _userData.CatalogData.ProduceDuration; }
         }
 
-        public override void Release()
+        public void Release()
         {
-            base.Release();
             Fsm.Release();
             OnProduceComplete = null;
         }
 
-        protected override void OnTick(int deltaTime)
+        protected  void OnTick(int deltaTime)
         {
-            Fsm.CurrentState.Tick(deltaTime);
+            
         }
 
         public void ProduceComplete()
@@ -144,7 +144,7 @@ namespace Model
 
         protected override void InitData()
         {
-            ResourceTime = new ReactiveParameter<int>(_userData.ResourceTime);
+            ResourceTime = new ReactiveParameter<float>(_userData.ResourceTime);
             Progress = new ReactiveParameter<float>(_userData.Progress);
             PendingCount = new ReactiveParameter<int>(_userData.PendingCount);
 
@@ -161,11 +161,12 @@ namespace Model
             _userData.PendingCount = PendingCount.Value;
             UserRepository.Save();
         }
+
+        public void FixedTick()
+        {
+            Fsm.CurrentState.Tick(Time.fixedDeltaTime);
+        }
     }
 
 
-    public interface IEatible
-    {
-        string Name { get; }
-    }
 }

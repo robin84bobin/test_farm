@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data.User;
+using Zenject;
 
 namespace Model
 {
@@ -12,19 +13,20 @@ namespace Model
         
         public Dictionary<string,Model.FarmCell> Cells{ get; private set; }
 
+
+        public Farm(ShopInventory shop, ProductInventory products)
+        {
+            ShopInventory = shop;
+            ProductInventory = products;
+        }
+
         public void Init()
         {
             size = App.Instance.catalog.GetSetting<FarmSize>("grid");
-            
-            ShopInventory = new ShopInventory();
             ShopInventory.Init();
-            
-            ProductInventory = new ProductInventory();
             ProductInventory.Init();
-            
             InitCells();
         }
-
         
         private void InitCells()
         {
@@ -34,6 +36,8 @@ namespace Model
                 Cells.Add(cell.Id,  new FarmCell(cell));
             }
         }
+
+       
     }
 
 }

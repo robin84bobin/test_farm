@@ -2,7 +2,7 @@ using Data;
 
 namespace Model
 {
-    public abstract class BaseModelItem<T> :TickableItem where T: DataItem
+    public abstract class BaseModelItem<T>  where T: DataItem
     {
         protected T _userData;
         public T UserData

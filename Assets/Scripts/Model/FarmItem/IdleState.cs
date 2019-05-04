@@ -7,7 +7,7 @@
             _farmItem = farmItem;
         }
 
-        public override void Tick(int deltaTime)
+        public override void Tick(float time)
         {
             //
         }

@@ -13,7 +13,7 @@ namespace Model
             _farmItem = farmItem;
         }
 
-        public override void Tick(int deltaTime)
+        public override void Tick(float deltaTime)
         {
             if (_farmItem.ResourceTime.Value > 0)
             {

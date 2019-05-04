@@ -51,7 +51,7 @@ namespace UI
             _progressBar.gameObject.SetActive(state.Name == State.PRODUCE);
         }
 
-        private void UpdateResourceView(int oldvalue = 0, int newvalue = 0)
+        private void UpdateResourceView(float oldvalue = 0, float newvalue = 0)
         {
             _resourceBar.color = _model.IsEnoughResources ? Color.green : Color.red;
             _resourceLabel.text = _model.ResourceTime.Value.ToString();

@@ -1,8 +1,9 @@
 using Data.Catalog;
+using Zenject;
 
 namespace Data.User
 {
-    public class UserRepository : Repository.Repository
+    public class UserRepository : Repository.Repository, IFixedTickable
     {
         public const string CURRENCY = "currency";
         public const string SHOP = "shop";
@@ -20,7 +21,7 @@ namespace Data.User
         
         public UserRepository(IDataBaseProxy dbProxy) : base(dbProxy)
         {
-            EnableTick();
+            
         }
 
         public override void Init()
@@ -74,9 +75,9 @@ namespace Data.User
         {
             _needSave = true;
         }
-        protected override void OnTick(int deltaTime)
+        
+        public void FixedTick()
         {
-            base.OnTick(deltaTime);
             if (_needSave)
             {
                 _needSave = false;

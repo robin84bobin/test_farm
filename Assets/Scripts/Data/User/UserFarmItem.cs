@@ -3,7 +3,7 @@
     public class UserFarmItem: UserDataItem<FarmItem>
     {
         public float Progress;
-        public int ResourceTime;
+        public float ResourceTime;
         public int PendingCount;
     }
 }

@@ -10,21 +10,9 @@ namespace Model
         public Dictionary<string,ReactiveParameter<int>> Currencies;
         public Dictionary<string, Model.ShopItem> Items;
 
-        public void Init()
+        public ShopInventory()
         {
-            int coinsValue = App.Instance.userRepository.Currency["coins"].Value;
             
-            Currencies = new Dictionary<string, ReactiveParameter<int>>();
-            foreach (var currency in App.Instance.userRepository.Currency)
-            {
-                Currencies.Add(currency.Id, new ReactiveParameter<int>(currency.Value));
-            }
-            
-            Items = new Dictionary<string, Model.ShopItem>();
-            foreach (var shopItem in App.Instance.userRepository.ShopItems.GetAll())
-            {
-                Items.Add(shopItem.Id, new ShopItem(shopItem));
-            }
         }
         
         public bool Buy(IBuyable item, int amount = 1)
@@ -50,6 +38,22 @@ namespace Model
             App.Instance.userRepository.Currency[currencyId].Value = value;
             UserRepository.Save();
         }
-        
+
+        public void Init()
+        {
+            int coinsValue = App.Instance.userRepository.Currency["coins"].Value;
+            
+            Currencies = new Dictionary<string, ReactiveParameter<int>>();
+            foreach (var currency in App.Instance.userRepository.Currency)
+            {
+                Currencies.Add(currency.Id, new ReactiveParameter<int>(currency.Value));
+            }
+            
+            Items = new Dictionary<string, Model.ShopItem>();
+            foreach (var shopItem in App.Instance.userRepository.ShopItems.GetAll())
+            {
+                Items.Add(shopItem.Id, new ShopItem(shopItem));
+            }
+        }
     }
 }
