@@ -73,7 +73,6 @@ public class App : MonoBehaviour
         {
             _nextTickTime = Time.time + TiCK_DELTA_TIME;
             OnTick.Invoke(TiCK_DELTA_TIME);
-            Debug.Log("tick: " + Time.time);
         }
     }
 }
