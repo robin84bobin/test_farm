@@ -1,4 +1,5 @@
 using Data.Catalog;
+using UnityEngine;
 using Zenject;
 
 namespace Data.User
@@ -75,9 +76,15 @@ namespace Data.User
         {
             _needSave = true;
         }
-        
+
+        private float deltaTime;
         public void FixedTick()
         {
+            deltaTime += Time.fixedDeltaTime;
+            if (deltaTime < 1f)
+                return;
+            deltaTime = 0f;
+            
             if (_needSave)
             {
                 _needSave = false;

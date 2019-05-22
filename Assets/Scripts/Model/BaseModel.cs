@@ -9,6 +9,12 @@ namespace Model
         {
             get { return _userData; }
         }
+
+        public BaseModelItem()
+        {
+            
+        }
+        
         public BaseModelItem(T userData)
         {
             _userData = userData;

@@ -13,12 +13,19 @@ namespace Model
             _farmItem = farmItem;
         }
 
-        public override void Tick(float deltaTime)
+        private float deltaTime;
+        
+        public override void Tick(float tickTime)
         {
             if (_farmItem.ResourceTime.Value > 0)
             {
+                deltaTime += tickTime;
+                if (deltaTime < 1f)
+                    return;
+                
                 _farmItem.ResourceTime.Value -= deltaTime;
                 _farmItem.Progress.Value += deltaTime;
+                deltaTime = 0f;
             }
         }
 

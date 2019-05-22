@@ -24,12 +24,14 @@ namespace Model
         private Queue<Data.Product> _pendingProducts = new Queue<Data.Product>();
         
 
-        public FarmItem(UserFarmItem userFarmItem) : base(userFarmItem)
+        public FarmItem(UserFarmItem userFarmItem, TickableManager tickableManager) : base(userFarmItem)
         {
             var produceState = new ProduceState(this);
             Fsm = new FSM<State, FarmItemState>();
             Fsm.Add(produceState);
             Fsm.Add(new IdleState(this));
+            
+            tickableManager.AddFixed(this);
         }
 
         public void OnInitInCell()
@@ -165,6 +167,11 @@ namespace Model
         public void FixedTick()
         {
             Fsm.CurrentState.Tick(Time.fixedDeltaTime);
+        }
+
+        public class Factory : PlaceholderFactory<UserFarmItem,FarmItem>
+        {
+            
         }
     }
 

@@ -11,7 +11,7 @@ namespace Model
         {
         }
 
-        public abstract void Tick(float time);
+        public abstract void Tick(float tickTime);
 
         public override void OnEnterState()
         {

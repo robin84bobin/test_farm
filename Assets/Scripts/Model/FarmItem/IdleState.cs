@@ -7,7 +7,7 @@
             _farmItem = farmItem;
         }
 
-        public override void Tick(float time)
+        public override void Tick(float tickTime)
         {
             //
         }

@@ -5,6 +5,7 @@ using Model;
 using UnityEngine;
 using UnityEngine.Analytics;
 using Zenject;
+using FarmItem = Data.FarmItem;
 
 namespace DI
 {
@@ -18,10 +19,13 @@ namespace DI
             Container.Bind<IDataBaseProxy>().To<JsonDbProxy>().WithArguments(_config.UserRepositoryPath, _config.CatalogRoot).WhenInjectedInto<UserRepository>();
             Container.Bind<CatalogRepository>().AsSingle();
             Container.BindInterfacesAndSelfTo<UserRepository>().AsSingle();
-
-            Container.Bind<Farm>().AsSingle();
+            //Container.BindInstance<ITickable>().To<Model.FarmItem>().AsTransient();
+           
+            Container.BindFactory<UserFarmItem,Model.FarmItem, Model.FarmItem.Factory>();
+            Container.BindFactory<UserFarmCell,FarmCell, Model.FarmCell.Factory>();
             Container.Bind<ShopInventory>().AsSingle();
             Container.Bind<ProductInventory>().AsSingle();
+            Container.Bind<Farm>().AsSingle();
 
             Container.DeclareSignal<DataInitComplete>();
         }

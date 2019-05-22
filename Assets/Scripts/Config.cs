@@ -12,7 +12,7 @@ public class Config : ScriptableObject
 
     public string UserRepositoryPath 
     {
-        get { return Application.persistentDataPath + "/user.json";
+        get { return Application.persistentDataPath + "/user_0.json";
     }
 }
 
