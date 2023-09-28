@@ -47,6 +47,7 @@ namespace Data
         /// <typeparam name="T"></typeparam>
         //void Remove<T>(string collection, string id = "", Action<string> callback = null);
 
+        bool CheckSourceExist();
         T GetConfigObject<T>(string name);
 
         event Action OnInitialized;

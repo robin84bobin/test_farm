@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Data
 {
-    internal class JsonDbProxy:IDataBaseProxy
+    internal class JsonDbProxy: IDataBaseProxy
     {
         private string _path;
         private DateTime _lastReadTime;
@@ -25,6 +25,8 @@ namespace Data
         {
             throw new NotImplementedException();
         }
+
+        public bool CheckSourceExist() => File.Exists(_path);
 
         public event Action OnInitialized;
 

@@ -24,7 +24,7 @@ namespace Model
 
         public void Init()
         {
-            size = App.Instance.catalog.GetSetting<FarmSize>("grid");
+            size = App.Instance.CatalogRepository.GetSetting<FarmSize>("grid");
             ShopInventory.Init();
             ProductInventory.Init();
             InitCells();
@@ -33,14 +33,12 @@ namespace Model
         private void InitCells()
         {
             Cells = new Dictionary<string, Model.FarmCell>();
-            foreach (var cell in App.Instance.userRepository.Cells)
+            foreach (var cell in App.Instance.UserRepository.Cells)
             {
                 var cellModel = _cellFactory.Create(cell);
                 Cells.Add(cell.Id, cellModel);
             }
         }
-
-       
     }
 
 }

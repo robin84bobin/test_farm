@@ -5,17 +5,17 @@ namespace Commands.Startup
 {
     public class InitDataCommand : Command
     {
-        private Repository _repository;
+        private BaseRepository _baseRepository;
 
-        public InitDataCommand(Repository repository)
+        public InitDataCommand(BaseRepository baseRepository)
         {
-            _repository = repository;
+            _baseRepository = baseRepository;
         }
         
         public override void Execute()
         {
-            _repository.OnInitComplete += OnInitComplete;
-            _repository.Init();
+            _baseRepository.OnInitComplete += OnInitComplete;
+            _baseRepository.Init();
         }
 
         private void OnInitComplete()

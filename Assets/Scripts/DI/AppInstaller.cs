@@ -3,9 +3,7 @@ using Data.Catalog;
 using Data.User;
 using Model;
 using UnityEngine;
-using UnityEngine.Analytics;
 using Zenject;
-using FarmItem = Data.FarmItem;
 
 namespace DI
 {

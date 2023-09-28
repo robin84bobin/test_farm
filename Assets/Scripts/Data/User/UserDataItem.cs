@@ -9,7 +9,7 @@ namespace Data.User
         {
             base.Init();
 
-            CatalogData = App.Instance.catalog.Storages[Type].GetObject(CatalogDataId) as T;
+            CatalogData = App.Instance.CatalogRepository.Storages[Type].GetObject(CatalogDataId) as T;
         }
     }
 }

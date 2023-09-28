@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using Data.Repository;
 
 namespace Data.Catalog
 {
-    public class CatalogRepository : Repository.Repository
+    public class CatalogRepository : BaseRepository
     {
         public DataStorage<Currency> Currency;
         public DataStorage<ShopItem> ShopItems;
@@ -13,7 +12,6 @@ namespace Data.Catalog
         public CatalogRepository(IDataBaseProxy dbProxy) : base(dbProxy)
         {
         }
-
 
         public override void Init()
         {

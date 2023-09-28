@@ -139,7 +139,7 @@ namespace Model
 
         private Data.Product CreateProduct()
         {
-            Data.Product product = App.Instance.catalog.Products[_userData.CatalogData.ProductId];
+            Data.Product product = App.Instance.CatalogRepository.Products[_userData.CatalogData.ProductId];
             _pendingProducts.Enqueue(product);
             return product;
         }

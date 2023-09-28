@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Commands
 {
@@ -16,7 +15,6 @@ namespace Commands
             _commands = commands;
         }
         
-
         public override void Execute()
         {
             for (var i = 0; i < _commands.Length; i++)
@@ -24,27 +22,17 @@ namespace Commands
                 if (i < _commands.Length - 1)
                 {
                     var nextCommand = _commands[i + 1];
-                    var currentCommand = i;
                     _commands[i].OnComplete += () =>
                     {
                         CommandManager.Execute(nextCommand);
                     };
                 }
                 else if (i == _commands.Length - 1)
-                    _commands[i].OnComplete += () =>
-                    {
-                        Complete();
-                    };
+                    _commands[i].OnComplete += () => {};
                     
             }
 
             CommandManager.Execute(_commands.First());
         }
-
-        protected override void Complete()
-        {
-            base.Complete();
-        }
-
     }
 }

@@ -34,9 +34,9 @@ namespace Model
             var userFarmItemData = new UserFarmItem();
             userFarmItemData.Id = _userData.UserFarmItemId;
             userFarmItemData.CatalogDataId = farmItemId;
-            userFarmItemData.Type = App.Instance.userRepository.FarmItems.CollectionName;
+            userFarmItemData.Type = App.Instance.UserRepository.FarmItems.CollectionName;
             userFarmItemData.Init(); 
-            App.Instance.userRepository.FarmItems.Set(userFarmItemData, this._userData.Id);
+            App.Instance.UserRepository.FarmItems.Set(userFarmItemData, this._userData.Id);
             Item = _farmItemFactory.Create(userFarmItemData);
         }
 
@@ -45,7 +45,7 @@ namespace Model
         {
             if (!string.IsNullOrEmpty(_userData.UserFarmItemId))
             {
-                UserFarmItem userFarmItemData = App.Instance.userRepository.FarmItems[_userData.UserFarmItemId];
+                UserFarmItem userFarmItemData = App.Instance.UserRepository.FarmItems[_userData.UserFarmItemId];
                 Item = _farmItemFactory.Create(userFarmItemData);
             }
         }

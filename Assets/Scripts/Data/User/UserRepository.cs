@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Data.User
 {
-    public class UserRepository : Repository.Repository, IFixedTickable
+    public class UserRepository : Repository.BaseRepository, IFixedTickable
     {
         public const string CURRENCY = "currency";
         public const string SHOP = "shop";
@@ -12,19 +12,22 @@ namespace Data.User
         public const string FARM_ITEMS = "farmItems";
         public const string CELLS = "cells";
         public const string GRID = "grid";
-        
+
         public  DataStorage<UserCurrency> Currency;
         public  DataStorage<UserShopItem> ShopItems;
         public  DataStorage<UserFarmItem> FarmItems;
         public  DataStorage<UserProduct> Products;
         public  DataStorage<UserFarmCell> Cells;
 
-        
-        public UserRepository(IDataBaseProxy dbProxy) : base(dbProxy)
-        {
-            
-        }
+        public UserRepository(IDataBaseProxy dbProxy) : base(dbProxy) { }
 
+        private CatalogRepository _catalogRepository;
+
+        public void Setup(CatalogRepository catalogRepository)
+        {
+            _catalogRepository = catalogRepository;
+        }
+        
         public override void Init()
         {
             Currency = CreateStorage<UserCurrency>(CURRENCY);
@@ -35,9 +38,14 @@ namespace Data.User
 
             _dbProxy.OnInitialized += OnDbInitComplete;
             _dbProxy.Init();
+
+            if (!_dbProxy.CheckSourceExist())
+            {
+                InitStartValuesFrom(_catalogRepository);
+            }
         }
 
-        public void InitStartValuesFrom(CatalogRepository catalog)
+        private void InitStartValuesFrom(CatalogRepository catalog)
         {
             foreach (Currency currency in catalog.Currency.GetAll())
             {
@@ -72,12 +80,14 @@ namespace Data.User
         }
 
         private static bool _needSave;
+
         public static void Save()
         {
             _needSave = true;
         }
 
         private float deltaTime;
+
         public void FixedTick()
         {
             deltaTime += Time.fixedDeltaTime;

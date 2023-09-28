@@ -1,7 +1,6 @@
 using System;
 using Model;
 using UnityEngine;
-using UnityEngine.Networking.NetworkSystem;
 using FarmItem = Model.FarmItem;
 
 namespace UI
